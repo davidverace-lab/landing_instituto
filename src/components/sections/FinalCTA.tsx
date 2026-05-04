@@ -74,9 +74,9 @@ export default function FinalCTA() {
           />
         </div>
 
-        {/* Logos — absolutos arriba, no afectan el centrado del slogan */}
+        {/* Logos — absolutos arriba, misma proporción y espaciado que el HERO */}
         <motion.div
-          className="absolute top-0 left-0 right-0 z-20 pt-10 px-10 md:px-16 lg:px-24 flex items-center justify-between"
+          className="absolute top-0 left-0 right-0 z-20 pt-8 px-6 md:pt-12 md:px-16 lg:pt-14 lg:px-24 flex items-center justify-between"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -85,7 +85,7 @@ export default function FinalCTA() {
           <motion.img
             src="/webp/LogoInstitutoHP-color.webp"
             alt="Instituto Hutchison Ports"
-            className="h-16 md:h-20 w-auto"
+            style={{ height: 'clamp(40px, 5vw, 60px)', width: 'auto' }}
             loading="lazy"
             decoding="async"
             whileHover={{ y: -4, scale: 1.05 }}
@@ -94,7 +94,7 @@ export default function FinalCTA() {
           <motion.img
             src="/webp/hports.webp"
             alt="Hutchison Ports"
-            className="h-10 md:h-14 w-auto"
+            style={{ height: 'clamp(40px, 5vw, 60px)', width: 'auto' }}
             loading="lazy"
             decoding="async"
             whileHover={{ y: -4, scale: 1.05 }}

@@ -20,9 +20,9 @@ export default function Hero() {
         />
       </div>
 
-      {/* Logos — posición absoluta, no afectan el centrado del texto */}
+      {/* Logos */}
       <motion.div
-        className="absolute top-0 left-0 right-0 z-20 pt-8 px-10 md:px-16 lg:px-24 flex items-center justify-between"
+        className="absolute top-0 left-0 right-0 z-20 pt-8 px-6 md:pt-12 md:px-16 lg:pt-14 lg:px-24 flex items-center justify-between"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.1 }}
@@ -30,45 +30,50 @@ export default function Hero() {
         <img
           src="/webp/LogoInstitutoHP-blanco.webp"
           alt="Instituto Hutchison Ports"
-          className="h-12 md:h-14 w-auto"
+          style={{ height: 'clamp(40px, 5vw, 60px)', width: 'auto' }}
           decoding="async"
         />
         <img
           src="/webp/hports.webp"
           alt="Hutchison Ports"
-          className="h-12 md:h-14 w-auto"
+          style={{ height: 'clamp(40px, 5vw, 60px)', width: 'auto' }}
           decoding="async"
         />
       </motion.div>
 
-      {/* Contenido — centrado real respecto al viewport */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-6">
+      {/* Contenido centrado */}
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-5 md:px-10">
         <div className="w-full max-w-4xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', stiffness: 70, damping: 18, delay: 0.35 }}
-            className="section-title text-white mb-5"
+            className="section-title text-white mb-4 md:mb-5"
             style={{ fontSize: Type.h1 }}
           >
-            <span className="whitespace-nowrap">TU EVOLUCIÓN <span className="text-sky-brand">PROFESIONAL</span></span><br />
-            <span className="whitespace-nowrap">NO SE DETIENE.</span>
+            <span className="block">TU EVOLUCIÓN <span className="text-sky-brand">PROFESIONAL</span></span>
+            <span className="block">NO SE DETIENE.</span>
           </motion.h1>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', stiffness: 70, damping: 18, delay: 0.55 }}
-            className="mb-6"
+            className="mb-5 md:mb-6"
           >
-            <p className="text-white font-verlag md:whitespace-nowrap" style={{ fontSize: 'clamp(11px, 1.15vw, 17px)', lineHeight: 1.75, textTransform: 'uppercase', letterSpacing: '0.02em' }}>¡EL PRÓXIMO LÍDER PORTUARIO PUEDES SER TÚ!</p>
+            <p
+              className="text-white font-verlag font-bold uppercase"
+              style={{ fontSize: 'clamp(13px, 2.2vw, 20px)', lineHeight: 1.6, letterSpacing: '0.06em' }}
+            >
+              ¡EL PRÓXIMO LÍDER PORTUARIO PUEDES SER TÚ!
+            </p>
           </motion.div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.75 }}
-            className="text-white mb-12"
+            className="text-white mb-10 mx-auto max-w-lg"
             style={DescriptionCSS.base}
           >
             En el Instituto Hutchison Ports, navegamos juntos desde la cultura
@@ -79,12 +84,13 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.95 }}
+            className="flex justify-center"
           >
             <a
               href="https://mxhutchisonports.csod.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-gold text-base md:text-lg"
+              className="btn-gold w-full max-w-xs text-sm md:text-base lg:text-lg py-3 md:py-4 px-6"
             >
               CONTINUAR MI FORMACIÓN AQUÍ
             </a>

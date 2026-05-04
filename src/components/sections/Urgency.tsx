@@ -34,35 +34,34 @@ export default function Urgency() {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24 text-center">
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-5 md:px-12 lg:px-20 py-20 md:py-28 text-center">
+
         <SectionReveal>
-          <h2 className="section-title text-white mb-4" style={{ fontSize: Type.h2 }}>
+          <h2 className="section-title text-white mb-3" style={{ fontSize: Type.h2 }}>
             EL TIEMPO CORRE:
           </h2>
-          <h3 className="section-subtitle text-navy mb-14" style={{ fontSize: Type.h3Card }}>
+          <h3 className="section-subtitle text-navy mb-10 md:mb-14" style={{ fontSize: Type.h3Card }}>
             LA ETAPA DE CULTURIZACIÓN LLEGA A SU FIN
           </h3>
         </SectionReveal>
 
+        {/* Contador — 2 cols en mobile, 4 cols en md+ */}
         <SectionReveal delay={0.2}>
-          <div className="flex items-center justify-center gap-4 md:gap-8 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 justify-items-center mb-12 md:mb-16 max-w-2xl mx-auto">
             <CountdownUnit value={days} label="Días" labelColor="text-navy" />
-            <span className="font-verlag text-4xl text-navy mb-8">:</span>
             <CountdownUnit value={hours} label="Horas" labelColor="text-navy" />
-            <span className="font-verlag text-4xl text-navy mb-8">:</span>
             <CountdownUnit value={minutes} label="Minutos" labelColor="text-navy" />
-            <span className="font-verlag text-4xl text-navy mb-8">:</span>
             <CountdownUnit value={seconds} label="Segundos" labelColor="text-navy" />
           </div>
         </SectionReveal>
 
-        {/* Dos paneles — colores divididos */}
+        {/* Dos paneles */}
         <SectionReveal delay={0.35}>
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-0 items-stretch">
 
-            {/* Panel izquierdo: sky-brand */}
+            {/* Panel izquierdo */}
             <motion.div
-              className="flex flex-col items-center justify-center text-center p-8 md:p-10"
+              className="flex flex-col items-center justify-center text-center p-7 md:p-10"
               style={{ background: Colors.skyBlue100 }}
               whileHover={{ scale: 1.01 }}
               transition={{ type: 'spring', stiffness: 200, damping: 20 }}
@@ -80,9 +79,9 @@ export default function Urgency() {
               </p>
             </motion.div>
 
-            {/* Panel derecho: navy */}
+            {/* Panel derecho */}
             <motion.div
-              className="flex flex-col items-center justify-center text-center p-8 md:p-10"
+              className="flex flex-col items-center justify-center text-center p-7 md:p-10"
               style={{ background: Colors.seaBlue100 }}
               whileHover={{ scale: 1.01 }}
               transition={{ type: 'spring', stiffness: 200, damping: 20 }}
