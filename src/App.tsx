@@ -1,4 +1,3 @@
-import ZoomParallaxSection from './components/sections/ZoomParallaxSection'
 import Hero from './components/sections/Hero'
 import Challenge from './components/sections/Challenge'
 import Urgency from './components/sections/Urgency'

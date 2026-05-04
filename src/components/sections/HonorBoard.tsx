@@ -13,12 +13,6 @@ const PHOTOS = [
   '/webp/fotos-nacho/DSC07077.webp',
 ]
 
-const BU_HIGHLIGHTS = [
-  { bu: 'Lázaro Cárdenas', honorees: 48, label: 'Graduados destacados' },
-  { bu: 'Manzanillo', honorees: 41, label: 'Graduados destacados' },
-  { bu: 'Ensenada', honorees: 29, label: 'Graduados destacados' },
-  { bu: 'Veracruz', honorees: 25, label: 'Graduados destacados' },
-]
 
 function PhotoGrid() {
   const { ref, inView } = useInView()
