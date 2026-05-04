@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Verlag Black';
+  src: url('/fonts/verlag/Verlag-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Verlag Bold';
+  src: url('/fonts/verlag/Verlag-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Verlag Book';
+  src: url('/fonts/verlag/Verlag-Book.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --color-primary-cta: #FFC627;
+  --color-primary-cta-hover: #e6b322;
+  --color-primary-cta-active: #c99d1e;
+  --color-primary-cta-disabled: #c4a84e;
+  --color-sea-blue-100: #002E6D;
+  --color-sea-blue-80:  #1A4B8D;
+  --color-sky-blue-100: #009BDE;
+  --color-sky-blue-80:  #33AEE5;
+  --color-sunray:       #FFC627;
+  --color-sunset:       #EE7523;
+  --color-aqua:         #54BBAB;
+  --color-text-primary: #222F4F;
+  --color-text-secondary: #5F6C7B;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-navy text-white font-montserrat;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer utilities {
+  .font-verlag {
+    font-family: 'Verlag Black', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .text-sky-brand {
+    color: #009BDE;
+  }
+
+  .bg-navy {
+    background-color: #002E6D;
+  }
+
+  .bg-navy-dark {
+    background-color: #002E6D;
+  }
+
+  .bg-sky-brand {
+    background-color: #009BDE;
+  }
+
+  .section-padding {
+    @apply py-20 px-6 md:px-12 lg:px-20;
+  }
+
+  .section-title {
+    font-family: 'Verlag Black', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -0.4px;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    line-height: 1.05;
+  }
+
+  .section-subtitle {
+    font-family: 'Verlag Black', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: clamp(1.2rem, 1.8vw, 1.7rem);
+    line-height: 1.2;
+  }
+
+  .section-body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.1rem, 1.3vw, 1.25rem);
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-primary {
+    font-family: 'Verlag Black', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    @apply inline-flex items-center justify-center px-10 py-4 text-lg text-white bg-sky-brand rounded-none transition-all duration-300;
+  }
+
+  .btn-primary:hover {
+    background-color: #9ACAEB;
+    @apply scale-[1.02];
+  }
+
+  .btn-primary:active {
+    @apply scale-[0.98];
+  }
+
+  .btn-gold {
+    font-family: 'Verlag Black', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background-color: var(--color-primary-cta);
+    color: #0A2540;
+    @apply inline-flex items-center justify-center px-10 py-4 text-lg rounded-none transition-all duration-300;
+  }
+
+  .btn-gold:hover {
+    background-color: var(--color-primary-cta-hover);
+    @apply scale-[1.02];
+  }
+
+  .btn-gold:active {
+    background-color: var(--color-primary-cta-active);
+    @apply scale-[0.98];
+  }
+
+  .btn-gold:disabled {
+    background-color: var(--color-primary-cta-disabled);
+    @apply cursor-not-allowed scale-100 opacity-60;
+  }
+
+  .diagonal-divider {
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  }
+
+  .diagonal-divider-reverse {
+    clip-path: polygon(0 15%, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* Design system tokens */
+  .text-primary    { color: #222F4F; }
+  .text-secondary  { color: #5F6C7B; }
+  .bg-surface      { background-color: #F8FAFC; }
+  .bg-sea-blue-80  { background-color: #1A4B8D; }
+  .text-sea-blue-80 { color: #1A4B8D; }
+}
