@@ -24,8 +24,6 @@ export default function App() {
       .finally(() => setLoading(false))
   }, [])
 
-  if (loading) return null
-
   return (
     <main>
       <Hero
