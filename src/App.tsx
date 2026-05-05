@@ -14,14 +14,12 @@ import type { SanityLanding } from './types/sanity'
 
 export default function App() {
   const [data, setData] = useState<SanityLanding | null>(null)
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     sanityClient
       .fetch<SanityLanding>(LANDING_QUERY)
       .then(setData)
       .catch(() => setData(null))
-      .finally(() => setLoading(false))
   }, [])
 
   return (
