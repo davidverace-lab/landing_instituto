@@ -4,13 +4,27 @@ import AnimatedCounter from '../ui/AnimatedCounter'
 import { useInView } from '../../hooks/useInView'
 import { Colors, Type, DescriptionCSS } from '../../tokens'
 
-const CURRENT_GRADUADOS = 940
-const TARGET = 1510
+interface ChallengeProps {
+  graduadosActuales?: number
+  meta?: number
+  tituloIzquierda?: string
+  descripcionIzquierda?: string
+}
 
-export default function Challenge() {
+const DEFAULTS = {
+  graduadosActuales: 940,
+  meta: 1510,
+  tituloIzquierda: '¡HAGAMOS HISTORIA JUNTOS!',
+  descripcionIzquierda: 'En Hutchison Ports, no solo movemos carga, impulsamos talento. Nuestra meta es que {meta} colaboradores completen la etapa de Culturización. Tu avance es el motor que nos llevará a este hito histórico.',
+}
+
+export default function Challenge({ graduadosActuales, meta, tituloIzquierda, descripcionIzquierda }: ChallengeProps) {
   const { ref, inView } = useInView()
-  const pct = Math.round((CURRENT_GRADUADOS / TARGET) * 100)
-  const remaining = TARGET - CURRENT_GRADUADOS
+
+  const currentGraduados = graduadosActuales ?? DEFAULTS.graduadosActuales
+  const target = meta ?? DEFAULTS.meta
+  const pct = Math.round((currentGraduados / target) * 100)
+  const remaining = target - currentGraduados
 
   return (
     <section className="relative overflow-hidden">
@@ -37,18 +51,24 @@ export default function Challenge() {
 
             <SectionReveal>
               <h2 className="section-title text-navy leading-tight" style={{ fontSize: Type.h2 }}>
-                ¡HAGAMOS <span className="text-white">HISTORIA</span><br />
-                JUNTOS!
+                {tituloIzquierda ?? DEFAULTS.tituloIzquierda}
               </h2>
             </SectionReveal>
 
             <SectionReveal delay={0.15}>
               <p className="text-white" style={DescriptionCSS.base}>
-                En Hutchison Ports, no solo movemos carga, impulsamos talento.
-                Nuestra meta es que{' '}
-                <strong className="text-navy">{TARGET.toLocaleString()} colaboradores</strong> completen
-                la etapa de Culturización. Tu avance es el motor que nos llevará
-                a este hito histórico.
+                {descripcionIzquierda
+                  ? descripcionIzquierda.replace('{meta}', target.toLocaleString())
+                  : (
+                    <>
+                      En Hutchison Ports, no solo movemos carga, impulsamos talento.
+                      Nuestra meta es que{' '}
+                      <strong className="text-navy">{target.toLocaleString()} colaboradores</strong> completen
+                      la etapa de Culturización. Tu avance es el motor que nos llevará
+                      a este hito histórico.
+                    </>
+                  )
+                }
               </p>
             </SectionReveal>
 
@@ -72,7 +92,7 @@ export default function Challenge() {
 
                 {/* Número principal */}
                 <AnimatedCounter
-                  target={CURRENT_GRADUADOS}
+                  target={currentGraduados}
                   className="font-verlag leading-none block"
                   style={{ fontSize: Type.statLg, letterSpacing: '-2px' }}
                   duration={2500}
@@ -88,7 +108,7 @@ export default function Challenge() {
                     Meta:
                   </span>
                   <span className="font-verlag font-bold text-white" style={{ fontSize: 'clamp(1.2rem, 2vw, 2rem)' }}>
-                    {TARGET.toLocaleString()}
+                    {target.toLocaleString()}
                   </span>
                 </div>
 
@@ -105,7 +125,7 @@ export default function Challenge() {
                   <div className="flex justify-between mt-2">
                     <span className="font-montserrat text-white text-xs md:text-sm">0</span>
                     <span className="font-montserrat font-bold text-white text-xs md:text-sm">{pct}% alcanzado</span>
-                    <span className="font-montserrat text-white text-xs md:text-sm">{TARGET.toLocaleString()}</span>
+                    <span className="font-montserrat text-white text-xs md:text-sm">{target.toLocaleString()}</span>
                   </div>
                 </div>
 
@@ -113,10 +133,10 @@ export default function Challenge() {
                 <div className="pt-4 border-t border-white/10">
                   <p className="text-white" style={DescriptionCSS.base}>
                     Ya somos{' '}
-                    <span className="text-sky-brand font-semibold">{CURRENT_GRADUADOS.toLocaleString()}</span>.{' '}
+                    <span className="text-sky-brand font-semibold">{currentGraduados.toLocaleString()}</span>.{' '}
                     Faltan{' '}
                     <span className="text-white font-bold">{remaining.toLocaleString()}</span>{' '}
-                    para alcanzar los {TARGET.toLocaleString()}.
+                    para alcanzar los {target.toLocaleString()}.
                   </p>
                 </div>
 

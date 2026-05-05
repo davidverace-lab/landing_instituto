@@ -1,7 +1,26 @@
 import { motion } from 'framer-motion'
 import { Type, DescriptionCSS } from '../../tokens'
 
-export default function Hero() {
+interface HeroProps {
+  title?: string
+  subtitle?: string
+  description?: string
+  buttonText?: string
+}
+
+const DEFAULTS = {
+  title: 'TU EVOLUCIÓN PROFESIONAL NO SE DETIENE.',
+  subtitle: '¡EL PRÓXIMO LÍDER PORTUARIO PUEDES SER TÚ!',
+  description: 'En el Instituto Hutchison Ports, navegamos juntos desde la cultura hasta el liderazgo de clase mundial.',
+  buttonText: 'CONTINUAR MI FORMACIÓN AQUÍ',
+}
+
+export default function Hero({ title, subtitle, description, buttonText }: HeroProps) {
+  const t = title ?? DEFAULTS.title
+  const s = subtitle ?? DEFAULTS.subtitle
+  const d = description ?? DEFAULTS.description
+  const b = buttonText ?? DEFAULTS.buttonText
+
   return (
     <section className="relative min-h-[100dvh] flex flex-col overflow-hidden bg-navy-dark">
       {/* Background image */}
@@ -51,8 +70,7 @@ export default function Hero() {
             className="section-title text-white mb-4 md:mb-5"
             style={{ fontSize: Type.h1 }}
           >
-            <span className="block">TU EVOLUCIÓN <span className="text-sky-brand">PROFESIONAL</span></span>
-            <span className="block">NO SE DETIENE.</span>
+            {t}
           </motion.h1>
 
           <motion.div
@@ -65,7 +83,7 @@ export default function Hero() {
               className="text-white font-verlag font-bold uppercase"
               style={{ fontSize: 'clamp(13px, 2.2vw, 20px)', lineHeight: 1.6, letterSpacing: '0.06em' }}
             >
-              ¡EL PRÓXIMO LÍDER PORTUARIO PUEDES SER TÚ!
+              {s}
             </p>
           </motion.div>
 
@@ -76,8 +94,7 @@ export default function Hero() {
             className="text-white mb-10 mx-auto max-w-lg"
             style={DescriptionCSS.base}
           >
-            En el Instituto Hutchison Ports, navegamos juntos desde la cultura
-            hasta el liderazgo de clase mundial.
+            {d}
           </motion.p>
 
           <motion.div
@@ -92,7 +109,7 @@ export default function Hero() {
               rel="noopener noreferrer"
               className="btn-gold w-full max-w-xs text-sm md:text-base lg:text-lg py-3 md:py-4 px-6"
             >
-              CONTINUAR MI FORMACIÓN AQUÍ
+              {b}
             </a>
           </motion.div>
         </div>

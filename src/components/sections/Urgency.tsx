@@ -5,10 +5,36 @@ import SectionReveal from '../ui/SectionReveal'
 import { Warning } from '@phosphor-icons/react'
 import { Colors, Type, DescriptionCSS } from '../../tokens'
 
-const DEADLINE = '2026-06-30T23:59:59'
+interface UrgencyProps {
+  deadline?: string
+  titulo?: string
+  subtitulo?: string
+  panelIzquierdoFecha?: string
+  panelIzquierdoTexto?: string
+  panelDerechoTitulo?: string
+  panelDerechoTexto?: string
+}
 
-export default function Urgency() {
-  const { days, hours, minutes, seconds } = useCountdown(DEADLINE)
+const DEFAULTS = {
+  deadline: '2026-06-30T23:59:59',
+  titulo: 'EL TIEMPO CORRE:',
+  subtitulo: 'LA ETAPA DE CULTURIZACIÓN LLEGA A SU FIN',
+  panelIzquierdoFecha: '30 DE JUNIO',
+  panelIzquierdoTexto: 'Al cerrar la plataforma, las puertas a la fase de profesionalización se abrirán solo para quienes hayan completado el Tronco Común.',
+  panelDerechoTitulo: '¡NO TE QUEDES ATRÁS!',
+  panelDerechoTexto: 'Tu próxima etapa depende de lo que hagas hoy.',
+}
+
+export default function Urgency({
+  deadline,
+  titulo,
+  subtitulo,
+  panelIzquierdoFecha,
+  panelIzquierdoTexto,
+  panelDerechoTitulo,
+  panelDerechoTexto,
+}: UrgencyProps) {
+  const { days, hours, minutes, seconds } = useCountdown(deadline ?? DEFAULTS.deadline)
 
   return (
     <section
@@ -38,10 +64,10 @@ export default function Urgency() {
 
         <SectionReveal>
           <h2 className="section-title text-white mb-3" style={{ fontSize: Type.h2 }}>
-            EL TIEMPO CORRE:
+            {titulo ?? DEFAULTS.titulo}
           </h2>
           <h3 className="section-subtitle text-navy mb-10 md:mb-14" style={{ fontSize: Type.h3Card }}>
-            LA ETAPA DE CULTURIZACIÓN LLEGA A SU FIN
+            {subtitulo ?? DEFAULTS.subtitulo}
           </h3>
         </SectionReveal>
 
@@ -69,13 +95,11 @@ export default function Urgency() {
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Warning size={24} color={Colors.sunrayYellow100} weight="fill" />
                 <span className="font-verlag text-white uppercase" style={{ fontSize: Type.h3Card }}>
-                  30 DE JUNIO
+                  {panelIzquierdoFecha ?? DEFAULTS.panelIzquierdoFecha}
                 </span>
               </div>
               <p className="text-white" style={DescriptionCSS.sm}>
-                Al cerrar la plataforma, las puertas a la fase de{' '}
-                <strong>profesionalización</strong> se abrirán solo para quienes
-                hayan completado el <strong>Tronco Común</strong>.
+                {panelIzquierdoTexto ?? DEFAULTS.panelIzquierdoTexto}
               </p>
             </motion.div>
 
@@ -92,10 +116,10 @@ export default function Urgency() {
                 animate={{ opacity: [1, 0.7, 1] }}
                 transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
               >
-                ¡NO TE QUEDES ATRÁS!
+                {panelDerechoTitulo ?? DEFAULTS.panelDerechoTitulo}
               </motion.p>
               <p className="text-white" style={DescriptionCSS.sm}>
-                Tu próxima etapa depende de lo que hagas hoy.
+                {panelDerechoTexto ?? DEFAULTS.panelDerechoTexto}
               </p>
             </motion.div>
 

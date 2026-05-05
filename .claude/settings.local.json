@@ -8,7 +8,11 @@
       "Bash(node *)",
       "Bash(Get-ChildItem \"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\public\\\\fotos-nacho\" -Filter \"*.jpg\")",
       "Bash(Measure-Object)",
-      "Bash(Select-Object -ExpandProperty Count)"
+      "Bash(Select-Object -ExpandProperty Count)",
+      "Bash(npm install *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\" -Recurse -Force)",
+      "Bash(Select-Object FullName, PSIsContainer)",
+      "Bash(Sort-Object FullName)"
     ]
   }
 }
