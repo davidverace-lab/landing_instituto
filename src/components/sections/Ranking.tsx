@@ -15,7 +15,7 @@ const DEFAULTS = {
   etiquetaGrafica: 'Avance por Unidad de Negocio',
 }
 
-export default function Ranking({ titulo, descripcion, etiquetaGrafica }: RankingProps) {
+export default function Ranking({ titulo: _titulo, descripcion, etiquetaGrafica }: RankingProps) {
   const { ref: imgRef, inView: imgInView } = useInView()
 
   return (

@@ -26,7 +26,7 @@ const DEFAULTS = {
 }
 
 export default function FinalCTA({
-  ctaTitulo,
+  ctaTitulo: _ctaTitulo,
   ctaDescripcion,
   ctaButtonText,
   ctaButtonUrl,

@@ -18,7 +18,6 @@ const DEFAULTS = {
 }
 
 export default function Hero({ title, subtitle, description, buttonText, buttonUrl }: HeroProps) {
-  const t = title ?? DEFAULTS.title
   const s = subtitle ?? DEFAULTS.subtitle
   const d = description ?? DEFAULTS.description
   const b = buttonText ?? DEFAULTS.buttonText
