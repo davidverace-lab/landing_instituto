@@ -29,6 +29,7 @@ export default function App() {
         subtitle={data?.hero?.subtitle}
         description={data?.hero?.description}
         buttonText={data?.hero?.buttonText}
+        buttonUrl={data?.hero?.buttonUrl}
       />
       <Challenge
         graduadosActuales={data?.challenge?.graduadosActuales}
@@ -45,12 +46,46 @@ export default function App() {
         panelDerechoTitulo={data?.urgency?.panelDerechoTitulo}
         panelDerechoTexto={data?.urgency?.panelDerechoTexto}
       />
-      <Ranking />
-      <Organigrama />
-      <Testimonials />
-      <HonorBoard />
-      <Ceremony />
-      <FinalCTA />
+      <Ranking
+        titulo={data?.ranking?.titulo}
+        descripcion={data?.ranking?.descripcion}
+        etiquetaGrafica={data?.ranking?.etiquetaGrafica}
+      />
+      <Organigrama
+        titulo={data?.organigrama?.titulo}
+        topItem={data?.organigrama?.topItem}
+        leftItem={data?.organigrama?.leftItem}
+        rightItem={data?.organigrama?.rightItem}
+        bottomItem={data?.organigrama?.bottomItem}
+      />
+      <Testimonials
+        titulo={data?.testimonials?.titulo}
+        items={data?.testimonials?.items}
+      />
+      <HonorBoard
+        titulo={data?.honorBoard?.titulo}
+        descripcion={data?.honorBoard?.descripcion}
+        fotos={data?.honorBoard?.fotos}
+      />
+      <Ceremony
+        titulo={data?.ceremony?.titulo}
+        descripcion={data?.ceremony?.descripcion}
+        etiquetaFecha={data?.ceremony?.etiquetaFecha}
+        fecha={data?.ceremony?.fecha}
+        videoLabel={data?.ceremony?.videoLabel}
+        videoSubLabel={data?.ceremony?.videoSubLabel}
+        videoBadge={data?.ceremony?.videoBadge}
+      />
+      <FinalCTA
+        ctaTitulo={data?.finalCTA?.ctaTitulo}
+        ctaDescripcion={data?.finalCTA?.ctaDescripcion}
+        ctaButtonText={data?.finalCTA?.ctaButtonText}
+        ctaButtonUrl={data?.finalCTA?.ctaButtonUrl}
+        sloganLinea1={data?.finalCTA?.sloganLinea1}
+        sloganHighlight1={data?.finalCTA?.sloganHighlight1}
+        sloganLinea2={data?.finalCTA?.sloganLinea2}
+        sloganHighlight2={data?.finalCTA?.sloganHighlight2}
+      />
     </main>
   )
 }

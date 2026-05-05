@@ -6,6 +6,7 @@ interface HeroProps {
   subtitle?: string
   description?: string
   buttonText?: string
+  buttonUrl?: string
 }
 
 const DEFAULTS = {
@@ -13,13 +14,15 @@ const DEFAULTS = {
   subtitle: '¡EL PRÓXIMO LÍDER PORTUARIO PUEDES SER TÚ!',
   description: 'En el Instituto Hutchison Ports, navegamos juntos desde la cultura hasta el liderazgo de clase mundial.',
   buttonText: 'CONTINUAR MI FORMACIÓN AQUÍ',
+  buttonUrl: 'https://mxhutchisonports.csod.com/',
 }
 
-export default function Hero({ title, subtitle, description, buttonText }: HeroProps) {
+export default function Hero({ title, subtitle, description, buttonText, buttonUrl }: HeroProps) {
   const t = title ?? DEFAULTS.title
   const s = subtitle ?? DEFAULTS.subtitle
   const d = description ?? DEFAULTS.description
   const b = buttonText ?? DEFAULTS.buttonText
+  const url = buttonUrl ?? DEFAULTS.buttonUrl
 
   return (
     <section className="relative min-h-[100dvh] flex flex-col overflow-hidden bg-navy-dark">
@@ -104,7 +107,7 @@ export default function Hero({ title, subtitle, description, buttonText }: HeroP
             className="flex justify-center"
           >
             <a
-              href="https://mxhutchisonports.csod.com/"
+              href={url}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-gold w-full max-w-xs text-sm md:text-base lg:text-lg py-3 md:py-4 px-6"

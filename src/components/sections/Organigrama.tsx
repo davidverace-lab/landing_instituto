@@ -3,28 +3,35 @@ import SectionReveal from '../ui/SectionReveal'
 import { useInView } from '../../hooks/useInView'
 import { Users, ChartBar, Buildings } from '@phosphor-icons/react'
 import { Colors, Type, DescriptionCSS } from '../../tokens'
+import type { SanityOrganigramaItem, SanityOrganigramaCard } from '../../types/sanity'
 
 const ACCENT = Colors.seaBlue100
 
-const TOP_ITEM = {
-  label: 'Consejo Directivo Hutchison Ports',
-  desc: 'Actúa como instancia de patrocinio, validación y legitimidad corporativa del Instituto, respaldando, validando y habilitando el proyecto a nivel Grupo.',
+interface OrganigramaProps {
+  titulo?: string
+  topItem?: SanityOrganigramaItem
+  leftItem?: SanityOrganigramaCard
+  rightItem?: SanityOrganigramaCard
+  bottomItem?: SanityOrganigramaItem
 }
 
-const LEFT_ITEM = {
-  icon: <Users size={32} weight="duotone" color={ACCENT} />,
-  title: 'RECURSOS HUMANOS',
-  desc: 'Garantiza que la oferta formativa responda a las necesidades reales del negocio y contribuya al desarrollo del talento en todos los niveles.',
-}
-
-const RIGHT_ITEM = {
-  icon: <ChartBar size={32} weight="duotone" color={ACCENT} />,
-  title: 'SIGA-CALIDAD',
-  desc: 'Asegura que la formación impartida sea medible, consistente y alineada con los estándares corporativos de excelencia operativa.',
-}
-
-const BOTTOM_ITEM = {
-  desc: 'Centro corporativo de desarrollo del conocimiento, la formación y la profesionalización del talento dentro del Grupo.',
+const DEFAULTS = {
+  titulo: 'CONOCE CÓMO SE CONFORMA EL INSTITUTO HUTCHISON PORTS',
+  topItem: {
+    label: 'Consejo Directivo Hutchison Ports',
+    desc: 'Actúa como instancia de patrocinio, validación y legitimidad corporativa del Instituto, respaldando, validando y habilitando el proyecto a nivel Grupo.',
+  },
+  leftItem: {
+    title: 'RECURSOS HUMANOS',
+    desc: 'Garantiza que la oferta formativa responda a las necesidades reales del negocio y contribuya al desarrollo del talento en todos los niveles.',
+  },
+  rightItem: {
+    title: 'SIGA-CALIDAD',
+    desc: 'Asegura que la formación impartida sea medible, consistente y alineada con los estándares corporativos de excelencia operativa.',
+  },
+  bottomItem: {
+    desc: 'Centro corporativo de desarrollo del conocimiento, la formación y la profesionalización del talento dentro del Grupo.',
+  },
 }
 
 function OrgCard({ icon, title, desc, side }: {
@@ -80,15 +87,19 @@ function Connector({ direction, inView: visible }: { direction: 'v' | 'h-left' |
   )
 }
 
-export default function Organigrama() {
+export default function Organigrama({ titulo, topItem, leftItem, rightItem, bottomItem }: OrganigramaProps) {
   const { ref: imgRef, inView: imgInView } = useInView()
+
+  const top = { ...DEFAULTS.topItem, ...topItem }
+  const left = { ...DEFAULTS.leftItem, ...leftItem }
+  const right = { ...DEFAULTS.rightItem, ...rightItem }
+  const bottom = { ...DEFAULTS.bottomItem, ...bottomItem }
 
   return (
     <section
       className="relative section-padding overflow-hidden"
       style={{ backgroundColor: Colors.seaBlue100 }}
     >
-      {/* Foto de fondo sutil */}
       <div className="absolute inset-0 z-0">
         <img
           src="/webp/fotos-nacho/DSC03386.webp"
@@ -99,7 +110,6 @@ export default function Organigrama() {
           decoding="async"
         />
       </div>
-      {/* Subtle grid */}
       <div
         className="absolute inset-0 opacity-[0.022] pointer-events-none"
         style={{
@@ -109,17 +119,14 @@ export default function Organigrama() {
       />
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Title */}
         <SectionReveal>
           <div className="text-center mb-14">
             <h2 className="section-title text-white" style={{ fontSize: Type.h2 }}>
-              CONOCE CÓMO SE CONFORMA EL<br />
-              INSTITUTO HUTCHISON PORTS
+              {titulo ?? DEFAULTS.titulo}
             </h2>
           </div>
         </SectionReveal>
 
-        {/* TOP: Consejo Directivo */}
         <SectionReveal delay={0.1}>
           <div className="flex justify-center mb-2">
             <div className="max-w-2xl w-full text-center">
@@ -129,29 +136,31 @@ export default function Organigrama() {
               >
                 <Buildings size={18} weight="fill" color="#FFFFFF" />
                 <span className="font-verlag text-white uppercase tracking-wider" style={{ fontSize: Type.h3Col }}>
-                  {TOP_ITEM.label}
+                  {top.label}
                 </span>
               </div>
               <p className="text-white max-w-xl mx-auto" style={DescriptionCSS.base}>
-                {TOP_ITEM.desc}
+                {top.desc}
               </p>
             </div>
           </div>
           <Connector direction="v" inView={imgInView} />
         </SectionReveal>
 
-        {/* MIDDLE: Left — Vector — Right */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px_1fr] gap-4 lg:gap-8 items-center mb-2">
 
-          {/* Left: Recursos Humanos */}
           <div>
             <SectionReveal direction="right" delay={0.22}>
-              <OrgCard icon={LEFT_ITEM.icon} title={LEFT_ITEM.title} desc={LEFT_ITEM.desc} side="left" />
+              <OrgCard
+                icon={<Users size={32} weight="duotone" color={ACCENT} />}
+                title={left.title}
+                desc={left.desc}
+                side="left"
+              />
             </SectionReveal>
             <Connector direction="h-left" inView={imgInView} />
           </div>
 
-          {/* Center: Vector */}
           <div className="flex justify-center" ref={imgRef}>
             <div className="relative">
               <motion.div
@@ -174,19 +183,21 @@ export default function Organigrama() {
             </div>
           </div>
 
-          {/* Right: SIGA-Calidad */}
           <div>
             <Connector direction="h-right" inView={imgInView} />
             <SectionReveal direction="left" delay={0.22}>
-              <OrgCard icon={RIGHT_ITEM.icon} title={RIGHT_ITEM.title} desc={RIGHT_ITEM.desc} side="right" />
+              <OrgCard
+                icon={<ChartBar size={32} weight="duotone" color={ACCENT} />}
+                title={right.title}
+                desc={right.desc}
+                side="right"
+              />
             </SectionReveal>
           </div>
         </div>
 
-        {/* Vertical connector to bottom */}
         <Connector direction="v" inView={imgInView} />
 
-        {/* BOTTOM: Instituto logo + description */}
         <SectionReveal delay={0.38}>
           <div className="flex justify-center">
             <div
@@ -208,7 +219,7 @@ export default function Organigrama() {
               />
               <div className="h-px w-16 bg-navy" />
               <p className="text-white" style={DescriptionCSS.base}>
-                {BOTTOM_ITEM.desc}
+                {bottom.desc}
               </p>
             </div>
           </div>

@@ -3,11 +3,41 @@ import SectionReveal from '../ui/SectionReveal'
 import { ArrowRight } from '@phosphor-icons/react'
 import { Colors, Type, DescriptionCSS } from '../../tokens'
 
-export default function FinalCTA() {
+interface FinalCTAProps {
+  ctaTitulo?: string
+  ctaDescripcion?: string
+  ctaButtonText?: string
+  ctaButtonUrl?: string
+  sloganLinea1?: string
+  sloganHighlight1?: string
+  sloganLinea2?: string
+  sloganHighlight2?: string
+}
+
+const DEFAULTS = {
+  ctaTitulo: '¡TERMINAR MIS MÓDULOS AHORA!',
+  ctaDescripcion: 'Solo te tomará unos minutos completar lo que empezaste. Tu próximo paso hacia el liderazgo portuario está a un clic de distancia.',
+  ctaButtonText: 'CONTINUAR EN LA PLATAFORMA',
+  ctaButtonUrl: 'https://mxhutchisonports.csod.com/',
+  sloganLinea1: 'NAVEGANDO JUNTOS DESDE LA',
+  sloganHighlight1: 'CULTURA ORGANIZACIONAL',
+  sloganLinea2: 'HASTA EL',
+  sloganHighlight2: 'LIDERAZGO PROFESIONAL',
+}
+
+export default function FinalCTA({
+  ctaTitulo,
+  ctaDescripcion,
+  ctaButtonText,
+  ctaButtonUrl,
+  sloganLinea1,
+  sloganHighlight1,
+  sloganLinea2,
+  sloganHighlight2,
+}: FinalCTAProps) {
   return (
     <section className="relative overflow-hidden" style={{ display: 'flex', flexDirection: 'column' }}>
 
-      {/* ── Sección CTA — sky-blue de fondo ── */}
       <div
         className="relative overflow-hidden"
         style={{ minHeight: '100dvh', display: 'flex', alignItems: 'center', backgroundColor: Colors.skyBlue100 }}
@@ -26,18 +56,16 @@ export default function FinalCTA() {
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-28 text-center">
           <SectionReveal>
             <h2 className="section-title text-white mb-6" style={{ fontSize: Type.h1 }}>
-              ¡TERMINAR MIS<br />
-              MÓDULOS AHORA!
+              {ctaTitulo ?? DEFAULTS.ctaTitulo}
             </h2>
             <p className="text-white max-w-2xl mx-auto mb-14" style={DescriptionCSS.base}>
-              Solo te tomará unos minutos completar lo que empezaste.
-              Tu próximo paso hacia el liderazgo portuario está a un clic de distancia.
+              {ctaDescripcion ?? DEFAULTS.ctaDescripcion}
             </p>
           </SectionReveal>
 
           <SectionReveal delay={0.2}>
             <a
-              href="https://mxhutchisonports.csod.com/"
+              href={ctaButtonUrl ?? DEFAULTS.ctaButtonUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-4 text-white transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
@@ -50,19 +78,17 @@ export default function FinalCTA() {
                 padding: '20px 48px',
               }}
             >
-              CONTINUAR EN LA PLATAFORMA
+              {ctaButtonText ?? DEFAULTS.ctaButtonText}
               <ArrowRight size={22} weight="bold" />
             </a>
           </SectionReveal>
         </div>
       </div>
 
-      {/* ── Slogan final — navy con logos arriba ── */}
       <div
         className="relative w-full overflow-hidden"
         style={{ minHeight: '100dvh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.seaBlue100 }}
       >
-        {/* Foto de fondo sutil */}
         <div className="absolute inset-0 z-0">
           <img
             src="/webp/fotos-nacho/DJI_20251103112308_0211_D.webp"
@@ -74,7 +100,6 @@ export default function FinalCTA() {
           />
         </div>
 
-        {/* Logos — absolutos arriba, misma proporción y espaciado que el HERO */}
         <motion.div
           className="absolute top-0 left-0 right-0 z-20 pt-8 px-6 md:pt-12 md:px-16 lg:pt-14 lg:px-24 flex items-center justify-between"
           initial={{ opacity: 0, y: 20 }}
@@ -102,7 +127,6 @@ export default function FinalCTA() {
           />
         </motion.div>
 
-        {/* Slogan — centrado real respecto al viewport */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 text-center">
           <motion.h2
             className="section-title text-white"
@@ -112,9 +136,9 @@ export default function FinalCTA() {
             viewport={{ once: true }}
             transition={{ type: 'spring', stiffness: 65, damping: 18, delay: 0.15 }}
           >
-            NAVEGANDO JUNTOS DESDE LA<br />
-            <span className="text-sky-brand">CULTURA ORGANIZACIONAL</span><br />
-            HASTA EL <span className="text-sky-brand">LIDERAZGO PROFESIONAL</span>
+            {sloganLinea1 ?? DEFAULTS.sloganLinea1}<br />
+            <span className="text-sky-brand">{sloganHighlight1 ?? DEFAULTS.sloganHighlight1}</span><br />
+            {sloganLinea2 ?? DEFAULTS.sloganLinea2} <span className="text-sky-brand">{sloganHighlight2 ?? DEFAULTS.sloganHighlight2}</span>
           </motion.h2>
         </div>
       </div>

@@ -3,6 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import SectionReveal from '../ui/SectionReveal'
 import { CaretLeft, CaretRight, Play, Pause } from '@phosphor-icons/react'
 import { Colors } from '../../tokens'
+import type { SanityTestimonial } from '../../types/sanity'
+
+interface TestimonialsProps {
+  titulo?: string
+  items?: SanityTestimonial[]
+}
 
 interface TestimonialVideo {
   name: string
@@ -13,7 +19,9 @@ interface TestimonialVideo {
   poster: string
 }
 
-const TESTIMONIALS: TestimonialVideo[] = [
+const DEFAULT_TITLE = 'VOCES DE ÉXITO'
+
+const DEFAULT_TESTIMONIALS: TestimonialVideo[] = [
   {
     name: 'Rodrigo Espinoza Varela',
     role: 'Operador de Grúa',
@@ -48,9 +56,18 @@ const TESTIMONIALS: TestimonialVideo[] = [
   },
 ]
 
-const n = TESTIMONIALS.length
+function normalizeTestimonials(items?: SanityTestimonial[]): TestimonialVideo[] {
+  if (!items || items.length === 0) return DEFAULT_TESTIMONIALS
+  return items.map((it, i) => ({
+    name: it.name ?? DEFAULT_TESTIMONIALS[i % DEFAULT_TESTIMONIALS.length].name,
+    role: it.role ?? '',
+    bu: it.bu ?? '',
+    quote: it.quote ?? '',
+    videoSrc: it.videoSrc ?? '',
+    poster: it.poster ?? DEFAULT_TESTIMONIALS[i % DEFAULT_TESTIMONIALS.length].poster,
+  }))
+}
 
-/* Card principal — activa */
 function ActiveCard({ t }: { t: TestimonialVideo }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [playing, setPlaying] = useState(false)
@@ -81,7 +98,6 @@ function ActiveCard({ t }: { t: TestimonialVideo }) {
         background: `linear-gradient(to top, rgba(0,46,109,0.97) 0%, rgba(0,46,109,0.40) 45%, transparent 100%)`,
       }} />
 
-      {/* Play */}
       <motion.button
         onClick={togglePlay}
         className="absolute flex items-center justify-center"
@@ -101,7 +117,6 @@ function ActiveCard({ t }: { t: TestimonialVideo }) {
         }
       </motion.button>
 
-      {/* Info bottom — nombre → puesto → quote */}
       <div className="absolute bottom-0 left-0 right-0 p-4">
         <p className="text-navy leading-tight mb-0.5"
           style={{ fontFamily: 'Verlag Black, sans-serif', textTransform: 'uppercase', fontSize: '13px', letterSpacing: '0.04em' }}>
@@ -116,7 +131,6 @@ function ActiveCard({ t }: { t: TestimonialVideo }) {
   )
 }
 
-/* Card fantasma — borrosa a los lados */
 function GhostCard({ t, side }: { t: TestimonialVideo; side: 'left' | 'right' }) {
   return (
     <div
@@ -135,7 +149,6 @@ function GhostCard({ t, side }: { t: TestimonialVideo; side: 'left' | 'right' })
       <div className="absolute inset-0" style={{
         background: 'linear-gradient(to top, rgba(0,46,109,0.80) 0%, rgba(0,46,109,0.20) 60%, transparent 100%)',
       }} />
-      {/* fade edges */}
       <div className="absolute inset-0" style={{
         background: side === 'left'
           ? 'linear-gradient(to right, rgba(0,46,109,1) 0%, transparent 60%)'
@@ -145,7 +158,10 @@ function GhostCard({ t, side }: { t: TestimonialVideo; side: 'left' | 'right' })
   )
 }
 
-export default function Testimonials() {
+export default function Testimonials({ titulo, items }: TestimonialsProps) {
+  const testimonials = normalizeTestimonials(items)
+  const n = testimonials.length
+
   const [active, setActive] = useState(0)
   const [direction, setDirection] = useState(1)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
@@ -161,7 +177,7 @@ export default function Testimonials() {
       setDirection(1)
       setActive(a => (a + 1) % n)
     }, 5000)
-  }, [])
+  }, [n])
 
   useEffect(() => {
     resetInterval()
@@ -185,7 +201,6 @@ export default function Testimonials() {
       className="relative overflow-hidden"
       style={{ minHeight: '100dvh', display: 'flex', alignItems: 'center', backgroundColor: '#9ACAEB' }}
     >
-      {/* Foto de fondo sutil */}
       <div className="absolute inset-0 z-0">
         <img
           src="/webp/fotos-nacho/DSC00758.webp"
@@ -202,13 +217,11 @@ export default function Testimonials() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-          {/* Izquierda: título + descripción activa + controles */}
           <SectionReveal>
             <h2 className="section-title text-navy mb-6 whitespace-nowrap">
-              VOCES DE <span className="text-navy">ÉXITO</span>
+              {titulo ?? DEFAULT_TITLE}
             </h2>
 
-            {/* Descripción animada del testimonio activo */}
             <div className="mb-10 min-h-[80px]">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -219,19 +232,18 @@ export default function Testimonials() {
                   transition={{ duration: 0.35 }}
                 >
                   <p className="font-montserrat text-navy text-lg font-semibold mb-1">
-                    {TESTIMONIALS[active].name}
+                    {testimonials[active].name}
                   </p>
                   <p className="font-montserrat text-navy text-base mb-3">
-                    {TESTIMONIALS[active].role} · {TESTIMONIALS[active].bu}
+                    {testimonials[active].role} · {testimonials[active].bu}
                   </p>
                   <p className="section-body text-navy leading-relaxed italic">
-                    "{TESTIMONIALS[active].quote}"
+                    "{testimonials[active].quote}"
                   </p>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            {/* Controles */}
             <div className="flex items-center gap-6">
               <motion.button onClick={handlePrev}
                 className="w-14 h-14 flex items-center justify-center shrink-0"
@@ -244,7 +256,7 @@ export default function Testimonials() {
               </motion.button>
 
               <div className="flex items-center gap-2">
-                {TESTIMONIALS.map((_, i) => (
+                {testimonials.map((_, i) => (
                   <button key={i} onClick={() => { goTo(i, i > active ? 1 : -1); resetInterval() }}
                     aria-label={`Testimonio ${i + 1}`}>
                     <motion.div
@@ -268,14 +280,11 @@ export default function Testimonials() {
             </div>
           </SectionReveal>
 
-          {/* Derecha: carrusel con fantasmas a los lados */}
           <div className="flex justify-center lg:justify-end">
             <div className="flex items-center gap-3">
 
-              {/* Ghost izquierda — siempre montada, solo cambia la imagen */}
-              <GhostCard t={TESTIMONIALS[prevIdx]} side="left" />
+              <GhostCard t={testimonials[prevIdx]} side="left" />
 
-              {/* Card activa */}
               <div className="relative shrink-0" style={{ width: '260px', height: '462px' }}>
                 <AnimatePresence initial={false} custom={direction} mode="popLayout">
                   <motion.div
@@ -288,13 +297,12 @@ export default function Testimonials() {
                     className="absolute inset-0"
                     style={{ willChange: 'transform, opacity' }}
                   >
-                    <ActiveCard t={TESTIMONIALS[active]} />
+                    <ActiveCard t={testimonials[active]} />
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              {/* Ghost derecha — siempre montada */}
-              <GhostCard t={TESTIMONIALS[nextIdx]} side="right" />
+              <GhostCard t={testimonials[nextIdx]} side="right" />
 
             </div>
           </div>

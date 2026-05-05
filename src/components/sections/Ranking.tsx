@@ -3,7 +3,19 @@ import SectionReveal from '../ui/SectionReveal'
 import { useInView } from '../../hooks/useInView'
 import { Colors, Type, DescriptionCSS } from '../../tokens'
 
-export default function Ranking() {
+interface RankingProps {
+  titulo?: string
+  descripcion?: string
+  etiquetaGrafica?: string
+}
+
+const DEFAULTS = {
+  titulo: 'EL PODER DE TU UNIDAD DE NEGOCIO',
+  descripcion: '¿Tu Unidad de Negocio está liderando el camino? Tu participación decide la posición de tu equipo en el ranking nacional. Cada módulo completado suma para llevar a tu terminal al primer lugar.',
+  etiquetaGrafica: 'Avance por Unidad de Negocio',
+}
+
+export default function Ranking({ titulo, descripcion, etiquetaGrafica }: RankingProps) {
   const { ref: imgRef, inView: imgInView } = useInView()
 
   return (
@@ -11,7 +23,6 @@ export default function Ranking() {
       className="relative overflow-hidden"
       style={{ minHeight: '100dvh', display: 'flex', alignItems: 'center', backgroundColor: 'rgba(0,155,222,0.50)' }}
     >
-      {/* Foto de fondo sutil */}
       <div className="absolute inset-0 z-0">
         <img
           src="/webp/fotos-nacho/DJI_20250926023427_0054_D.webp"
@@ -28,26 +39,19 @@ export default function Ranking() {
       />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24">
-        {/* Split: izquierda título+texto | derecha gráfica */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-          {/* Izquierda */}
           <div>
             <SectionReveal>
               <h2 className="section-title text-white mb-8" style={{ fontSize: Type.h2 }}>
-                EL PODER DE TU<br />
-                <span className="text-white">UNIDAD DE NEGOCIO</span>
+                {titulo ?? DEFAULTS.titulo}
               </h2>
               <p className="text-white" style={DescriptionCSS.base}>
-                ¿Tu Unidad de Negocio está liderando el camino? Tu participación
-                decide la posición de tu equipo en el{' '}
-                <span className="text-white font-semibold">ranking nacional</span>.
-                Cada módulo completado suma para llevar a tu terminal al primer lugar.
+                {descripcion ?? DEFAULTS.descripcion}
               </p>
             </SectionReveal>
           </div>
 
-          {/* Derecha: gráfica en panel blanco */}
           <SectionReveal direction="left" delay={0.18}>
             <motion.div
               ref={imgRef}
@@ -66,7 +70,7 @@ export default function Ranking() {
                 transition={{ type: 'spring', stiffness: 70, damping: 18, delay: 0.15 }}
               >
                 <p className="font-verlag text-navy uppercase tracking-wider mb-4" style={{ fontSize: Type.overline }}>
-                  Avance por Unidad de Negocio
+                  {etiquetaGrafica ?? DEFAULTS.etiquetaGrafica}
                 </p>
                 <img
                   src="/webp/grafica comparativa.webp"
