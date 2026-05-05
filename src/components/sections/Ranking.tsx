@@ -21,32 +21,18 @@ export default function Ranking({ titulo, descripcion, etiquetaGrafica }: Rankin
   return (
     <section
       className="relative overflow-hidden"
-      style={{ minHeight: '100dvh', display: 'flex', alignItems: 'center', backgroundColor: 'rgba(0,155,222,0.50)' }}
+      style={{ backgroundColor: Colors.bgSurface }}
     >
-      <div className="absolute inset-0 z-0">
-        <img
-          src="/webp/fotos-nacho/DJI_20250926023427_0054_D.webp"
-          alt=""
-          className="w-full h-full object-cover object-center"
-          style={{ opacity: 0.15 }}
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <div
-        className="absolute bottom-0 left-0 w-80 h-80 opacity-5 pointer-events-none"
-        style={{ background: `radial-gradient(circle, ${Colors.skyBlue100} 0%, transparent 70%)` }}
-      />
-
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           <div>
             <SectionReveal>
-              <h2 className="section-title text-white mb-8" style={{ fontSize: Type.h2 }}>
-                {titulo ?? DEFAULTS.titulo}
+              <h2 className="section-title mb-8" style={{ lineHeight: 1.1, color: '#002E6D' }}>
+                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>EL PODER DE TU</span>
+                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>UNIDAD DE NEGOCIO</span>
               </h2>
-              <p className="text-white" style={DescriptionCSS.base}>
+              <p style={{ ...DescriptionCSS.base, color: '#002E6D' }}>
                 {descripcion ?? DEFAULTS.descripcion}
               </p>
             </SectionReveal>
@@ -86,7 +72,6 @@ export default function Ranking({ titulo, descripcion, etiquetaGrafica }: Rankin
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-white/10" />
     </section>
   )
 }

@@ -11,7 +11,7 @@ export const Colors = {
   white:           '#FFFFFF',
   bgWhite:         '#FFFFFF',
   bgSurface:       '#F8FAFC',
-  textPrimary:     '#222F4F',
+  textPrimary:     '#002E6D',
   textSecondary:   '#5F6C7B',
 }
 

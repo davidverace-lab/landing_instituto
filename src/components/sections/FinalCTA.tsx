@@ -40,7 +40,7 @@ export default function FinalCTA({
 
       <div
         className="relative overflow-hidden"
-        style={{ minHeight: '100dvh', display: 'flex', alignItems: 'center', backgroundColor: Colors.skyBlue100 }}
+        style={{ backgroundColor: Colors.skyBlue100 }}
       >
         <div className="absolute inset-0 z-0">
           <img
@@ -53,10 +53,14 @@ export default function FinalCTA({
           />
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-28 text-center">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24 text-center">
           <SectionReveal>
-            <h2 className="section-title text-white mb-6" style={{ fontSize: Type.h1 }}>
-              {ctaTitulo ?? DEFAULTS.ctaTitulo}
+            <h2 className="section-title mb-6">
+              <span style={{ color: '#FFFFFF' }}>¡</span>
+              <span style={{ color: '#FFC627' }}>TERMINAR </span>
+              <span style={{ color: '#FFFFFF' }}>MIS MÓDULOS </span>
+              <span style={{ color: '#FFC627' }}>AHORA</span>
+              <span style={{ color: '#FFFFFF' }}>!</span>
             </h2>
             <p className="text-white max-w-2xl mx-auto mb-14" style={DescriptionCSS.base}>
               {ctaDescripcion ?? DEFAULTS.ctaDescripcion}
@@ -91,7 +95,7 @@ export default function FinalCTA({
       >
         <div className="absolute inset-0 z-0">
           <img
-            src="/webp/fotos-nacho/DJI_20251103112308_0211_D.webp"
+            src="/Hutchison-Ports-ICAVE-FinalCTA.jpg"
             alt=""
             className="w-full h-full object-cover object-center"
             style={{ opacity: 0.15 }}
@@ -130,7 +134,7 @@ export default function FinalCTA({
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 text-center">
           <motion.h2
             className="section-title text-white"
-            style={{ fontSize: Type.h1 }}
+            style={{ fontSize: 'clamp(1.9rem, 5.5vw, 65px)', lineHeight: 1.15 }}
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

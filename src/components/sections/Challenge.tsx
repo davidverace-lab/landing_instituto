@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import SectionReveal from '../ui/SectionReveal'
 import AnimatedCounter from '../ui/AnimatedCounter'
 import { useInView } from '../../hooks/useInView'
 import { Colors, Type, DescriptionCSS } from '../../tokens'
@@ -41,107 +40,98 @@ export default function Challenge({ graduadosActuales, meta, tituloIzquierda, de
         />
       </div>
 
-      {/* Layout: 1 columna en mobile, 2 columnas en desktop */}
-      <div className="relative z-10 flex flex-col lg:flex-row lg:min-h-[100dvh]">
+      {/* Layout: 1 columna en mobile, 2 columnas full-height en desktop */}
+      <div className="relative z-10 flex flex-col lg:grid lg:grid-cols-2 lg:min-h-[100dvh]">
 
         {/* Mitad izquierda: Hagamos Historia */}
-        <div className="relative w-full lg:w-1/2 flex flex-col justify-center px-6 md:px-16 lg:px-20 py-20 lg:py-28">
+        <div className="relative w-full h-full flex flex-col px-6 md:px-16 lg:px-20 pt-20 pb-16 lg:pt-28 lg:pb-28">
           <div className="absolute inset-0" style={{ backgroundColor: Colors.skyBlue100, opacity: 0.88 }} />
-          <div className="relative z-10 flex flex-col gap-6 max-w-lg mx-auto lg:mx-0">
+          <div className="relative z-10 max-w-lg mx-auto lg:mx-0 w-full">
 
-            <SectionReveal>
-              <h2 className="section-title text-navy leading-tight" style={{ fontSize: Type.h2 }}>
-                {tituloIzquierda ?? DEFAULTS.tituloIzquierda}
-              </h2>
-            </SectionReveal>
+            <h2
+              className="section-title text-navy"
+              style={{ fontSize: Type.h2, lineHeight: 1.05, margin: 0, marginBottom: '1.25rem', minHeight: '1.05em' }}
+            >
+              {tituloIzquierda ?? DEFAULTS.tituloIzquierda}
+            </h2>
 
-            <SectionReveal delay={0.15}>
-              <p className="text-white" style={DescriptionCSS.base}>
-                {descripcionIzquierda
-                  ? descripcionIzquierda.replace('{meta}', target.toLocaleString())
-                  : (
-                    <>
-                      En Hutchison Ports, no solo movemos carga, impulsamos talento.
-                      Nuestra meta es que{' '}
-                      <strong className="text-navy">{target.toLocaleString()} colaboradores</strong> completen
-                      la etapa de Culturización. Tu avance es el motor que nos llevará
-                      a este hito histórico.
-                    </>
-                  )
-                }
-              </p>
-            </SectionReveal>
+            <p className="text-white" style={DescriptionCSS.base}>
+              {descripcionIzquierda
+                ? descripcionIzquierda.replace('{meta}', target.toLocaleString())
+                : <>En Hutchison Ports, no solo movemos carga, impulsamos talento. Nuestra meta es que <strong className="text-navy">{target.toLocaleString()} colaboradores</strong> completen la etapa de Culturización. Tu avance es el motor que nos llevará a este hito histórico.</>
+              }
+            </p>
+
+            <div className="mt-8 overflow-hidden rounded-lg shadow-2xl">
+              <img
+                src="/webp/fotos-nacho/DJI_20251002151728_0052_D.webp"
+                alt="Operaciones portuarias Hutchison Ports"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
 
           </div>
         </div>
 
         {/* Mitad derecha: Graduados */}
-        <div className="relative w-full lg:w-1/2 flex flex-col justify-center px-6 md:px-16 lg:px-20 py-16 lg:py-28">
+        <div className="relative w-full h-full flex flex-col px-6 md:px-16 lg:px-20 pt-20 pb-16 lg:pt-28 lg:pb-28">
           <div className="absolute inset-0" style={{ backgroundColor: Colors.seaBlue100, opacity: 0.92 }} />
           <div className="relative z-10 max-w-lg mx-auto lg:mx-0 w-full">
-            <SectionReveal direction="left" delay={0.2}>
-              <div ref={ref} className="flex flex-col gap-5">
+            <div ref={ref} className="flex flex-col gap-5">
 
-                {/* Label */}
-                <p
-                  className="font-verlag text-sky-brand uppercase leading-tight"
-                  style={{ fontSize: 'clamp(1.4rem, 3vw, 3.2rem)', letterSpacing: '0.02em' }}
-                >
-                  Graduados actuales
-                </p>
+              <h2
+                className="section-title text-sky-brand"
+                style={{ fontSize: Type.h2, lineHeight: 1.05, margin: 0, letterSpacing: '0.02em', minHeight: '1.05em' }}
+              >
+                Graduados actuales
+              </h2>
 
-                {/* Número principal */}
-                <AnimatedCounter
-                  target={currentGraduados}
-                  className="font-verlag leading-none block"
-                  style={{ fontSize: Type.statLg, letterSpacing: '-2px' }}
-                  duration={2500}
-                  color={Colors.sunrayYellow100}
-                />
+              <AnimatedCounter
+                target={currentGraduados}
+                className="font-verlag leading-none block"
+                style={{ fontSize: Type.statLg, letterSpacing: '-2px' }}
+                duration={2500}
+                color={Colors.sunrayYellow100}
+              />
 
-                {/* Meta */}
-                <div className="flex items-baseline gap-3">
-                  <span
-                    className="font-verlag text-white uppercase"
-                    style={{ fontSize: 'clamp(1.2rem, 2vw, 2rem)', letterSpacing: '0.18em' }}
-                  >
-                    Meta:
-                  </span>
-                  <span className="font-verlag font-bold text-white" style={{ fontSize: 'clamp(1.2rem, 2vw, 2rem)' }}>
-                    {target.toLocaleString()}
-                  </span>
-                </div>
-
-                {/* Barra de progreso */}
-                <div>
-                  <div className="h-3 bg-white/10 w-full overflow-hidden rounded-full">
-                    <motion.div
-                      className="h-full bg-sky-brand rounded-full"
-                      initial={{ width: '0%' }}
-                      animate={{ width: inView ? `${pct}%` : '0%' }}
-                      transition={{ duration: 2.4, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
-                    />
-                  </div>
-                  <div className="flex justify-between mt-2">
-                    <span className="font-montserrat text-white text-xs md:text-sm">0</span>
-                    <span className="font-montserrat font-bold text-white text-xs md:text-sm">{pct}% alcanzado</span>
-                    <span className="font-montserrat text-white text-xs md:text-sm">{target.toLocaleString()}</span>
-                  </div>
-                </div>
-
-                {/* Footer */}
-                <div className="pt-4 border-t border-white/10">
-                  <p className="text-white" style={DescriptionCSS.base}>
-                    Ya somos{' '}
-                    <span className="text-sky-brand font-semibold">{currentGraduados.toLocaleString()}</span>.{' '}
-                    Faltan{' '}
-                    <span className="text-white font-bold">{remaining.toLocaleString()}</span>{' '}
-                    para alcanzar los {target.toLocaleString()}.
-                  </p>
-                </div>
-
+              <div className="flex items-baseline gap-3">
+                <span className="font-verlag text-white uppercase" style={{ fontSize: 'clamp(1.2rem, 2vw, 2rem)', letterSpacing: '0.18em' }}>
+                  Meta:
+                </span>
+                <span className="font-verlag font-bold text-white" style={{ fontSize: 'clamp(1.2rem, 2vw, 2rem)' }}>
+                  {target.toLocaleString()}
+                </span>
               </div>
-            </SectionReveal>
+
+              <div>
+                <div className="h-5 bg-white/10 w-full overflow-hidden rounded-full">
+                  <motion.div
+                    className="h-full bg-sky-brand rounded-full"
+                    initial={{ width: '0%' }}
+                    animate={{ width: inView ? `${pct}%` : '0%' }}
+                    transition={{ duration: 2.4, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
+                  />
+                </div>
+                <div className="flex justify-between mt-3">
+                  <span className="font-montserrat text-white text-sm md:text-base">0</span>
+                  <span className="font-montserrat font-bold text-white text-sm md:text-base">{pct}% alcanzado</span>
+                  <span className="font-montserrat text-white text-sm md:text-base">{target.toLocaleString()}</span>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-white/10">
+                <p className="text-white" style={DescriptionCSS.base}>
+                  Ya somos{' '}
+                  <span className="text-sky-brand font-semibold">{currentGraduados.toLocaleString()}</span>.{' '}
+                  Faltan{' '}
+                  <span className="text-white font-bold">{remaining.toLocaleString()}</span>{' '}
+                  para alcanzar los {target.toLocaleString()}.
+                </p>
+              </div>
+
+            </div>
           </div>
         </div>
 

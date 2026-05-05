@@ -63,7 +63,7 @@ export default function Urgency({
       <div className="relative z-10 w-full max-w-5xl mx-auto px-5 md:px-12 lg:px-20 py-20 md:py-28 text-center">
 
         <SectionReveal>
-          <h2 className="section-title text-white mb-3" style={{ fontSize: Type.h2 }}>
+          <h2 className="section-title text-navy mb-3" style={{ fontSize: Type.h2 }}>
             {titulo ?? DEFAULTS.titulo}
           </h2>
           <h3 className="section-subtitle text-navy mb-10 md:mb-14" style={{ fontSize: Type.h3Card }}>
@@ -98,7 +98,7 @@ export default function Urgency({
                   {panelIzquierdoFecha ?? DEFAULTS.panelIzquierdoFecha}
                 </span>
               </div>
-              <p className="text-white" style={DescriptionCSS.sm}>
+              <p className="text-white" style={{ ...DescriptionCSS.sm, fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)' }}>
                 {panelIzquierdoTexto ?? DEFAULTS.panelIzquierdoTexto}
               </p>
             </motion.div>
@@ -118,7 +118,7 @@ export default function Urgency({
               >
                 {panelDerechoTitulo ?? DEFAULTS.panelDerechoTitulo}
               </motion.p>
-              <p className="text-white" style={DescriptionCSS.sm}>
+              <p className="text-white" style={{ ...DescriptionCSS.sm, fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)' }}>
                 {panelDerechoTexto ?? DEFAULTS.panelDerechoTexto}
               </p>
             </motion.div>

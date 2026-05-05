@@ -48,16 +48,20 @@ function OrgCard({ icon, title, desc, side }: {
       animate={inView ? { opacity: 0.99, x: 0, y: 0 } : {}}
       transition={{ type: 'spring', stiffness: 75, damping: 20 }}
       whileHover={{ y: -4 }}
-      className="flex flex-col gap-4 p-6 md:p-7"
+      className="flex flex-col gap-3 p-6 md:p-7 items-center text-center"
       style={{
         background: 'rgba(0,46,109,0.60)',
         borderLeft: side === 'left' ? `3px solid ${ACCENT}` : undefined,
         borderRight: side === 'right' ? `3px solid ${ACCENT}` : undefined,
       }}
     >
-      {icon && <div>{icon}</div>}
-      {title && (
-        <h4 className="font-verlag text-white leading-tight" style={{ fontSize: Type.h3Col }}>{title}</h4>
+      {(icon || title) && (
+        <div className="flex items-center gap-3">
+          {icon && <div className="shrink-0">{icon}</div>}
+          {title && (
+            <h4 className="font-verlag text-white leading-tight" style={{ fontSize: Type.h3Col }}>{title}</h4>
+          )}
+        </div>
       )}
       <p className="text-white" style={DescriptionCSS.base}>{desc}</p>
     </motion.div>
@@ -149,10 +153,10 @@ export default function Organigrama({ titulo, topItem, leftItem, rightItem, bott
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px_1fr] gap-4 lg:gap-8 items-center mb-2">
 
-          <div>
+          <div className="flex flex-col justify-center">
             <SectionReveal direction="right" delay={0.22}>
               <OrgCard
-                icon={<Users size={32} weight="duotone" color={ACCENT} />}
+                icon={<Users size={24} weight="duotone" color="#FFC627" />}
                 title={left.title}
                 desc={left.desc}
                 side="left"
@@ -183,11 +187,11 @@ export default function Organigrama({ titulo, topItem, leftItem, rightItem, bott
             </div>
           </div>
 
-          <div>
+          <div className="flex flex-col justify-center">
             <Connector direction="h-right" inView={imgInView} />
             <SectionReveal direction="left" delay={0.22}>
               <OrgCard
-                icon={<ChartBar size={32} weight="duotone" color={ACCENT} />}
+                icon={<ChartBar size={24} weight="duotone" color="#FFC627" />}
                 title={right.title}
                 desc={right.desc}
                 side="right"
@@ -201,7 +205,7 @@ export default function Organigrama({ titulo, topItem, leftItem, rightItem, bott
         <SectionReveal delay={0.38}>
           <div className="flex justify-center">
             <div
-              className="max-w-xl w-full flex flex-col items-center gap-5 px-10 py-10 text-center"
+              className="max-w-xl w-full flex flex-col items-center gap-3 px-10 py-8 text-center"
               style={{
                 background: 'linear-gradient(135deg, rgba(0,46,109,0.80) 0%, rgba(0,46,109,0.60) 100%)',
                 border: `2px solid ${ACCENT}`,

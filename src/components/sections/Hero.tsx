@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Type, DescriptionCSS } from '../../tokens'
+import { DescriptionCSS } from '../../tokens'
 
 interface HeroProps {
   title?: string
@@ -37,7 +37,7 @@ export default function Hero({ title, subtitle, description, buttonText, buttonU
         <div
           className="absolute inset-0"
           style={{
-            background: 'linear-gradient(105deg, rgba(0,46,109,0.93) 0%, rgba(0,46,109,0.86) 45%, rgba(0,46,109,0.52) 100%)',
+            background: 'linear-gradient(to top, rgba(0,46,109,0.92) 0%, rgba(0,46,109,0.55) 45%, rgba(0,46,109,0.10) 100%)',
           }}
         />
       </div>
@@ -65,26 +65,26 @@ export default function Hero({ title, subtitle, description, buttonText, buttonU
 
       {/* Contenido centrado */}
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-5 md:px-10">
-        <div className="w-full max-w-4xl mx-auto">
+        <div className="w-full max-w-6xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', stiffness: 70, damping: 18, delay: 0.35 }}
-            className="section-title text-white mb-4 md:mb-5"
-            style={{ fontSize: Type.h1 }}
+            className="section-title mb-4 md:mb-5"
+            style={{ fontSize: 'clamp(1.9rem, 5.5vw, 65px)', lineHeight: 1.15, color: '#FFFFFF' }}
           >
-            {t}
+            TU EVOLUCIÓN PROFESIONAL<br />NO SE DETIENE.
           </motion.h1>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', stiffness: 70, damping: 18, delay: 0.55 }}
-            className="mb-5 md:mb-6"
+            className="mb-6 md:mb-7"
           >
             <p
               className="text-white font-verlag font-bold uppercase"
-              style={{ fontSize: 'clamp(13px, 2.2vw, 20px)', lineHeight: 1.6, letterSpacing: '0.06em' }}
+              style={{ fontSize: 'clamp(1rem, 2.8vw, 1.75rem)', lineHeight: 1.5, letterSpacing: '0.06em' }}
             >
               {s}
             </p>
@@ -94,7 +94,7 @@ export default function Hero({ title, subtitle, description, buttonText, buttonU
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.75 }}
-            className="text-white mb-10 mx-auto max-w-lg"
+            className="text-white mb-10 mx-auto max-w-2xl"
             style={DescriptionCSS.base}
           >
             {d}
@@ -110,7 +110,7 @@ export default function Hero({ title, subtitle, description, buttonText, buttonU
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-gold w-full max-w-xs text-sm md:text-base lg:text-lg py-3 md:py-4 px-6"
+              className="btn-gold inline-block text-sm md:text-base lg:text-lg py-3 px-8 md:py-4 md:px-12"
             >
               {b}
             </a>

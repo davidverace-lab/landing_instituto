@@ -199,7 +199,7 @@ export default function Testimonials({ titulo, items }: TestimonialsProps) {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ minHeight: '100dvh', display: 'flex', alignItems: 'center', backgroundColor: '#9ACAEB' }}
+      style={{ backgroundColor: '#9ACAEB' }}
     >
       <div className="absolute inset-0 z-0">
         <img
@@ -214,11 +214,11 @@ export default function Testimonials({ titulo, items }: TestimonialsProps) {
       <div className="absolute top-0 right-0 w-80 h-80 opacity-5 pointer-events-none"
         style={{ background: `radial-gradient(circle, ${Colors.skyBlue100} 0%, transparent 70%)` }} />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-24">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           <SectionReveal>
-            <h2 className="section-title text-navy mb-6 whitespace-nowrap">
+            <h2 className="section-title text-navy mb-6">
               {titulo ?? DEFAULT_TITLE}
             </h2>
 
@@ -231,13 +231,13 @@ export default function Testimonials({ titulo, items }: TestimonialsProps) {
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.35 }}
                 >
-                  <p className="font-montserrat text-navy text-lg font-semibold mb-1">
+                  <p className="font-montserrat text-navy font-semibold mb-1" style={{ fontSize: 'clamp(1.1rem, 1.6vw, 1.35rem)' }}>
                     {testimonials[active].name}
                   </p>
-                  <p className="font-montserrat text-navy text-base mb-3">
+                  <p className="font-montserrat text-navy mb-3" style={{ fontSize: 'clamp(1rem, 1.4vw, 1.2rem)' }}>
                     {testimonials[active].role} · {testimonials[active].bu}
                   </p>
-                  <p className="section-body text-navy leading-relaxed italic">
+                  <p className="font-montserrat text-navy font-bold leading-relaxed" style={{ fontSize: 'clamp(1rem, 1.3vw, 1.15rem)' }}>
                     "{testimonials[active].quote}"
                   </p>
                 </motion.div>
