@@ -12,7 +12,14 @@
       "Bash(npm install *)",
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\" -Recurse -Force)",
       "Bash(Select-Object FullName, PSIsContainer)",
-      "Bash(Sort-Object FullName)"
+      "Bash(Sort-Object FullName)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\" -Force -Recurse -Depth 2)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\" -Force)",
+      "Bash(Select-Object -Property Name, PSIsContainer)",
+      "Bash(xargs cat)",
+      "Bash(Remove-Item *)",
+      "PowerShell(Remove-Item *)"
     ]
   }
 }
