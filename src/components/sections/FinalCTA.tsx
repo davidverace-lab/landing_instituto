@@ -108,7 +108,7 @@ export default function FinalCTA({
           transition={{ type: 'spring', stiffness: 65, damping: 18 }}
         >
           <motion.img
-            src="/webp/LogoInstitutoHP-color.webp"
+            src="/webp/LogoInstitutoHP-blanco.webp"
             alt="Instituto Hutchison Ports"
             style={{ height: 'clamp(40px, 5vw, 60px)', width: 'auto' }}
             loading="lazy"
