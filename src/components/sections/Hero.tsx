@@ -17,7 +17,7 @@ const DEFAULTS = {
   buttonUrl: 'https://mxhutchisonports.csod.com/',
 }
 
-export default function Hero({ title, subtitle, description, buttonText, buttonUrl }: HeroProps) {
+export default function Hero({ title: _title, subtitle, description, buttonText, buttonUrl }: HeroProps) {
   const s = subtitle ?? DEFAULTS.subtitle
   const d = description ?? DEFAULTS.description
   const b = buttonText ?? DEFAULTS.buttonText
