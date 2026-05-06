@@ -19,7 +19,27 @@
       "Bash(Select-Object -Property Name, PSIsContainer)",
       "Bash(xargs cat)",
       "Bash(Remove-Item *)",
-      "PowerShell(Remove-Item *)"
+      "PowerShell(Remove-Item *)",
+      "Bash(dir /s /b \"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\")",
+      "Bash(findstr /i \"vectores_logos\")",
+      "Bash(dir \"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\")",
+      "Bash(findstr /i \"vectores\")",
+      "Bash(dir *)",
+      "Bash(where inkscape *)",
+      "Bash(where magick *)",
+      "Bash(where convert *)",
+      "Bash(where pdftocairo *)",
+      "Bash(where gs *)",
+      "Bash(where gswin64c *)",
+      "Bash(where pdf2svg *)",
+      "PowerShell(Get-Command *)",
+      "PowerShell(Get-Item *)",
+      "PowerShell(python --version; python -c \"import sys; print\\(sys.executable\\)\")",
+      "PowerShell(python -m pip install --quiet pymupdf 2>&1 | Select-Object -Last 5; python -c \"import fitz; print\\('pymupdf OK', fitz.__version__\\)\")",
+      "PowerShell(python \"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\scripts\\\\ai_to_svg.py\")",
+      "PowerShell(npm run *)",
+      "PowerShell(python \"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\scripts\\\\trim_svg_viewbox.py\")",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\public\\\\fondo.png\"\\); Write-Output \"Width: $\\($img.Width\\)  Height: $\\($img.Height\\)  Ratio: $\\([Math]::Round\\($img.Width/$img.Height,2\\)\\):1\"; $img.Dispose\\(\\))"
     ]
   }
 }

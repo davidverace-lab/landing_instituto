@@ -15,7 +15,8 @@ interface CeremonyProps {
 }
 
 const DEFAULTS = {
-  titulo: '¡NOS VEMOS EN LA CEREMONIA DE CLAUSURA!',
+  tituloLinea1: 'NOS VEMOS EN LA',
+  tituloLinea2: 'CEREMONIA DE CLAUSURA',
   descripcion: 'Julio será el mes de la victoria. Celebraremos tu esfuerzo y compromiso en un evento que reconocerá a todos los colaboradores que completaron su formación en el Instituto Hutchison Ports.',
   etiquetaFecha: 'Fecha',
   fecha: 'JULIO 2026',
@@ -42,15 +43,52 @@ export default function Ceremony({
     else { videoRef.current.play(); setPlaying(true) }
   }
 
+  const lineas = (titulo ?? '').trim()
+  const [linea1, linea2] = lineas
+    ? lineas.split('\n').length === 2
+      ? lineas.split('\n')
+      : [DEFAULTS.tituloLinea1, DEFAULTS.tituloLinea2]
+    : [DEFAULTS.tituloLinea1, DEFAULTS.tituloLinea2]
+
   return (
     <section className="relative overflow-hidden" style={{ backgroundColor: 'rgba(154,202,235,0.88)' }}>
 
-      <div className="w-full max-w-3xl mx-auto px-6 md:px-12 py-16 md:py-24 flex flex-col items-center text-center">
+      <img
+        src="/fondo.png"
+        alt=""
+        aria-hidden
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none z-0"
+        style={{ opacity: 0.18 }}
+        draggable={false}
+      />
+
+      <SectionReveal>
+        <div
+          className="relative z-10 w-full flex items-center justify-center text-center"
+          style={{
+            paddingTop: 'clamp(48px, 6vw, 96px)',
+            paddingBottom: 'clamp(24px, 3vw, 48px)',
+            paddingLeft: 'clamp(24px, 6vw, 96px)',
+            paddingRight: 'clamp(24px, 6vw, 96px)',
+          }}
+        >
+          <h2
+            className="font-verlag uppercase text-navy"
+            style={{
+              fontSize: Type.h2,
+              lineHeight: 1.05,
+              letterSpacing: '-0.4px',
+            }}
+          >
+            <span className="block">{linea1}</span>
+            <span className="block">{linea2}</span>
+          </h2>
+        </div>
+      </SectionReveal>
+
+      <div className="relative z-10 w-full max-w-3xl mx-auto px-6 md:px-12 pb-16 md:pb-24 flex flex-col items-center text-center">
 
         <SectionReveal>
-          <h2 className="section-title text-navy mb-5 md:mb-6" style={{ fontSize: Type.h2 }}>
-            {titulo ?? DEFAULTS.titulo}
-          </h2>
           <p className="text-navy mb-10" style={DescriptionCSS.base}>
             {descripcion ?? DEFAULTS.descripcion}
           </p>
