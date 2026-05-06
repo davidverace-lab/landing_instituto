@@ -39,7 +39,10 @@
       "PowerShell(python \"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\scripts\\\\ai_to_svg.py\")",
       "PowerShell(npm run *)",
       "PowerShell(python \"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\scripts\\\\trim_svg_viewbox.py\")",
-      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\public\\\\fondo.png\"\\); Write-Output \"Width: $\\($img.Width\\)  Height: $\\($img.Height\\)  Ratio: $\\([Math]::Round\\($img.Width/$img.Height,2\\)\\):1\"; $img.Dispose\\(\\))"
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\public\\\\fondo.png\"\\); Write-Output \"Width: $\\($img.Width\\)  Height: $\\($img.Height\\)  Ratio: $\\([Math]::Round\\($img.Width/$img.Height,2\\)\\):1\"; $img.Dispose\\(\\))",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\public\\\\webp\\\\hutchisonports.webp\"\\); Write-Output \"Width: $\\($img.Width\\)  Height: $\\($img.Height\\)  Ratio: $\\([Math]::Round\\($img.Width/$img.Height,2\\)\\):1\"; $img.Dispose\\(\\))",
+      "PowerShell(python -c \"from PIL import Image; im = Image.open\\(r'C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\public\\\\webp\\\\hutchisonports.webp'\\); print\\(f'Width: {im.width}  Height: {im.height}  Ratio: {im.width/im.height:.2f}:1'\\); im2 = Image.open\\(r'C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\public\\\\logos\\\\tng.svg' if False else r'C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\public\\\\webp\\\\hports.webp'\\); print\\(f'hports: {im2.width} x {im2.height}  Ratio: {im2.width/im2.height:.2f}:1'\\)\")",
+      "PowerShell(python \"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\scripts\\\\trim_webp.py\")"
     ]
   }
 }

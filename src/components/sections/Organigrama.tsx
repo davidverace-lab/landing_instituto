@@ -106,7 +106,7 @@ export default function Organigrama({ topItem, leftItem, rightItem, bottomItem }
     >
       <div className="absolute inset-0 z-0">
         <img
-          src="/LCT.jpg"
+          src="/fondorganigrama.jpg"
           alt=""
           className="w-full h-full object-cover object-center"
           style={{ opacity: 0.12 }}

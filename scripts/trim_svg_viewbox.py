@@ -12,6 +12,7 @@ SRC = Path(r"C:\Users\david\Documents\landinginstituto\public\vectores_logos")
 DST = Path(r"C:\Users\david\Documents\landinginstituto\public\logos")
 
 NAME_MAP = {
+    "CONTAINER CARE LOGO COLOR": "cci",
     "HP-ICAVE LOGO RGB COLOUR POS": "icave",
     "HUTCHISON PORTS ECV RGB COLOUR POS": "ecv",
     "HUTCHISON PORTS EIT RGB COLOUR POS": "eit",
@@ -39,13 +40,6 @@ def real_bbox(page: fitz.Page) -> fitz.Rect:
         rect.include_rect(r)
     if not (rect.x0 < rect.x1 and rect.y0 < rect.y1):
         return page.rect
-    # small padding (1% of size)
-    pad_x = (rect.x1 - rect.x0) * 0.02
-    pad_y = (rect.y1 - rect.y0) * 0.02
-    rect.x0 -= pad_x
-    rect.y0 -= pad_y
-    rect.x1 += pad_x
-    rect.y1 += pad_y
     rect &= page.rect
     return rect
 

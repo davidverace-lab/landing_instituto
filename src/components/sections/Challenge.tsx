@@ -55,7 +55,7 @@ export default function Challenge({ graduadosActuales, meta, tituloIzquierda, de
               {tituloIzquierda ?? DEFAULTS.tituloIzquierda}
             </h2>
 
-            <p className="text-white" style={DescriptionCSS.base}>
+            <p className="text-white" style={{ ...DescriptionCSS.base, textAlign: 'justify' }}>
               {descripcionIzquierda
                 ? descripcionIzquierda.replace('{meta}', target.toLocaleString())
                 : <>En Hutchison Ports, no solo movemos carga, impulsamos talento. Nuestra meta es que <strong className="text-navy">{target.toLocaleString()} colaboradores</strong> completen la etapa de Culturización. Tu avance es el motor que nos llevará a este hito histórico.</>

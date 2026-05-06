@@ -11,15 +11,15 @@ interface RankingProps {
 }
 
 const DEFAULT_DATA: ProgressChartItem[] = [
-  { name: 'CCI',           value: 21, color: Colors.skyBlue80 },
-  { name: 'EIT + ECV',     value: 63, color: Colors.aquaGreen100 },
-  { name: 'HP LOGISTICS',  value: 67, color: Colors.seaBlue80 },
-  { name: 'HP MÉXICO',     value: 66, color: Colors.sunrayYellow100 },
-  { name: 'ICAVE',         value: 90, color: Colors.sunsetOrange100 },
-  { name: 'LCMT + LCT',    value: 66, color: Colors.seaBlue100 },
-  { name: 'TILH',          value: 66, color: Colors.aquaGreen100 },
-  { name: 'TIMSA',         value: 33, color: Colors.sunsetOrange100 },
-  { name: 'TNG',           value: 94, color: Colors.skyBlue100 },
+  { name: 'CCI',           value: 21, color: Colors.skyBlue80,    logos: ['/logos/cci.svg'] },
+  { name: 'EIT + ECV',     value: 63, color: Colors.aquaGreen100, logos: ['/logos/eit.svg', '/logos/ecv.svg'] },
+  { name: 'HP LOGISTICS',  value: 67, color: Colors.seaBlue80,    logos: ['/logos/hp-logistics.svg'] },
+  { name: 'HP MÉXICO',     value: 66, color: Colors.sunrayYellow100, logos: ['/logos/hutchisonports.webp'] },
+  { name: 'ICAVE',         value: 90, color: Colors.sunsetOrange100, logos: ['/logos/icave.svg'] },
+  { name: 'LCMT + LCT',    value: 66, color: Colors.seaBlue100,   logos: ['/logos/lcmt.svg', '/logos/lct.svg'] },
+  { name: 'TILH',          value: 66, color: Colors.aquaGreen100, logos: ['/logos/tilh.svg'] },
+  { name: 'TIMSA',         value: 33, color: Colors.sunsetOrange100, logos: ['/logos/timsa.svg'] },
+  { name: 'TNG',           value: 94, color: Colors.skyBlue100,   logos: ['/logos/tng.svg'] },
 ]
 
 const DEFAULTS = {
@@ -34,10 +34,10 @@ export default function Ranking({ titulo: _titulo, descripcion, etiquetaGrafica,
       className="relative overflow-hidden"
       style={{ backgroundColor: Colors.bgSurface }}
     >
-      <div className="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-8 lg:pl-8 lg:pr-20 py-16 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
 
-          <div>
+          <div className="lg:pr-4">
             <SectionReveal>
               <h2 className="section-title mb-8" style={{ lineHeight: 1.1, color: '#002E6D' }}>
                 <span style={{ display: 'block', whiteSpace: 'nowrap' }}>EL PODER DE TU</span>

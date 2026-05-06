@@ -48,62 +48,57 @@ export default function ProgressChart({
           <div
             key={item.name}
             className="row grid items-center cursor-pointer"
-            style={{ gridTemplateColumns: '160px 1fr', columnGap: 8 }}
+            style={{ gridTemplateColumns: '240px 1fr', columnGap: 0 }}
             onMouseEnter={() => setHovered(idx)}
             onMouseLeave={() => setHovered(null)}
           >
-            {item.logos && item.logos.length > 0 ? (
-              <motion.div
-                className={`logo-wrapper flex items-center justify-end${item.logos.length > 1 ? ' double' : ''}`}
-                style={{
-                  width: 160,
-                  height: 32,
-                  gap: item.logos.length > 1 ? 6 : 0,
-                }}
-                animate={{ opacity: isDimmed ? 0.4 : 1, scale: isHovered ? 1.06 : 1 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-                aria-label={item.name}
-              >
-                {item.logos.map((logo, i) => (
-                  <div
-                    key={`${item.name}-slot-${i}`}
-                    className="logo-container flex items-center justify-center"
-                    style={{
-                      width: item.logos!.length > 1 ? 76 : 160,
-                      height: 32,
-                      flex: '0 0 auto',
-                    }}
-                  >
-                    <img
-                      src={logo}
-                      alt={item.name}
-                      className="block select-none pointer-events-none"
-                      style={{
-                        maxWidth: '100%',
-                        maxHeight: '100%',
-                        width: 'auto',
-                        height: 'auto',
-                        objectFit: 'contain',
-                      }}
-                      draggable={false}
-                    />
-                  </div>
-                ))}
-              </motion.div>
-            ) : (
-              <motion.span
-                className="font-montserrat font-semibold uppercase tracking-wide text-right pr-1"
-                style={{
-                  color: textColor,
-                  fontSize: 'clamp(0.7rem, 0.9vw, 0.9rem)',
-                  letterSpacing: '0.04em',
-                }}
-                animate={{ opacity: isDimmed ? 0.4 : 1 }}
-                transition={{ duration: 0.2 }}
-              >
-                {item.name}
-              </motion.span>
-            )}
+            <div className="logo-column flex items-center" style={{ width: 240, height: 26 }}>
+              {item.logos && item.logos.length > 0 ? (
+                <motion.div
+                  className={`logo-wrapper flex items-center justify-start${item.logos.length > 1 ? ' double' : ''}`}
+                  style={{
+                    height: 26,
+                    gap: item.logos.length > 1 ? 10 : 0,
+                  }}
+                  animate={{ opacity: isDimmed ? 0.4 : 1, scale: isHovered ? 1.06 : 1 }}
+                  transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+                  aria-label={item.name}
+                >
+                  {item.logos.map((logo, i) => (
+                    <div
+                      key={`${item.name}-slot-${i}`}
+                      className="logo-container flex items-center"
+                      style={{ height: 26 }}
+                    >
+                      <img
+                        src={logo}
+                        alt={item.name}
+                        className="block select-none pointer-events-none"
+                        style={{
+                          height: '100%',
+                          width: 'auto',
+                          objectFit: 'contain',
+                        }}
+                        draggable={false}
+                      />
+                    </div>
+                  ))}
+                </motion.div>
+              ) : (
+                <motion.span
+                  className="font-montserrat font-semibold uppercase tracking-wide text-left"
+                  style={{
+                    color: textColor,
+                    fontSize: 'clamp(0.7rem, 0.9vw, 0.9rem)',
+                    letterSpacing: '0.04em',
+                  }}
+                  animate={{ opacity: isDimmed ? 0.4 : 1 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {item.name}
+                </motion.span>
+              )}
+            </div>
 
             <motion.div
               className="relative w-full overflow-hidden rounded-md"

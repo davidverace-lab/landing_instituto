@@ -44,10 +44,10 @@ export default function Urgency({
       {/* Foto de fondo sutil */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/Hutchison Ports-TIMSA-hp.jpg"
+          src="/fondotiempo.jpg"
           alt=""
-          className="w-full h-full object-cover object-center"
-          style={{ opacity: 0.18 }}
+          className="w-full h-full object-cover"
+          style={{ opacity: 0.18, objectPosition: 'center 90%' }}
           loading="lazy"
           decoding="async"
         />

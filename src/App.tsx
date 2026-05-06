@@ -8,6 +8,7 @@ import Testimonials from './components/sections/Testimonials'
 import HonorBoard from './components/sections/HonorBoard'
 import Ceremony from './components/sections/Ceremony'
 import FinalCTA from './components/sections/FinalCTA'
+import Footer from './components/sections/Footer'
 import { sanityClient } from './lib/sanityClient'
 import { LANDING_QUERY } from './lib/queries'
 import type { SanityLanding } from './types/sanity'
@@ -86,6 +87,7 @@ export default function App() {
         sloganLinea2={data?.finalCTA?.sloganLinea2}
         sloganHighlight2={data?.finalCTA?.sloganHighlight2}
       />
+      <Footer />
     </main>
   )
 }
