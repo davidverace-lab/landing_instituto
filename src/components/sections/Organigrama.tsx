@@ -91,7 +91,7 @@ function Connector({ direction, inView: visible }: { direction: 'v' | 'h-left' |
   )
 }
 
-export default function Organigrama({ titulo, topItem, leftItem, rightItem, bottomItem }: OrganigramaProps) {
+export default function Organigrama({ topItem, leftItem, rightItem, bottomItem }: OrganigramaProps) {
   const { ref: imgRef, inView: imgInView } = useInView()
 
   const top = { ...DEFAULTS.topItem, ...topItem }
