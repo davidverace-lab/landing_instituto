@@ -21,9 +21,9 @@ export const Type = {
   h3Card:  'clamp(1.2rem, 1.8vw, 1.7rem)',
   h3Col:   'clamp(1.1rem, 1.4vw, 1.3rem)',
   h3Small: 'clamp(1rem, 1.3vw, 1.2rem)',
-  descBase: 'clamp(1.1rem, 1.3vw, 1.25rem)',
-  descSm:   'clamp(0.95rem, 1.1vw, 1.05rem)',
-  descCard: 'clamp(1rem, 1.15vw, 1.2rem)',
+  descBase: 'clamp(1.2rem, 1.6vw, 1.55rem)',
+  descSm:   'clamp(1.05rem, 1.35vw, 1.3rem)',
+  descCard: 'clamp(1.1rem, 1.4vw, 1.4rem)',
   heroSub:  'clamp(15px, 1.45vw, 19px)',
   statLg:  'clamp(3.8rem, 6.5vw, 6rem)',
   statMd:  'clamp(2.6rem, 5vw, 4.2rem)',
@@ -35,15 +35,15 @@ export const Type = {
 
 export const DescriptionCSS = {
   base: {
-    fontSize:      'clamp(1.1rem, 1.3vw, 1.25rem)',
-    lineHeight:    1.7,
+    fontSize:      'clamp(1.2rem, 1.6vw, 1.55rem)',
+    lineHeight:    1.65,
     letterSpacing: '0.01em',
     fontFamily:    '"Montserrat", sans-serif',
     textWrap:      'balance' as React.CSSProperties['textWrap'],
   },
   sm: {
-    fontSize:      'clamp(0.95rem, 1.1vw, 1.05rem)',
-    lineHeight:    1.65,
+    fontSize:      'clamp(1.05rem, 1.35vw, 1.3rem)',
+    lineHeight:    1.6,
     letterSpacing: '0.01em',
     fontFamily:    '"Montserrat", sans-serif',
     textWrap:      'balance' as React.CSSProperties['textWrap'],

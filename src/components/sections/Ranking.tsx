@@ -1,13 +1,26 @@
 import { motion } from 'framer-motion'
 import SectionReveal from '../ui/SectionReveal'
-import { useInView } from '../../hooks/useInView'
-import { Colors, Type, DescriptionCSS } from '../../tokens'
+import ProgressChart, { type ProgressChartItem } from '../ui/ProgressChart'
+import { Colors, DescriptionCSS } from '../../tokens'
 
 interface RankingProps {
   titulo?: string
   descripcion?: string
   etiquetaGrafica?: string
+  data?: ProgressChartItem[]
 }
+
+const DEFAULT_DATA: ProgressChartItem[] = [
+  { name: 'CCI',           value: 21, color: Colors.skyBlue80 },
+  { name: 'EIT + ECV',     value: 63, color: Colors.aquaGreen100 },
+  { name: 'HP LOGISTICS',  value: 67, color: Colors.seaBlue80 },
+  { name: 'HP MÉXICO',     value: 66, color: Colors.sunrayYellow100 },
+  { name: 'ICAVE',         value: 90, color: Colors.sunsetOrange100 },
+  { name: 'LCMT + LCT',    value: 66, color: Colors.seaBlue100 },
+  { name: 'TILH',          value: 66, color: Colors.aquaGreen100 },
+  { name: 'TIMSA',         value: 33, color: Colors.sunsetOrange100 },
+  { name: 'TNG',           value: 94, color: Colors.skyBlue100 },
+]
 
 const DEFAULTS = {
   titulo: 'EL PODER DE TU UNIDAD DE NEGOCIO',
@@ -15,16 +28,14 @@ const DEFAULTS = {
   etiquetaGrafica: 'Avance por Unidad de Negocio',
 }
 
-export default function Ranking({ titulo: _titulo, descripcion, etiquetaGrafica }: RankingProps) {
-  const { ref: imgRef, inView: imgInView } = useInView()
-
+export default function Ranking({ titulo: _titulo, descripcion, etiquetaGrafica, data }: RankingProps) {
   return (
     <section
       className="relative overflow-hidden"
       style={{ backgroundColor: Colors.bgSurface }}
     >
       <div className="w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
           <div>
             <SectionReveal>
@@ -40,8 +51,7 @@ export default function Ranking({ titulo: _titulo, descripcion, etiquetaGrafica 
 
           <SectionReveal direction="left" delay={0.18}>
             <motion.div
-              ref={imgRef}
-              className="overflow-hidden"
+              className="overflow-hidden p-5 md:p-7"
               style={{
                 background: Colors.white,
                 boxShadow: '0 24px 60px -10px rgba(0,46,109,0.25)',
@@ -49,23 +59,13 @@ export default function Ranking({ titulo: _titulo, descripcion, etiquetaGrafica 
               whileHover={{ y: -6 }}
               transition={{ type: 'spring', stiffness: 200, damping: 22 }}
             >
-              <motion.div
-                className="p-5 md:p-7"
-                initial={{ opacity: 0, y: 16 }}
-                animate={imgInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ type: 'spring', stiffness: 70, damping: 18, delay: 0.15 }}
+              <p
+                className="font-verlag uppercase tracking-wider mb-6"
+                style={{ fontSize: 'clamp(1rem, 1.4vw, 1.4rem)', color: '#002E6D', letterSpacing: '0.04em' }}
               >
-                <p className="font-verlag text-navy uppercase tracking-wider mb-4" style={{ fontSize: Type.overline }}>
-                  {etiquetaGrafica ?? DEFAULTS.etiquetaGrafica}
-                </p>
-                <img
-                  src="/webp/grafica comparativa.webp"
-                  alt="Gráfica comparativa de avance por Unidad de Negocio"
-                  className="w-full h-auto"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </motion.div>
+                {etiquetaGrafica ?? DEFAULTS.etiquetaGrafica}
+              </p>
+              <ProgressChart data={data ?? DEFAULT_DATA} />
             </motion.div>
           </SectionReveal>
 

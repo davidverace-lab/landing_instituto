@@ -16,7 +16,7 @@ interface OrganigramaProps {
 }
 
 const DEFAULTS = {
-  titulo: 'CONOCE CÓMO SE CONFORMA EL INSTITUTO HUTCHISON PORTS',
+  titulo: 'CÓMO SE CONFORMA EL INSTITUTO HUTCHISON PORTS',
   topItem: {
     label: 'Consejo Directivo Hutchison Ports',
     desc: 'Actúa como instancia de patrocinio, validación y legitimidad corporativa del Instituto, respaldando, validando y habilitando el proyecto a nivel Grupo.',
@@ -48,22 +48,22 @@ function OrgCard({ icon, title, desc, side }: {
       animate={inView ? { opacity: 0.99, x: 0, y: 0 } : {}}
       transition={{ type: 'spring', stiffness: 75, damping: 20 }}
       whileHover={{ y: -4 }}
-      className="flex flex-col gap-3 p-6 md:p-7 items-center text-center"
-      style={{
-        background: 'rgba(0,46,109,0.60)',
-        borderLeft: side === 'left' ? `3px solid ${ACCENT}` : undefined,
-        borderRight: side === 'right' ? `3px solid ${ACCENT}` : undefined,
-      }}
+      className="flex flex-col items-center text-center max-w-2xl mx-auto"
     >
       {(icon || title) && (
-        <div className="flex items-center gap-3">
+        <div
+          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 mb-4"
+          style={{ background: ACCENT, minWidth: 'min(100%, 360px)' }}
+        >
           {icon && <div className="shrink-0">{icon}</div>}
           {title && (
-            <h4 className="font-verlag text-white leading-tight" style={{ fontSize: Type.h3Col }}>{title}</h4>
+            <span className="font-verlag text-white uppercase tracking-wider" style={{ fontSize: Type.h3Col }}>
+              {title}
+            </span>
           )}
         </div>
       )}
-      <p className="text-white" style={DescriptionCSS.base}>{desc}</p>
+      <p className="text-white max-w-xl mx-auto" style={DescriptionCSS.base}>{desc}</p>
     </motion.div>
   )
 }
@@ -106,7 +106,7 @@ export default function Organigrama({ titulo, topItem, leftItem, rightItem, bott
     >
       <div className="absolute inset-0 z-0">
         <img
-          src="/webp/fotos-nacho/DSC03386.webp"
+          src="/LCT.jpg"
           alt=""
           className="w-full h-full object-cover object-center"
           style={{ opacity: 0.12 }}
@@ -125,8 +125,9 @@ export default function Organigrama({ titulo, topItem, leftItem, rightItem, bott
       <div className="relative z-10 max-w-7xl mx-auto">
         <SectionReveal>
           <div className="text-center mb-14">
-            <h2 className="section-title text-white" style={{ fontSize: Type.h2 }}>
-              {titulo ?? DEFAULTS.titulo}
+            <h2 className="section-title text-white">
+              <span style={{ display: 'block' }}>CÓMO SE CONFORMA EL</span>
+              <span style={{ display: 'block' }}>INSTITUTO HUTCHISON PORTS</span>
             </h2>
           </div>
         </SectionReveal>
@@ -138,7 +139,7 @@ export default function Organigrama({ titulo, topItem, leftItem, rightItem, bott
                 className="inline-flex items-center gap-2 px-5 py-2.5 mb-4"
                 style={{ background: ACCENT }}
               >
-                <Buildings size={18} weight="fill" color="#FFFFFF" />
+                <Buildings size={18} weight="fill" color="#FFC627" />
                 <span className="font-verlag text-white uppercase tracking-wider" style={{ fontSize: Type.h3Col }}>
                   {top.label}
                 </span>
@@ -156,7 +157,7 @@ export default function Organigrama({ titulo, topItem, leftItem, rightItem, bott
           <div className="flex flex-col justify-center">
             <SectionReveal direction="right" delay={0.22}>
               <OrgCard
-                icon={<Users size={24} weight="duotone" color="#FFC627" />}
+                icon={<Users size={18} weight="fill" color="#FFC627" />}
                 title={left.title}
                 desc={left.desc}
                 side="left"
@@ -191,7 +192,7 @@ export default function Organigrama({ titulo, topItem, leftItem, rightItem, bott
             <Connector direction="h-right" inView={imgInView} />
             <SectionReveal direction="left" delay={0.22}>
               <OrgCard
-                icon={<ChartBar size={24} weight="duotone" color="#FFC627" />}
+                icon={<ChartBar size={18} weight="fill" color="#FFC627" />}
                 title={right.title}
                 desc={right.desc}
                 side="right"

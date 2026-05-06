@@ -70,7 +70,7 @@ export default function HonorBoard({ titulo, descripcion, fotos }: HonorBoardPro
     >
       <div className="absolute inset-0 z-0">
         <img
-          src="/webp/fotos-nacho/DJI_20251107185200_0025_D.webp"
+          src="/tilh_noche_ok.jpg"
           alt=""
           className="w-full h-full object-cover object-center"
           style={{ opacity: 0.14 }}

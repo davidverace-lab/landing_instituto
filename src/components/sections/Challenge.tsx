@@ -31,7 +31,7 @@ export default function Challenge({ graduadosActuales, meta, tituloIzquierda, de
       {/* Imagen de fondo compartida */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/webp/fotos-nacho/DSC03413.webp"
+          src="/Terminal.jpg"
           alt=""
           className="w-full h-full object-cover object-center"
           style={{ opacity: 0.22 }}
@@ -105,24 +105,28 @@ export default function Challenge({ graduadosActuales, meta, tituloIzquierda, de
                 </span>
               </div>
 
-              <div>
+              <motion.div
+                className="cursor-pointer"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+              >
                 <div className="h-5 bg-white/10 w-full overflow-hidden rounded-full">
                   <motion.div
-                    className="h-full bg-sky-brand rounded-full"
+                    className="h-full bg-sky-brand rounded-full flex items-center justify-end pr-3"
                     initial={{ width: '0%' }}
                     animate={{ width: inView ? `${pct}%` : '0%' }}
                     transition={{ duration: 2.4, ease: [0.16, 1, 0.3, 1], delay: 0.5 }}
                   />
                 </div>
                 <div className="flex justify-between mt-3">
-                  <span className="font-montserrat text-white text-sm md:text-base">0</span>
+                  <span className="font-montserrat font-bold text-white text-sm md:text-base">0</span>
                   <span className="font-montserrat font-bold text-white text-sm md:text-base">{pct}% alcanzado</span>
-                  <span className="font-montserrat text-white text-sm md:text-base">{target.toLocaleString()}</span>
+                  <span className="font-montserrat font-bold text-white text-sm md:text-base">{target.toLocaleString()}</span>
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="pt-4 border-t border-white/10">
-                <p className="text-white" style={DescriptionCSS.base}>
+              <div className="pt-3 border-t border-white/10">
+                <p className="text-white whitespace-nowrap" style={DescriptionCSS.base}>
                   Ya somos{' '}
                   <span className="text-sky-brand font-semibold">{currentGraduados.toLocaleString()}</span>.{' '}
                   Faltan{' '}

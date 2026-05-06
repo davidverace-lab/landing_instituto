@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import SectionReveal from '../ui/SectionReveal'
 import { CaretLeft, CaretRight, Play, Pause } from '@phosphor-icons/react'
-import { Colors } from '../../tokens'
+import { Colors, DescriptionCSS } from '../../tokens'
 import type { SanityTestimonial } from '../../types/sanity'
 
 interface TestimonialsProps {
@@ -231,13 +231,13 @@ export default function Testimonials({ titulo, items }: TestimonialsProps) {
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.35 }}
                 >
-                  <p className="font-montserrat text-navy font-semibold mb-1" style={{ fontSize: 'clamp(1.1rem, 1.6vw, 1.35rem)' }}>
+                  <p className="text-navy font-semibold mb-1" style={DescriptionCSS.base}>
                     {testimonials[active].name}
                   </p>
-                  <p className="font-montserrat text-navy mb-3" style={{ fontSize: 'clamp(1rem, 1.4vw, 1.2rem)' }}>
+                  <p className="text-navy mb-3" style={DescriptionCSS.base}>
                     {testimonials[active].role} · {testimonials[active].bu}
                   </p>
-                  <p className="font-montserrat text-navy font-bold leading-relaxed" style={{ fontSize: 'clamp(1rem, 1.3vw, 1.15rem)' }}>
+                  <p className="text-navy font-bold" style={DescriptionCSS.base}>
                     "{testimonials[active].quote}"
                   </p>
                 </motion.div>

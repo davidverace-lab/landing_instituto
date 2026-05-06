@@ -44,7 +44,7 @@ export default function Urgency({
       {/* Foto de fondo sutil */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/webp/fotos-nacho/DJI_20251010153734_0002_D.webp"
+          src="/Hutchison Ports-TIMSA-hp.jpg"
           alt=""
           className="w-full h-full object-cover object-center"
           style={{ opacity: 0.18 }}
