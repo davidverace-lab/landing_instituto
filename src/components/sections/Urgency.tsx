@@ -95,7 +95,25 @@ export default function Urgency({
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Warning size={24} color={Colors.sunrayYellow100} weight="fill" />
                 <span className="font-verlag text-white uppercase" style={{ fontSize: Type.h3Card }}>
-                  {panelIzquierdoFecha ?? DEFAULTS.panelIzquierdoFecha}
+                  {(panelIzquierdoFecha ?? DEFAULTS.panelIzquierdoFecha)
+                    .split(/(\d+)/)
+                    .map((part, i) =>
+                      /^\d+$/.test(part) ? (
+                        <span
+                          key={i}
+                          style={{
+                            fontSize: '1.3em',
+                            lineHeight: 1,
+                            verticalAlign: '-0.02em',
+                            display: 'inline-block',
+                          }}
+                        >
+                          {part}
+                        </span>
+                      ) : (
+                        part
+                      ),
+                    )}
                 </span>
               </div>
               <p className="text-white" style={{ ...DescriptionCSS.sm, fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)' }}>

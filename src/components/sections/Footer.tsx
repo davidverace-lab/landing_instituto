@@ -1,32 +1,22 @@
-import { Colors } from '../../tokens'
-
 export default function Footer() {
   return (
     <footer className="relative bg-navy-dark overflow-hidden">
-      <div
-        className="absolute top-0 left-0 right-0 h-16"
-        style={{ background: Colors.skyBlue100, clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 100%)' }}
-      />
-
-      <div className="relative pt-20 pb-10 px-6 md:px-12 lg:px-20">
+      <div className="relative pt-16 pb-10 px-6 md:px-12 lg:px-20">
         <div className="max-w-7xl mx-auto">
 
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-10 mb-12">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10 mb-12">
 
-            <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <div className="flex flex-row items-center gap-6">
               <img
                 src="/webp/hports.webp"
                 alt="Hutchison Ports"
-                className="h-10 w-auto mb-3"
+                className="h-12 w-auto"
               />
               <img
                 src="/webp/LogoInstitutoHP-blanco.webp"
                 alt="Instituto Hutchison Ports"
-                className="h-12 w-auto mb-5"
+                className="h-12 w-auto"
               />
-              <p className="font-montserrat text-white/70 text-sm max-w-xs">
-                Hub digital para colaboradores de Hutchison Ports.
-              </p>
             </div>
 
             <div className="flex flex-col items-center md:items-end text-center md:text-right gap-2">
