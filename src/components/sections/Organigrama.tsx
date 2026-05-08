@@ -123,12 +123,12 @@ export default function Organigrama(_props: OrganigramaProps) {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
         <SectionReveal>
-          <div className="text-center mb-14">
-            <h2 className="section-title text-white">
-              <span style={{ display: 'block' }}>CÓMO SE CONFORMA EL</span>
-              <span style={{ display: 'block' }}>INSTITUTO HUTCHISON PORTS</span>
+          <div className="text-center mb-10 md:mb-14">
+            <h2 className="section-title text-white" style={{ textWrap: 'balance' as React.CSSProperties['textWrap'] }}>
+              <span className="block">CÓMO SE CONFORMA EL</span>
+              <span className="block">INSTITUTO HUTCHISON PORTS</span>
             </h2>
           </div>
         </SectionReveal>
@@ -153,7 +153,7 @@ export default function Organigrama(_props: OrganigramaProps) {
           <Connector direction="v" inView={imgInView} />
         </SectionReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px_1fr] gap-4 lg:gap-8 items-center mb-2">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(280px,380px)_1fr] gap-6 md:gap-4 lg:gap-8 items-center mb-2">
 
           <div className="flex flex-col justify-center">
             <SectionReveal direction="right" delay={0.22}>

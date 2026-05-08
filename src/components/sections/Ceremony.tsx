@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import SectionReveal from '../ui/SectionReveal'
-import { Colors, Type, DescriptionCSS } from '../../tokens'
+import { Colors, DescriptionCSS } from '../../tokens'
 
 interface CeremonyProps {
   titulo?: string
@@ -63,21 +63,21 @@ export default function Ceremony(_props: CeremonyProps) {
             paddingRight: 'clamp(24px, 6vw, 96px)',
           }}
         >
-          <div style={{ width: 'fit-content', maxWidth: '100%' }}>
+          <div style={{ width: '100%', maxWidth: 'min(900px, 100%)' }}>
             <h2
               className="font-verlag uppercase text-navy"
               style={{
-                fontSize: Type.h2,
+                fontSize: 'clamp(1.4rem, 4.5vw, 3.2rem)',
                 lineHeight: 1.05,
                 letterSpacing: '-0.4px',
-                whiteSpace: 'nowrap',
+                textWrap: 'balance' as React.CSSProperties['textWrap'],
               }}
             >
               <span className="block">{linea1}</span>
               {linea2 && <span className="block">{linea2}</span>}
             </h2>
             <p
-              className="text-navy mt-8"
+              className="text-navy mt-6 md:mt-8"
               style={{ ...DescriptionCSS.base, width: '100%' }}
             >
               {descripcion}
@@ -153,7 +153,7 @@ export default function Ceremony(_props: CeremonyProps) {
         <SectionReveal delay={0.35}>
           <p
             className="font-verlag text-navy uppercase flex flex-wrap items-baseline justify-center"
-            style={{ fontSize: Type.h2, lineHeight: 1.05, letterSpacing: '-0.4px', gap: '0.4em' }}
+            style={{ fontSize: 'clamp(1.4rem, 4vw, 3.2rem)', lineHeight: 1.05, letterSpacing: '-0.4px', gap: '0.4em' }}
           >
             <span>{etiquetaFecha}:</span>
             {fecha.split(' ').map((parte, i) => {

@@ -16,17 +16,17 @@ export const Colors = {
 }
 
 export const Type = {
-  h1:      'clamp(2rem, 3.5vw, 3.2rem)',
-  h2:      'clamp(2rem, 3.5vw, 3.2rem)',
-  h3Card:  'clamp(1.2rem, 1.8vw, 1.7rem)',
-  h3Col:   'clamp(1.1rem, 1.4vw, 1.3rem)',
-  h3Small: 'clamp(1rem, 1.3vw, 1.2rem)',
-  descBase: 'clamp(1.2rem, 1.6vw, 1.55rem)',
-  descSm:   'clamp(1.05rem, 1.35vw, 1.3rem)',
-  descCard: 'clamp(1.1rem, 1.4vw, 1.4rem)',
-  heroSub:  'clamp(15px, 1.45vw, 19px)',
-  statLg:  'clamp(3.8rem, 6.5vw, 6rem)',
-  statMd:  'clamp(2.6rem, 5vw, 4.2rem)',
+  h1:      'clamp(1.5rem, 4.5vw, 3.2rem)',
+  h2:      'clamp(1.4rem, 4.5vw, 3.2rem)',
+  h3Card:  'clamp(1rem, 2.6vw, 1.7rem)',
+  h3Col:   'clamp(0.95rem, 2.2vw, 1.3rem)',
+  h3Small: 'clamp(0.9rem, 2vw, 1.2rem)',
+  descBase: 'clamp(0.95rem, 2.4vw, 1.55rem)',
+  descSm:   'clamp(0.9rem, 2.1vw, 1.3rem)',
+  descCard: 'clamp(0.95rem, 2.2vw, 1.4rem)',
+  heroSub:  'clamp(13px, 1.6vw, 19px)',
+  statLg:  'clamp(2.8rem, 9vw, 6rem)',
+  statMd:  'clamp(2rem, 6vw, 4.2rem)',
   overline: '0.72rem',
   label:    '0.75rem',
   statLbl:  '13px',
@@ -35,14 +35,14 @@ export const Type = {
 
 export const DescriptionCSS = {
   base: {
-    fontSize:      'clamp(1.2rem, 1.6vw, 1.55rem)',
+    fontSize:      'clamp(0.95rem, 2.4vw, 1.55rem)',
     lineHeight:    1.65,
     letterSpacing: '0.01em',
     fontFamily:    '"Montserrat", sans-serif',
     textWrap:      'balance' as React.CSSProperties['textWrap'],
   },
   sm: {
-    fontSize:      'clamp(1.05rem, 1.35vw, 1.3rem)',
+    fontSize:      'clamp(0.9rem, 2.1vw, 1.3rem)',
     lineHeight:    1.6,
     letterSpacing: '0.01em',
     fontFamily:    '"Montserrat", sans-serif',

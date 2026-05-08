@@ -44,43 +44,33 @@ export default function Challenge(_props: ChallengeProps) {
       <div className="relative z-10 flex flex-col lg:grid lg:grid-cols-2 lg:min-h-[100dvh]">
 
         {/* Mitad izquierda: Hagamos Historia */}
-        <div className="relative w-full h-full flex flex-col px-6 md:px-16 lg:px-20 pt-20 pb-16 lg:pt-28 lg:pb-28">
+        <div className="relative w-full h-full flex flex-col items-center justify-center px-5 md:px-12 lg:px-20 pt-14 md:pt-20 pb-12 md:pb-16 lg:pt-28 lg:pb-28">
           <div className="absolute inset-0" style={{ backgroundColor: Colors.skyBlue100, opacity: 0.88 }} />
-          <div className="relative z-10 max-w-2xl mx-auto lg:mx-0 w-full">
+          <div className="relative z-10 max-w-2xl mx-auto w-full text-center">
 
             <h2
               className="section-title text-navy"
-              style={{ fontSize: Type.h2, lineHeight: 1.05, margin: 0, marginBottom: '1.25rem', minHeight: '1.05em' }}
+              style={{ fontSize: Type.h2, lineHeight: 1.05, margin: 0, marginBottom: '1.25rem', textWrap: 'balance' as React.CSSProperties['textWrap'] }}
             >
               {tituloIzquierda}
             </h2>
 
-            <p className="text-white" style={{ ...DescriptionCSS.base, textAlign: 'left', textWrap: 'wrap' as React.CSSProperties['textWrap'] }}>
+            <p className="text-white" style={{ ...DescriptionCSS.base, textWrap: 'wrap' as React.CSSProperties['textWrap'] }}>
               El Instituto Hutchison Ports <strong className="text-navy font-bold">impulsa el desarrollo integral de sus colaboradores</strong> mediante programas de aprendizaje digital. Nuestra meta es consolidar una comunidad de conocimiento que fortalezca sus competencias en todos los niveles, impulsando la competitividad y el liderazgo de Hutchison Ports en el sector portuario.
             </p>
-
-            <div className="mt-8 overflow-hidden rounded-lg shadow-2xl">
-              <img
-                src="/webp/ICAVE-CO-135.webp"
-                alt="ICAVE - Operaciones portuarias Hutchison Ports"
-                className="w-full h-auto object-cover"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
 
           </div>
         </div>
 
         {/* Mitad derecha: Graduados */}
-        <div className="relative w-full h-full flex flex-col px-6 md:px-16 lg:px-20 pt-20 pb-16 lg:pt-28 lg:pb-28">
+        <div className="relative w-full h-full flex flex-col items-center justify-center px-5 md:px-12 lg:px-20 pt-14 md:pt-20 pb-12 md:pb-16 lg:pt-28 lg:pb-28">
           <div className="absolute inset-0" style={{ backgroundColor: Colors.seaBlue100, opacity: 0.92 }} />
-          <div className="relative z-10 max-w-lg mx-auto lg:mx-0 w-full">
-            <div ref={ref} className="flex flex-col gap-5">
+          <div className="relative z-10 max-w-lg mx-auto w-full text-center">
+            <div ref={ref} className="flex flex-col items-center gap-5">
 
               <h2
                 className="section-title text-sky-brand"
-                style={{ fontSize: Type.h2, lineHeight: 1.05, margin: 0, letterSpacing: '0.02em', minHeight: '1.05em' }}
+                style={{ fontSize: Type.h2, lineHeight: 1.05, margin: 0, letterSpacing: '0.02em', textWrap: 'balance' as React.CSSProperties['textWrap'] }}
               >
                 Graduados actuales
               </h2>
@@ -93,11 +83,11 @@ export default function Challenge(_props: ChallengeProps) {
                 color={Colors.sunrayYellow100}
               />
 
-              <div className="flex items-baseline gap-3">
+              <div className="flex items-baseline justify-center gap-3">
                 <span className="font-verlag text-white uppercase" style={{ fontSize: 'clamp(1.2rem, 2vw, 2rem)', letterSpacing: '0.18em' }}>
                   Objetivo:
                 </span>
-                <span className="font-verlag font-bold text-white" style={{ fontSize: 'clamp(1.2rem, 2vw, 2rem)' }}>
+                <span className="font-verlag font-bold text-white" style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2.5rem)', lineHeight: 1 }}>
                   {target.toLocaleString()}
                 </span>
               </div>

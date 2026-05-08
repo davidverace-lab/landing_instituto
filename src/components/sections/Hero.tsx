@@ -43,7 +43,7 @@ export default function Hero(_props: HeroProps) {
 
       {/* Logos */}
       <motion.div
-        className="absolute top-0 left-0 right-0 z-20 pt-8 px-6 md:pt-12 md:px-16 lg:pt-14 lg:px-24 flex items-center justify-between"
+        className="absolute top-0 left-0 right-0 z-20 pt-6 px-5 md:pt-12 md:px-16 lg:pt-14 lg:px-24 flex items-center justify-between gap-3"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.1 }}
@@ -51,26 +51,26 @@ export default function Hero(_props: HeroProps) {
         <img
           src="/webp/LogoInstitutoHP-blanco.webp"
           alt="Instituto Hutchison Ports"
-          style={{ height: 'clamp(40px, 5vw, 60px)', width: 'auto' }}
+          style={{ height: 'clamp(32px, 5vw, 60px)', width: 'auto', maxWidth: '40%' }}
           decoding="async"
         />
         <img
           src="/webp/hports.webp"
           alt="Hutchison Ports"
-          style={{ height: 'clamp(40px, 5vw, 60px)', width: 'auto' }}
+          style={{ height: 'clamp(32px, 5vw, 60px)', width: 'auto', maxWidth: '40%' }}
           decoding="async"
         />
       </motion.div>
 
       {/* Contenido centrado */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-5 md:px-10">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-5 md:px-10 pt-24 md:pt-28 pb-12">
         <div className="w-full max-w-6xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', stiffness: 70, damping: 18, delay: 0.35 }}
             className="font-verlag uppercase mb-4 md:mb-5"
-            style={{ fontSize: Type.h2, lineHeight: 1.05, letterSpacing: '-0.4px', color: '#FFFFFF' }}
+            style={{ fontSize: Type.h2, lineHeight: 1.05, letterSpacing: '-0.01em', color: '#FFFFFF', textWrap: 'balance' as React.CSSProperties['textWrap'] }}
           >
             {t}
           </motion.h1>

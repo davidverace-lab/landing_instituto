@@ -76,17 +76,17 @@ function ActiveCard({ t }: { t: TestimonialVideo }) {
 
   return (
     <motion.div
-      className="relative overflow-hidden shrink-0"
-      style={{ width: '260px', height: '462px' }}
+      className="relative overflow-hidden shrink-0 rounded-2xl w-full h-full"
       whileHover={{ y: -8, boxShadow: '0 32px 60px rgba(0,159,227,0.3)' }}
       transition={{ type: 'spring', stiffness: 200, damping: 22 }}
     >
       {t.videoSrc ? (
         <video ref={videoRef} src={t.videoSrc} poster={t.poster}
-          className="absolute inset-0 w-full h-full object-cover" playsInline loop />
+          className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: 'center 25%' }} playsInline loop />
       ) : (
         <img src={t.poster} alt={t.name}
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: 'center 25%' }}
           loading="lazy" decoding="async" />
       )}
 
@@ -118,9 +118,9 @@ function ActiveCard({ t }: { t: TestimonialVideo }) {
 function GhostCard({ t, side }: { t: TestimonialVideo; side: 'left' | 'right' }) {
   return (
     <div
-      className="relative overflow-hidden shrink-0 pointer-events-none select-none"
+      className="relative overflow-hidden shrink-0 pointer-events-none select-none rounded-2xl"
       style={{
-        width: '180px',
+        width: '240px',
         height: '320px',
         opacity: 0.35,
         filter: 'blur(3px)',
@@ -128,7 +128,8 @@ function GhostCard({ t, side }: { t: TestimonialVideo; side: 'left' | 'right' })
         transformOrigin: side === 'left' ? 'right center' : 'left center',
       }}
     >
-      <img src={t.poster} alt="" className="absolute inset-0 w-full h-full object-cover object-center"
+      <img src={t.poster} alt="" className="absolute inset-0 w-full h-full object-cover"
+        style={{ objectPosition: 'center 25%' }}
         loading="lazy" decoding="async" />
       <div className="absolute inset-0" style={{
         background: 'linear-gradient(to top, rgba(0,46,109,0.80) 0%, rgba(0,46,109,0.20) 60%, transparent 100%)',
@@ -177,9 +178,9 @@ export default function Testimonials(_props: TestimonialsProps) {
   const nextIdx = (active + 1) % n
 
   const cardVariants = {
-    enter: (dir: number) => ({ x: dir > 0 ? 260 : -260, opacity: 0 }),
+    enter: (dir: number) => ({ x: dir > 0 ? 320 : -320, opacity: 0 }),
     center: { x: 0, opacity: 1, transition: { type: 'spring' as const, stiffness: 320, damping: 38, mass: 0.8 } },
-    exit:  (dir: number) => ({ x: dir > 0 ? -260 : 260, opacity: 0, transition: { duration: 0.18, ease: [0.4, 0, 1, 1] } }),
+    exit:  (dir: number) => ({ x: dir > 0 ? -320 : 320, opacity: 0, transition: { duration: 0.18, ease: [0.4, 0, 1, 1] } }),
   }
 
   return (
@@ -200,15 +201,15 @@ export default function Testimonials(_props: TestimonialsProps) {
       <div className="absolute top-0 right-0 w-80 h-80 opacity-5 pointer-events-none"
         style={{ background: `radial-gradient(circle, ${Colors.skyBlue100} 0%, transparent 70%)` }} />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:pl-8 lg:pr-20 py-16 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:pl-8 lg:pr-20 py-20 md:py-28 lg:py-36">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center">
 
           <SectionReveal>
             <h2 className="section-title text-navy mb-6">
               {titulo}
             </h2>
 
-            <div className="mb-10 relative" style={{ minHeight: 'clamp(280px, 32vh, 360px)' }}>
+            <div className="mb-6 md:mb-12 relative w-full" style={{ minHeight: 'clamp(180px, 26vh, 380px)' }}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
@@ -216,7 +217,7 @@ export default function Testimonials(_props: TestimonialsProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.35 }}
-                  className="absolute inset-0"
+                  className="absolute inset-x-0 top-0"
                 >
                   <p className="text-navy font-semibold mb-1" style={DescriptionCSS.sm}>
                     {testimonials[active].name}
@@ -231,7 +232,7 @@ export default function Testimonials(_props: TestimonialsProps) {
               </AnimatePresence>
             </div>
 
-            <div className="flex items-center gap-6">
+            <div className="flex items-center justify-center lg:justify-start gap-4 md:gap-6 flex-wrap">
               <motion.button onClick={handlePrev}
                 className="w-14 h-14 flex items-center justify-center shrink-0"
                 style={{ border: '2px solid #FFFFFF', background: 'transparent' }}
@@ -270,9 +271,17 @@ export default function Testimonials(_props: TestimonialsProps) {
           <div className="flex justify-center lg:justify-end">
             <div className="flex items-center gap-3">
 
-              <GhostCard t={testimonials[prevIdx]} side="left" />
+              <div className="hidden md:block">
+                <GhostCard t={testimonials[prevIdx]} side="left" />
+              </div>
 
-              <div className="relative shrink-0" style={{ width: '260px', height: '462px' }}>
+              <div
+                className="relative shrink-0"
+                style={{
+                  width: 'min(360px, 82vw)',
+                  height: 'clamp(360px, 70vw, 460px)',
+                }}
+              >
                 <AnimatePresence initial={false} custom={direction} mode="popLayout">
                   <motion.div
                     key={active}
@@ -289,7 +298,9 @@ export default function Testimonials(_props: TestimonialsProps) {
                 </AnimatePresence>
               </div>
 
-              <GhostCard t={testimonials[nextIdx]} side="right" />
+              <div className="hidden md:block">
+                <GhostCard t={testimonials[nextIdx]} side="right" />
+              </div>
 
             </div>
           </div>

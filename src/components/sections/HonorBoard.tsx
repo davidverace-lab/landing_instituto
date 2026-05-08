@@ -98,7 +98,7 @@ function HonorSlide({ unit, widthVw, variant }: SlideProps) {
           {unit.photos.map((src, i) => (
             <div
               key={`${unit.name}-${i}`}
-              className="relative overflow-hidden"
+              className="relative overflow-hidden rounded-2xl"
               style={{
                 background: 'rgba(255,255,255,0.04)',
                 boxShadow: '0 18px 40px -16px rgba(0,0,0,0.5)',

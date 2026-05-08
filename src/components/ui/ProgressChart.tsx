@@ -65,17 +65,23 @@ export default function ProgressChart({
           <div
             key={item.name}
             className="row grid items-center cursor-pointer"
-            style={{ gridTemplateColumns: '240px 1fr', columnGap: 0 }}
+            style={{ gridTemplateColumns: 'clamp(96px, 22vw, 220px) 1fr', columnGap: 8 }}
             onMouseMove={(e) => handleMouseMove(e, idx)}
             onMouseLeave={handleMouseLeave}
+            onTouchStart={(e) => {
+              setHovered(idx)
+              const t = e.touches[0]
+              if (t) setCursorPos({ x: t.clientX, y: t.clientY })
+            }}
+            onTouchEnd={handleMouseLeave}
           >
-            <div className="logo-column flex items-center" style={{ width: 240, height: 26 }}>
+            <div className="logo-column flex items-center min-w-0" style={{ height: 26 }}>
               {item.logos && item.logos.length > 0 ? (
                 <motion.div
-                  className={`logo-wrapper flex items-center justify-start${item.logos.length > 1 ? ' double' : ''}`}
+                  className={`logo-wrapper flex items-center justify-start min-w-0 max-w-full${item.logos.length > 1 ? ' double' : ''}`}
                   style={{
                     height: 26,
-                    gap: item.logos.length > 1 ? 10 : 0,
+                    gap: item.logos.length > 1 ? 8 : 0,
                   }}
                   animate={{ opacity: isDimmed ? 0.4 : 1, scale: isHovered ? 1.06 : 1 }}
                   transition={{ type: 'spring', stiffness: 260, damping: 22 }}
@@ -84,13 +90,13 @@ export default function ProgressChart({
                   {item.logos.map((logo, i) => (
                     <div
                       key={`${item.name}-slot-${i}`}
-                      className="logo-container flex items-center"
+                      className="logo-container flex items-center min-w-0"
                       style={{ height: 26 }}
                     >
                       <img
                         src={logo}
                         alt={item.name}
-                        className="block select-none pointer-events-none"
+                        className="block select-none pointer-events-none max-w-full"
                         style={{
                           height: '100%',
                           width: 'auto',
@@ -154,11 +160,12 @@ export default function ProgressChart({
       <div
         style={{
           position: 'fixed',
-          left: cursorPos.x,
+          left: Math.max(8, Math.min(cursorPos.x, (typeof window !== 'undefined' ? window.innerWidth : 1024) - 8)),
           top: cursorPos.y - 24,
           pointerEvents: 'none',
           zIndex: 9999,
           transform: 'translate(-50%, -100%)',
+          maxWidth: 'calc(100vw - 16px)',
         }}
       >
         <div
@@ -169,10 +176,11 @@ export default function ProgressChart({
             padding: '8px 12px',
             borderRadius: 8,
             fontFamily: '"Montserrat", sans-serif',
-            fontSize: 'clamp(0.75rem, 0.9vw, 0.9rem)',
+            fontSize: 'clamp(0.7rem, 0.9vw, 0.9rem)',
             fontWeight: 600,
-            whiteSpace: 'nowrap',
+            whiteSpace: 'normal',
             boxShadow: '0 8px 24px rgba(0,46,109,0.25)',
+            textAlign: 'center',
           }}
         >
           <span style={{ fontWeight: 700 }}>{hoveredItem.name}:</span>{' '}

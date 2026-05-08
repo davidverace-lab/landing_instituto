@@ -58,7 +58,7 @@ export default function Urgency(_props: UrgencyProps) {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-5 md:px-12 lg:px-20 py-20 md:py-28 text-center">
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-5 md:px-12 lg:px-20 py-14 md:py-20 lg:py-28 text-center">
 
         <SectionReveal>
           <h2 className="section-title text-navy mb-3" style={{ fontSize: Type.h2 }}>

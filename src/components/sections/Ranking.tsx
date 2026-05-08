@@ -36,14 +36,14 @@ export default function Ranking(_props: RankingProps) {
       className="relative overflow-hidden"
       style={{ backgroundColor: Colors.bgSurface }}
     >
-      <div className="w-full max-w-7xl mx-auto px-6 md:px-8 lg:pl-8 lg:pr-20 py-16 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-12 items-center">
+      <div className="w-full max-w-7xl mx-auto px-6 md:px-8 lg:pl-8 lg:pr-12 py-12 md:py-20 lg:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-10 md:gap-12 items-center">
 
           <div className="lg:pr-2">
             <SectionReveal>
-              <h2 className="section-title mb-8" style={{ lineHeight: 1.1, color: '#002E6D' }}>
-                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>EL PODER DE TU</span>
-                <span style={{ display: 'block', whiteSpace: 'nowrap' }}>UNIDAD DE NEGOCIO</span>
+              <h2 className="section-title mb-6 md:mb-8" style={{ lineHeight: 1.1, color: '#002E6D', textWrap: 'balance' as React.CSSProperties['textWrap'] }}>
+                <span className="block">EL PODER DE TU</span>
+                <span className="block">UNIDAD DE NEGOCIO</span>
               </h2>
               <p style={{ ...DescriptionCSS.base, color: '#002E6D', textAlign: 'left', textWrap: 'pretty' as React.CSSProperties['textWrap'], margin: 0 }}>
                 Estamos en la recta final y el verdadero triunfo es <strong className="font-bold">llegar juntos a la meta.</strong> ¿Tu Unidad de Negocio está liderando el camino?

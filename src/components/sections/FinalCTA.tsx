@@ -36,10 +36,10 @@ export default function FinalCTA(_props: FinalCTAProps) {
     <section className="relative overflow-hidden" style={{ display: 'flex', flexDirection: 'column' }}>
 
       <div
-        className="relative overflow-hidden"
+        className="relative"
         style={{ backgroundColor: Colors.skyBlue100 }}
       >
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <img
             src="/fondocompleta.jpeg"
             alt=""
@@ -50,33 +50,61 @@ export default function FinalCTA(_props: FinalCTAProps) {
           />
         </div>
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24 text-center">
-          <SectionReveal>
-            <h2 className="section-title text-white mb-8 max-w-6xl mx-auto">
-              {ctaDescripcion}
-            </h2>
-            <a
-              href={ctaButtonUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-verlag uppercase inline-block transition-all duration-300 hover:scale-[1.04] active:scale-[0.97]"
-              aria-label="Terminar mis módulos ahora"
+        <div
+          className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-[0.9fr_1.4fr] gap-6 md:gap-12 items-center"
+          style={{ paddingTop: 'clamp(72px, 10vw, 140px)', paddingBottom: 'clamp(56px, 6vw, 96px)' }}
+        >
+          {/* Columna izquierda: laptop con efecto 3D que sobresale hacia arriba */}
+          <div className="relative flex justify-center md:justify-start">
+            <motion.img
+              src="/lap.png"
+              alt=""
+              aria-hidden
+              className="pointer-events-none select-none"
               style={{
-                background: Colors.seaBlue100,
-                padding: 'clamp(12px, 1.4vw, 18px) clamp(20px, 2.6vw, 36px)',
-                borderRadius: '4px',
-                boxShadow: '0 8px 24px rgba(0,46,109,0.35)',
-                fontSize: 'clamp(0.9rem, 1.1vw, 1.05rem)',
-                letterSpacing: '0.06em',
+                width: 'clamp(280px, 70vw, 760px)',
+                height: 'auto',
+                maxWidth: '100%',
+                transform: 'translateY(-12%) perspective(1200px) rotateX(8deg)',
+                filter: 'drop-shadow(0 30px 40px rgba(0,0,0,0.45))',
               }}
-            >
-              <span style={{ color: '#FFFFFF' }}>¡</span>
-              <span style={{ color: '#FFC627' }}>TERMINAR </span>
-              <span style={{ color: '#FFFFFF' }}>MIS MÓDULOS </span>
-              <span style={{ color: '#FFC627' }}>AHORA</span>
-              <span style={{ color: '#FFFFFF' }}>!</span>
-            </a>
-          </SectionReveal>
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ type: 'spring', stiffness: 70, damping: 18, delay: 0.1 }}
+              draggable={false}
+            />
+          </div>
+
+          {/* Columna derecha: texto + botón */}
+          <div className="text-center md:text-left">
+            <SectionReveal>
+              <h2 className="section-title text-white mb-8">
+                {ctaDescripcion}
+              </h2>
+              <a
+                href={ctaButtonUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-verlag uppercase inline-block transition-all duration-300 hover:scale-[1.04] active:scale-[0.97]"
+                aria-label="Terminar mis módulos ahora"
+                style={{
+                  background: Colors.seaBlue100,
+                  padding: 'clamp(12px, 1.4vw, 18px) clamp(20px, 2.6vw, 36px)',
+                  borderRadius: '4px',
+                  boxShadow: '0 8px 24px rgba(0,46,109,0.35)',
+                  fontSize: 'clamp(0.9rem, 1.1vw, 1.05rem)',
+                  letterSpacing: '0.06em',
+                }}
+              >
+                <span style={{ color: '#FFFFFF' }}>¡</span>
+                <span style={{ color: '#FFC627' }}>TERMINAR </span>
+                <span style={{ color: '#FFFFFF' }}>MIS MÓDULOS </span>
+                <span style={{ color: '#FFC627' }}>AHORA</span>
+                <span style={{ color: '#FFFFFF' }}>!</span>
+              </a>
+            </SectionReveal>
+          </div>
         </div>
       </div>
 
@@ -84,7 +112,7 @@ export default function FinalCTA(_props: FinalCTAProps) {
         className="relative w-full overflow-hidden"
         style={{ backgroundColor: Colors.seaBlue100 }}
       >
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-16 md:pt-20 pb-10 flex flex-col items-center">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-12 md:pt-20 pb-8 md:pb-10 flex flex-col items-center">
 
           <motion.h2
             className="section-title text-white text-center mb-10 md:mb-14"
