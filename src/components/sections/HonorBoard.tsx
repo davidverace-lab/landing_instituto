@@ -151,16 +151,16 @@ export default function HonorBoard(_props: HonorBoardProps) {
   const handleNext = () => { goTo(active + 1, 1); resetInterval() }
 
   const slideVariants = {
-    enter: (dir: number) => ({ x: dir > 0 ? '100%' : '-100%', opacity: 0 }),
+    enter: (dir: number) => ({ y: dir > 0 ? '110%' : '-110%', opacity: 0 }),
     center: {
-      x: 0,
+      y: 0,
       opacity: 1,
-      transition: { type: 'spring' as const, stiffness: 200, damping: 30, mass: 0.9 },
+      transition: { type: 'spring' as const, stiffness: 180, damping: 28, mass: 0.9 },
     },
     exit: (dir: number) => ({
-      x: dir > 0 ? '-100%' : '100%',
+      y: dir > 0 ? '-110%' : '110%',
       opacity: 0,
-      transition: { duration: 0.4, ease: [0.4, 0, 1, 1] as [number, number, number, number] },
+      transition: { duration: 0.55, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] },
     }),
   }
 
@@ -188,8 +188,8 @@ export default function HonorBoard(_props: HonorBoardProps) {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24 lg:py-28">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-10 md:gap-14 lg:gap-16 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-8 md:py-24 lg:py-28">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-4 md:gap-14 lg:gap-16 items-center">
 
           {/* Header */}
           <div className="text-center lg:text-left">
@@ -213,7 +213,7 @@ export default function HonorBoard(_props: HonorBoardProps) {
             </p>
 
             {/* Controles */}
-            <div className="mt-8 md:mt-10 flex items-center justify-center lg:justify-start gap-4 md:gap-6 flex-wrap">
+            <div className="mt-4 md:mt-10 flex items-center justify-center lg:justify-start gap-4 md:gap-6 flex-wrap">
               <motion.button
                 onClick={handlePrev}
                 className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center shrink-0"
@@ -259,12 +259,15 @@ export default function HonorBoard(_props: HonorBoardProps) {
             </div>
           </div>
 
-          {/* Carousel */}
+          {/* Carousel — transición vertical: sube hacia arriba, entra desde abajo */}
           <div
-            className="relative w-full overflow-hidden mx-auto"
+            className="honor-carousel relative w-full mx-auto overflow-hidden"
             style={{
               maxWidth: 'min(640px, 100%)',
-              height: 'clamp(360px, 56vh, 560px)',
+              WebkitMaskImage:
+                'linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)',
+              maskImage:
+                'linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)',
             }}
           >
             <AnimatePresence initial={false} custom={direction} mode="popLayout">

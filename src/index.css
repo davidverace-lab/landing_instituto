@@ -172,3 +172,14 @@
   .bg-sea-blue-80  { background-color: #1A4B8D; }
   .text-sea-blue-80 { color: #1A4B8D; }
 }
+
+/* HonorBoard carousel — altura responsiva.
+   Mobile: compacto y cercano a controles. Desktop: altura amplia. */
+.honor-carousel {
+  height: clamp(280px, 50vh, 360px);
+}
+@media (min-width: 768px) {
+  .honor-carousel {
+    height: clamp(360px, 56vh, 560px);
+  }
+}
