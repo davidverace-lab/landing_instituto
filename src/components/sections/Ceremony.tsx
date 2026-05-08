@@ -104,11 +104,11 @@ export default function Ceremony(_props: CeremonyProps) {
                 className="absolute inset-0 w-full h-full object-cover cursor-pointer"
                 poster="/Teaser1-poster.jpg"
                 playsInline
-                loop
-                muted
                 preload="metadata"
+                controls={playing}
                 onPlay={() => setPlaying(true)}
                 onPause={() => setPlaying(false)}
+                onEnded={() => setPlaying(false)}
               >
                 <source src="/Teaser1.mp4" type="video/mp4" />
               </video>
