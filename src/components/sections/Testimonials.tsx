@@ -23,50 +23,46 @@ const DEFAULT_TITLE = 'VOCES DE ÉXITO'
 
 const DEFAULT_TESTIMONIALS: TestimonialVideo[] = [
   {
-    name: 'Rodrigo Espinoza Varela',
-    role: 'Operador de Grúa',
-    bu: 'Terminal Lázaro Cárdenas',
-    quote: 'El Tronco Común me dio las bases para entender mi impacto en toda la operación.',
+    name: 'Héctor Raúl Acosta Ponce',
+    role: '',
+    bu: 'TIMSA',
+    quote: 'Formar parte del Instituto me ha permitido conocer a mayor detalle la filosofía del grupo, su historia, visión estratégica actual y planes a futuro. Todo ello sin duda suma al fortalecimiento de las competencias de cada uno de los que conformamos Hutchison Ports.',
     videoSrc: '',
-    poster: '/webp/fotos-nacho/DSC03415.webp',
+    poster: '/webp/Hector Raul Acosta Ponce.png',
   },
   {
-    name: 'Mariana Villanueva Cruz',
-    role: 'Supervisora de Operaciones',
-    bu: 'Terminal Manzanillo',
-    quote: 'Completar la Culturización me abrió una perspectiva diferente del liderazgo.',
+    name: 'Jafet Salas Díaz',
+    role: '',
+    bu: 'ICAVE',
+    quote: 'Me ha reforzado los conocimientos generales, adquiriendo una comprensión global sobre todas las áreas de la organización, objetivos comunes y un funcionamiento más efectivo, siendo una experiencia útil para sentirme identificado con la empresa y comprender de manera general cómo contribuye mi trabajo a los objetivos del grupo.',
     videoSrc: '',
-    poster: '/webp/fotos-nacho/DSC03437.webp',
+    poster: '/webp/Jafet salas.png',
   },
   {
-    name: 'Óscar Fuentes Méndez',
-    role: 'Técnico de Mantenimiento',
-    bu: 'Terminal Ensenada',
-    quote: 'Los módulos son claros y relevantes para lo que vivimos en el puerto cada día.',
+    name: 'Jaime Ortiz Sosa',
+    role: '',
+    bu: 'Container Care',
+    quote: 'Formar parte del Instituto Hutchison Ports ha sido una gran oportunidad de crecimiento personal y profesional, comprendiendo el valor de cada departamento, ya que todos contribuyen al éxito del Grupo.',
     videoSrc: '',
-    poster: '/webp/fotos-nacho/DSC03462.webp',
+    poster: '/webp/Jaime Ortiz Sosa.png',
   },
   {
-    name: 'Lucía Ramírez Solano',
-    role: 'Coordinadora de RRHH',
-    bu: 'Corporativo HP México',
-    quote: 'Ver el ranking fue el empuje que necesitaba. Subimos tres posiciones en una semana.',
+    name: 'Lucila del Carmen Mora Bravo',
+    role: '',
+    bu: 'Corporativo Hutchison Ports',
+    quote: 'El Instituto Hutchison Ports ha representado una gran experiencia de vanguardia tecnológica aplicada a la capacitación. Es una plataforma muy enriquecedora que contempla todos los procesos y aristas que nos permite que la operación se lleve a cabo de manera eficiente en tiempo y forma.',
     videoSrc: '',
-    poster: '/webp/fotos-nacho/4J4B8483.webp',
+    poster: '/webp/Lucila Mora.png',
+  },
+  {
+    name: 'María Susana Aguileta Roquet',
+    role: '',
+    bu: 'TNG',
+    quote: 'Aprendí sobre la Filosofía del Grupo, las Operaciones Portuarias, la seguridad de las mismas, la sostenibilidad y demás temas clave que fortalecen y exhortan el trabajo en equipo. Sin duda esta experiencia me ha inspirado a seguir creciendo y a continuar aportando lo mejor de mi en Hutchison Ports.',
+    videoSrc: '',
+    poster: '/webp/Susana Aguileta.png',
   },
 ]
-
-function normalizeTestimonials(items?: SanityTestimonial[]): TestimonialVideo[] {
-  if (!items || items.length === 0) return DEFAULT_TESTIMONIALS
-  return items.map((it, i) => ({
-    name: it.name ?? DEFAULT_TESTIMONIALS[i % DEFAULT_TESTIMONIALS.length].name,
-    role: it.role ?? '',
-    bu: it.bu ?? '',
-    quote: it.quote ?? '',
-    videoSrc: it.videoSrc ?? '',
-    poster: it.poster ?? DEFAULT_TESTIMONIALS[i % DEFAULT_TESTIMONIALS.length].poster,
-  }))
-}
 
 function ActiveCard({ t }: { t: TestimonialVideo }) {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -94,39 +90,27 @@ function ActiveCard({ t }: { t: TestimonialVideo }) {
           loading="lazy" decoding="async" />
       )}
 
-      <div className="absolute inset-0" style={{
-        background: `linear-gradient(to top, rgba(0,46,109,0.97) 0%, rgba(0,46,109,0.40) 45%, transparent 100%)`,
-      }} />
+      {t.videoSrc && (
+        <motion.button
+          onClick={togglePlay}
+          className="absolute flex items-center justify-center"
+          style={{ width: '56px', height: '56px', top: '36%', left: '50%', x: '-50%', y: '-50%',
+            background: Colors.skyBlue100, border: '2px solid rgba(255,255,255,0.35)' }}
+          whileHover={{ scale: 1.12 }}
+          whileTap={{ scale: 0.93 }}
+          animate={playing ? {} : {
+            boxShadow: ['0 0 0 0 rgba(0,159,227,0)', '0 0 0 14px rgba(0,159,227,0.22)', '0 0 0 28px rgba(0,159,227,0)'],
+          }}
+          transition={playing ? {} : { duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+          aria-label={playing ? 'Pausar' : 'Reproducir'}
+        >
+          {playing
+            ? <Pause size={22} color="#FFFFFF" weight="fill" />
+            : <Play  size={22} color="#FFFFFF" weight="fill" style={{ marginLeft: '3px' }} />
+          }
+        </motion.button>
+      )}
 
-      <motion.button
-        onClick={togglePlay}
-        className="absolute flex items-center justify-center"
-        style={{ width: '56px', height: '56px', top: '36%', left: '50%', x: '-50%', y: '-50%',
-          background: Colors.skyBlue100, border: '2px solid rgba(255,255,255,0.35)' }}
-        whileHover={{ scale: 1.12 }}
-        whileTap={{ scale: 0.93 }}
-        animate={playing ? {} : {
-          boxShadow: ['0 0 0 0 rgba(0,159,227,0)', '0 0 0 14px rgba(0,159,227,0.22)', '0 0 0 28px rgba(0,159,227,0)'],
-        }}
-        transition={playing ? {} : { duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
-        aria-label={playing ? 'Pausar' : 'Reproducir'}
-      >
-        {playing
-          ? <Pause size={22} color="#FFFFFF" weight="fill" />
-          : <Play  size={22} color="#FFFFFF" weight="fill" style={{ marginLeft: '3px' }} />
-        }
-      </motion.button>
-
-      <div className="absolute bottom-0 left-0 right-0 p-4">
-        <p className="text-navy leading-tight mb-0.5"
-          style={{ fontFamily: 'Verlag Black, sans-serif', textTransform: 'uppercase', fontSize: '13px', letterSpacing: '0.04em' }}>
-          {t.name}
-        </p>
-        <p className="font-montserrat text-navy text-xs mb-3">{t.role} · {t.bu}</p>
-        <p className="font-montserrat text-navy text-xs leading-relaxed italic">
-          "{t.quote}"
-        </p>
-      </div>
     </motion.div>
   )
 }
@@ -158,8 +142,10 @@ function GhostCard({ t, side }: { t: TestimonialVideo; side: 'left' | 'right' })
   )
 }
 
-export default function Testimonials({ titulo, items }: TestimonialsProps) {
-  const testimonials = normalizeTestimonials(items)
+export default function Testimonials(_props: TestimonialsProps) {
+  // CMS desconectado temporalmente — usar DEFAULTS hardcodeados
+  const titulo = DEFAULT_TITLE
+  const testimonials = DEFAULT_TESTIMONIALS
   const n = testimonials.length
 
   const [active, setActive] = useState(0)
@@ -214,15 +200,15 @@ export default function Testimonials({ titulo, items }: TestimonialsProps) {
       <div className="absolute top-0 right-0 w-80 h-80 opacity-5 pointer-events-none"
         style={{ background: `radial-gradient(circle, ${Colors.skyBlue100} 0%, transparent 70%)` }} />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:pl-8 lg:pr-20 py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           <SectionReveal>
             <h2 className="section-title text-navy mb-6">
-              {titulo ?? DEFAULT_TITLE}
+              {titulo}
             </h2>
 
-            <div className="mb-10 min-h-[80px]">
+            <div className="mb-10 relative" style={{ minHeight: 'clamp(280px, 32vh, 360px)' }}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
@@ -230,14 +216,15 @@ export default function Testimonials({ titulo, items }: TestimonialsProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.35 }}
+                  className="absolute inset-0"
                 >
-                  <p className="text-navy font-semibold mb-1" style={DescriptionCSS.base}>
+                  <p className="text-navy font-semibold mb-1" style={DescriptionCSS.sm}>
                     {testimonials[active].name}
                   </p>
-                  <p className="text-navy mb-3" style={DescriptionCSS.base}>
-                    {testimonials[active].role} · {testimonials[active].bu}
+                  <p className="text-navy mb-3" style={DescriptionCSS.sm}>
+                    {testimonials[active].bu}
                   </p>
-                  <p className="text-navy font-bold" style={DescriptionCSS.base}>
+                  <p className="text-navy font-bold" style={{ ...DescriptionCSS.sm, fontSize: 'clamp(0.95rem, 1.15vw, 1.1rem)' }}>
                     "{testimonials[active].quote}"
                   </p>
                 </motion.div>

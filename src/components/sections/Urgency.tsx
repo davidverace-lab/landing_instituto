@@ -20,21 +20,19 @@ const DEFAULTS = {
   titulo: 'EL TIEMPO CORRE:',
   subtitulo: 'LA ETAPA DE CULTURIZACIÓN LLEGA A SU FIN',
   panelIzquierdoFecha: '30 DE JUNIO',
-  panelIzquierdoTexto: 'Al cerrar la plataforma, las puertas a la fase de profesionalización se abrirán solo para quienes hayan completado el Tronco Común.',
-  panelDerechoTitulo: '¡NO TE QUEDES ATRÁS!',
+  panelIzquierdoTexto: 'Al cerrar los módulos el 30 de junio, las puertas a la fase de profesionalización se abrirán sólo para quienes hayan completado el Tronco Común.',
+  panelDerechoTitulo: '¡NO TE QUEDES SIN PARTE DE ESTE HISTÓRICO MOMENTO!',
   panelDerechoTexto: 'Tu próxima etapa depende de lo que hagas hoy.',
 }
 
-export default function Urgency({
-  deadline,
-  titulo,
-  subtitulo,
-  panelIzquierdoFecha,
-  panelIzquierdoTexto,
-  panelDerechoTitulo,
-  panelDerechoTexto,
-}: UrgencyProps) {
-  const { days, hours, minutes, seconds } = useCountdown(deadline ?? DEFAULTS.deadline)
+export default function Urgency(_props: UrgencyProps) {
+  // CMS desconectado temporalmente — usar DEFAULTS hardcodeados
+  const titulo = DEFAULTS.titulo
+  const subtitulo = DEFAULTS.subtitulo
+  const panelIzquierdoFecha = DEFAULTS.panelIzquierdoFecha
+  const panelDerechoTitulo = DEFAULTS.panelDerechoTitulo
+  const panelDerechoTexto = DEFAULTS.panelDerechoTexto
+  const { days, hours, minutes, seconds } = useCountdown(DEFAULTS.deadline)
 
   return (
     <section
@@ -64,11 +62,17 @@ export default function Urgency({
 
         <SectionReveal>
           <h2 className="section-title text-navy mb-3" style={{ fontSize: Type.h2 }}>
-            {titulo ?? DEFAULTS.titulo}
+            {titulo}
           </h2>
-          <h3 className="section-subtitle text-navy mb-10 md:mb-14" style={{ fontSize: Type.h3Card }}>
-            {subtitulo ?? DEFAULTS.subtitulo}
+          <h3 className="section-subtitle text-navy mb-6 md:mb-8" style={{ fontSize: Type.h3Card }}>
+            {subtitulo}
           </h3>
+          <p
+            className="text-navy mx-auto mb-10 md:mb-14"
+            style={{ ...DescriptionCSS.base, maxWidth: '52rem', textAlign: 'center' }}
+          >
+            El 30 de junio es la fecha límite para <strong className="font-bold">finalizar los 15 módulos</strong> y formar parte de la <strong className="font-bold">1era Gran Generación de Graduados</strong>.
+          </p>
         </SectionReveal>
 
         {/* Contador — 2 cols en mobile, 4 cols en md+ */}
@@ -95,7 +99,7 @@ export default function Urgency({
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Warning size={24} color={Colors.sunrayYellow100} weight="fill" />
                 <span className="font-verlag text-white uppercase" style={{ fontSize: Type.h3Card }}>
-                  {(panelIzquierdoFecha ?? DEFAULTS.panelIzquierdoFecha)
+                  {panelIzquierdoFecha
                     .split(/(\d+)/)
                     .map((part, i) =>
                       /^\d+$/.test(part) ? (
@@ -117,7 +121,7 @@ export default function Urgency({
                 </span>
               </div>
               <p className="text-white" style={{ ...DescriptionCSS.sm, fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)' }}>
-                {panelIzquierdoTexto ?? DEFAULTS.panelIzquierdoTexto}
+                Al cerrar los módulos el <strong className="font-bold">30 de junio</strong>, las puertas a la <strong className="font-bold">fase de profesionalización</strong> se abrirán sólo para quienes hayan completado el Tronco Común.
               </p>
             </motion.div>
 
@@ -128,16 +132,14 @@ export default function Urgency({
               whileHover={{ scale: 1.01 }}
               transition={{ type: 'spring', stiffness: 200, damping: 20 }}
             >
-              <motion.p
-                className="font-verlag text-sky-light leading-tight mb-4"
+              <p
+                className="font-verlag text-white uppercase leading-tight mb-4"
                 style={{ fontSize: Type.h3Card }}
-                animate={{ opacity: [1, 0.7, 1] }}
-                transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
               >
-                {panelDerechoTitulo ?? DEFAULTS.panelDerechoTitulo}
-              </motion.p>
+                {panelDerechoTitulo}
+              </p>
               <p className="text-white" style={{ ...DescriptionCSS.sm, fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)' }}>
-                {panelDerechoTexto ?? DEFAULTS.panelDerechoTexto}
+                {panelDerechoTexto}
               </p>
             </motion.div>
 

@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import SectionReveal from '../ui/SectionReveal'
-import { ArrowRight } from '@phosphor-icons/react'
-import { Colors, Type, DescriptionCSS } from '../../tokens'
+import { Colors } from '../../tokens'
 
 interface FinalCTAProps {
   ctaTitulo?: string
@@ -16,7 +15,7 @@ interface FinalCTAProps {
 
 const DEFAULTS = {
   ctaTitulo: '¡TERMINAR MIS MÓDULOS AHORA!',
-  ctaDescripcion: 'Solo te tomará unos minutos completar lo que empezaste. Tu próximo paso hacia el liderazgo portuario está a un clic de distancia.',
+  ctaDescripcion: 'Solo te tomará unos minutos completar lo que empezaste.',
   ctaButtonText: 'CONTINUAR EN LA PLATAFORMA',
   ctaButtonUrl: 'https://mxhutchisonports.csod.com/',
   sloganLinea1: 'NAVEGANDO JUNTOS DESDE LA',
@@ -25,16 +24,14 @@ const DEFAULTS = {
   sloganHighlight2: 'LIDERAZGO PROFESIONAL',
 }
 
-export default function FinalCTA({
-  ctaTitulo: _ctaTitulo,
-  ctaDescripcion,
-  ctaButtonText,
-  ctaButtonUrl,
-  sloganLinea1,
-  sloganHighlight1,
-  sloganLinea2,
-  sloganHighlight2,
-}: FinalCTAProps) {
+export default function FinalCTA(_props: FinalCTAProps) {
+  // CMS desconectado temporalmente — usar DEFAULTS hardcodeados
+  const ctaDescripcion = DEFAULTS.ctaDescripcion
+  const ctaButtonUrl = DEFAULTS.ctaButtonUrl
+  const sloganLinea1 = DEFAULTS.sloganLinea1
+  const sloganHighlight1 = DEFAULTS.sloganHighlight1
+  const sloganLinea2 = DEFAULTS.sloganLinea2
+  const sloganHighlight2 = DEFAULTS.sloganHighlight2
   return (
     <section className="relative overflow-hidden" style={{ display: 'flex', flexDirection: 'column' }}>
 
@@ -55,35 +52,29 @@ export default function FinalCTA({
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-16 md:py-24 text-center">
           <SectionReveal>
-            <h2 className="section-title mb-6">
+            <h2 className="section-title text-white mb-8 max-w-6xl mx-auto">
+              {ctaDescripcion}
+            </h2>
+            <a
+              href={ctaButtonUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-verlag uppercase inline-block transition-all duration-300 hover:scale-[1.04] active:scale-[0.97]"
+              aria-label="Terminar mis módulos ahora"
+              style={{
+                background: Colors.seaBlue100,
+                padding: 'clamp(12px, 1.4vw, 18px) clamp(20px, 2.6vw, 36px)',
+                borderRadius: '4px',
+                boxShadow: '0 8px 24px rgba(0,46,109,0.35)',
+                fontSize: 'clamp(0.9rem, 1.1vw, 1.05rem)',
+                letterSpacing: '0.06em',
+              }}
+            >
               <span style={{ color: '#FFFFFF' }}>¡</span>
               <span style={{ color: '#FFC627' }}>TERMINAR </span>
               <span style={{ color: '#FFFFFF' }}>MIS MÓDULOS </span>
               <span style={{ color: '#FFC627' }}>AHORA</span>
               <span style={{ color: '#FFFFFF' }}>!</span>
-            </h2>
-            <p className="text-white max-w-2xl mx-auto mb-14" style={DescriptionCSS.base}>
-              {ctaDescripcion ?? DEFAULTS.ctaDescripcion}
-            </p>
-          </SectionReveal>
-
-          <SectionReveal delay={0.2}>
-            <a
-              href={ctaButtonUrl ?? DEFAULTS.ctaButtonUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-4 text-white transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
-              style={{
-                fontFamily: 'Verlag Black, sans-serif',
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                fontSize: Type.button,
-                background: Colors.seaBlue100,
-                padding: '20px 48px',
-              }}
-            >
-              {ctaButtonText ?? DEFAULTS.ctaButtonText}
-              <ArrowRight size={22} weight="bold" />
             </a>
           </SectionReveal>
         </div>
@@ -91,59 +82,68 @@ export default function FinalCTA({
 
       <div
         className="relative w-full overflow-hidden"
-        style={{ minHeight: '100dvh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: Colors.seaBlue100 }}
+        style={{ backgroundColor: Colors.seaBlue100 }}
       >
-        <div className="absolute inset-0 z-0">
-          <img
-            src="/Hutchison-Ports-ICAVE-FinalCTA.jpg"
-            alt=""
-            className="w-full h-full object-cover object-center"
-            style={{ opacity: 0.15 }}
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 pt-16 md:pt-20 pb-10 flex flex-col items-center">
 
-        <motion.div
-          className="absolute top-0 left-0 right-0 z-20 pt-8 px-6 md:pt-12 md:px-16 lg:pt-14 lg:px-24 flex items-center justify-between"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ type: 'spring', stiffness: 65, damping: 18 }}
-        >
-          <motion.img
-            src="/webp/LogoInstitutoHP-blanco.webp"
-            alt="Instituto Hutchison Ports"
-            style={{ height: 'clamp(40px, 5vw, 60px)', width: 'auto' }}
-            loading="lazy"
-            decoding="async"
-            whileHover={{ y: -4, scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-          />
-          <motion.img
-            src="/webp/hports.webp"
-            alt="Hutchison Ports"
-            style={{ height: 'clamp(40px, 5vw, 60px)', width: 'auto' }}
-            loading="lazy"
-            decoding="async"
-            whileHover={{ y: -4, scale: 1.05 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-          />
-        </motion.div>
-
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 text-center">
           <motion.h2
-            className="section-title text-white"
-            style={{ fontSize: 'clamp(1.9rem, 5.5vw, 65px)', lineHeight: 1.15 }}
+            className="section-title text-white text-center mb-10 md:mb-14"
+            style={{ fontSize: 'clamp(1.1rem, 2.2vw, 1.8rem)', lineHeight: 1.25 }}
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ type: 'spring', stiffness: 65, damping: 18, delay: 0.15 }}
           >
-            {sloganLinea1 ?? DEFAULTS.sloganLinea1}<br />
-            <span className="text-sky-brand">{sloganHighlight1 ?? DEFAULTS.sloganHighlight1}</span><br />
-            {sloganLinea2 ?? DEFAULTS.sloganLinea2} <span className="text-sky-brand">{sloganHighlight2 ?? DEFAULTS.sloganHighlight2}</span>
+            {sloganLinea1}<br />
+            <span className="text-sky-brand">{sloganHighlight1}</span><br />
+            {sloganLinea2} <span className="text-sky-brand">{sloganHighlight2}</span>
           </motion.h2>
+
+          <motion.div
+            className="w-full flex flex-col md:flex-row items-center md:justify-between gap-6 md:gap-8 border-t border-white/10 pt-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ type: 'spring', stiffness: 65, damping: 18 }}
+          >
+            <motion.img
+              src="/webp/LogoInstitutoHP-blanco.webp"
+              alt="Instituto Hutchison Ports"
+              style={{ height: 'clamp(28px, 2.6vw, 36px)', width: 'auto' }}
+              loading="lazy"
+              decoding="async"
+              whileHover={{ y: -4, scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            />
+
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-6 text-center">
+              <p className="font-verlag uppercase text-white text-xs tracking-wider">
+                Contacto:
+              </p>
+              <a
+                href="mailto:instituto@hutchisonports.com.mx"
+                className="font-montserrat text-white text-xs transition-colors"
+              >
+                instituto@hutchisonports.com.mx
+              </a>
+              <a
+                href="tel:+522299852500,2569"
+                className="font-montserrat text-white text-xs transition-colors"
+              >
+                229 985 2500 ext. 2569
+              </a>
+            </div>
+
+            <motion.img
+              src="/webp/hports.webp"
+              alt="Hutchison Ports"
+              style={{ height: 'clamp(28px, 2.6vw, 36px)', width: 'auto' }}
+              loading="lazy"
+              decoding="async"
+              whileHover={{ y: -4, scale: 1.05 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            />
+          </motion.div>
         </div>
       </div>
     </section>

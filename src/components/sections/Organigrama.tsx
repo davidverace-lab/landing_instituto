@@ -19,7 +19,7 @@ const DEFAULTS = {
   titulo: 'CÓMO SE CONFORMA EL INSTITUTO HUTCHISON PORTS',
   topItem: {
     label: 'Consejo Directivo Hutchison Ports',
-    desc: 'Actúa como instancia de patrocinio, validación y legitimidad corporativa del Instituto, respaldando, validando y habilitando el proyecto a nivel Grupo.',
+    desc: 'Conformado por el Director Ejecutivo, Gerentes Generales y Gerentes Senior, actúa como órgano de Gobernanza y validación Institucional. Su función es ratificar la excelencia académica y asegurar la alineación estratégica de los programas formativos con los objetivos del Grupo.',
   },
   leftItem: {
     title: 'RECURSOS HUMANOS',
@@ -91,13 +91,14 @@ function Connector({ direction, inView: visible }: { direction: 'v' | 'h-left' |
   )
 }
 
-export default function Organigrama({ topItem, leftItem, rightItem, bottomItem }: OrganigramaProps) {
+export default function Organigrama(_props: OrganigramaProps) {
+  // CMS desconectado temporalmente — usar DEFAULTS hardcodeados
   const { ref: imgRef, inView: imgInView } = useInView()
 
-  const top = { ...DEFAULTS.topItem, ...topItem }
-  const left = { ...DEFAULTS.leftItem, ...leftItem }
-  const right = { ...DEFAULTS.rightItem, ...rightItem }
-  const bottom = { ...DEFAULTS.bottomItem, ...bottomItem }
+  const top = DEFAULTS.topItem
+  const left = DEFAULTS.leftItem
+  const right = DEFAULTS.rightItem
+  const bottom = DEFAULTS.bottomItem
 
   return (
     <section

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { DescriptionCSS } from '../../tokens'
+import { Type } from '../../tokens'
 
 interface HeroProps {
   title?: string
@@ -10,18 +10,18 @@ interface HeroProps {
 }
 
 const DEFAULTS = {
-  title: 'TU EVOLUCIÓN PROFESIONAL NO SE DETIENE.',
-  subtitle: '¡EL PRÓXIMO LÍDER PORTUARIO PUEDES SER TÚ!',
-  description: 'En el Instituto Hutchison Ports, navegamos juntos desde la cultura hasta el liderazgo de clase mundial.',
+  title: 'TU EVOLUCIÓN PROFESIONAL NO SE DETIENE. ¡EL PRÓXIMO LÍDER PORTUARIO PUEDES SER TÚ!',
+  subtitle: 'En el Instituto Hutchison Ports, navegamos juntos desde la cultura institucional hasta el liderazgo profesional.',
   buttonText: 'CONTINUAR MI FORMACIÓN AQUÍ',
   buttonUrl: 'https://mxhutchisonports.csod.com/',
 }
 
-export default function Hero({ title: _title, subtitle, description, buttonText, buttonUrl }: HeroProps) {
-  const s = subtitle ?? DEFAULTS.subtitle
-  const d = description ?? DEFAULTS.description
-  const b = buttonText ?? DEFAULTS.buttonText
-  const url = buttonUrl ?? DEFAULTS.buttonUrl
+export default function Hero(_props: HeroProps) {
+  // CMS desconectado temporalmente — usar DEFAULTS hardcodeados
+  const t = DEFAULTS.title
+  const s = DEFAULTS.subtitle
+  const b = DEFAULTS.buttonText
+  const url = DEFAULTS.buttonUrl
 
   return (
     <section className="relative min-h-[100dvh] flex flex-col overflow-hidden bg-navy-dark">
@@ -69,35 +69,25 @@ export default function Hero({ title: _title, subtitle, description, buttonText,
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', stiffness: 70, damping: 18, delay: 0.35 }}
-            className="section-title mb-4 md:mb-5"
-            style={{ fontSize: 'clamp(1.9rem, 5.5vw, 65px)', lineHeight: 1.15, color: '#FFFFFF' }}
+            className="font-verlag uppercase mb-4 md:mb-5"
+            style={{ fontSize: Type.h2, lineHeight: 1.05, letterSpacing: '-0.4px', color: '#FFFFFF' }}
           >
-            TU EVOLUCIÓN PROFESIONAL<br />NO SE DETIENE.
+            {t}
           </motion.h1>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', stiffness: 70, damping: 18, delay: 0.55 }}
-            className="mb-6 md:mb-7"
+            className="mb-10"
           >
             <p
-              className="text-white font-verlag font-bold uppercase"
-              style={{ fontSize: 'clamp(1rem, 2.8vw, 1.75rem)', lineHeight: 1.5, letterSpacing: '0.06em' }}
+              className="text-white mx-auto"
+              style={{ fontSize: 'clamp(1.2rem, 1.6vw, 1.55rem)', lineHeight: 1.65, letterSpacing: '0.01em', fontFamily: '"Montserrat", sans-serif', fontWeight: 400, maxWidth: '52ch', textWrap: 'balance' }}
             >
               {s}
             </p>
           </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.75 }}
-            className="text-white mb-10 mx-auto max-w-2xl"
-            style={DescriptionCSS.base}
-          >
-            {d}
-          </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

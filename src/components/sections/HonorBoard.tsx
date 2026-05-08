@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
-import { Type, DescriptionCSS } from '../../tokens'
+import { Type, DescriptionCSS, useBreakpoint } from '../../tokens'
 
 interface HonorBoardProps {
   titulo?: string
@@ -48,38 +48,50 @@ const UNITS: HonorUnit[] = [
 const DEFAULTS = {
   titulo: 'RECONOCEMOS TU EXCELENCIA',
   descripcion:
-    'El Cuadro de Honor es el reconocimiento más alto del Instituto Hutchison Ports. Los colaboradores que completan todos sus módulos con excelencia tienen un lugar reservado en esta distinción nacional.',
+    'En el Instituto Hutchison Ports, valoramos profundamente tu dedicación. El Cuadro de Honor distingue a los colaboradores que destacan por su desempeño académico y proactividad. ¡Su compromiso es una inspiración para toda nuestra comunidad!',
 }
 
-function HonorSlide({ unit }: { unit: HonorUnit }) {
+/* ------------------------------------------------------------------ */
+/* Slide                                                               */
+/* ------------------------------------------------------------------ */
+
+interface SlideProps {
+  unit: HonorUnit
+  /** Width the slide should occupy in viewport units. */
+  widthVw: number
+  /** Vertical paddings + max width tuned to the breakpoint. */
+  variant: 'desktop' | 'mobile'
+}
+
+function HonorSlide({ unit, widthVw, variant }: SlideProps) {
   const isDouble = unit.logos.length > 1
+  const isMobile = variant === 'mobile'
 
   return (
     <div
       className="shrink-0 flex items-center justify-center"
       style={{
-        width: '50vw',
+        width: `${widthVw}vw`,
         height: '100%',
-        paddingLeft: 'clamp(16px, 2.5vw, 48px)',
-        paddingRight: 'clamp(24px, 5vw, 80px)',
-        paddingTop: 'clamp(24px, 4vh, 56px)',
-        paddingBottom: 'clamp(24px, 4vh, 56px)',
+        paddingLeft: isMobile ? 'clamp(20px, 6vw, 40px)' : 'clamp(16px, 2.5vw, 48px)',
+        paddingRight: isMobile ? 'clamp(20px, 6vw, 40px)' : 'clamp(24px, 5vw, 80px)',
+        paddingTop: isMobile ? 'clamp(20px, 4vh, 36px)' : 'clamp(24px, 4vh, 56px)',
+        paddingBottom: isMobile ? 'clamp(28px, 6vh, 56px)' : 'clamp(24px, 4vh, 56px)',
       }}
     >
       <div
-        className="flex flex-col items-stretch"
+        className="flex flex-col items-center justify-center w-full"
         style={{
-          width: '100%',
-          maxWidth: 720,
-          height: '100%',
-          gap: 'clamp(14px, 2vh, 28px)',
+          maxWidth: isMobile ? 360 : 720,
+          height: isMobile ? 'auto' : '100%',
+          gap: isMobile ? 'clamp(10px, 2vh, 18px)' : 'clamp(14px, 2vh, 28px)',
         }}
       >
         <div
           className="grid grid-cols-3 w-full"
           style={{
-            gap: 'clamp(8px, 1vw, 16px)',
-            flex: '1 1 auto',
+            gap: isMobile ? 'clamp(6px, 1.5vw, 10px)' : 'clamp(8px, 1vw, 16px)',
+            flex: isMobile ? '0 0 auto' : '1 1 auto',
             minHeight: 0,
           }}
         >
@@ -90,7 +102,8 @@ function HonorSlide({ unit }: { unit: HonorUnit }) {
               style={{
                 background: 'rgba(255,255,255,0.04)',
                 boxShadow: '0 18px 40px -16px rgba(0,0,0,0.5)',
-                height: '100%',
+                aspectRatio: isMobile ? '3 / 4' : 'auto',
+                height: isMobile ? 'auto' : '100%',
               }}
             >
               <img
@@ -108,9 +121,9 @@ function HonorSlide({ unit }: { unit: HonorUnit }) {
         <div
           className="w-full flex items-center justify-center"
           style={{
-            paddingTop: 'clamp(8px, 1.4vh, 18px)',
-            paddingBottom: 'clamp(8px, 1.4vh, 18px)',
-            gap: isDouble ? 'clamp(28px, 4vw, 56px)' : 0,
+            paddingTop: isMobile ? '4px' : 'clamp(8px, 1.4vh, 18px)',
+            paddingBottom: isMobile ? '4px' : 'clamp(8px, 1.4vh, 18px)',
+            gap: isDouble ? (isMobile ? 'clamp(20px, 5vw, 36px)' : 'clamp(28px, 4vw, 56px)') : 0,
             flex: '0 0 auto',
           }}
         >
@@ -121,9 +134,13 @@ function HonorSlide({ unit }: { unit: HonorUnit }) {
               alt={unit.name}
               className="block select-none pointer-events-none"
               style={{
-                // Raster logos (e.g. hports.webp) carry transparent padding inside the bitmap,
-                // so we bump their height to match the visible footprint of the inline SVGs.
-                height: unit.preserveColor ? 'clamp(60px, 8vh, 110px)' : 'clamp(34px, 4.6vh, 64px)',
+                height: unit.preserveColor
+                  ? isMobile
+                    ? 'clamp(48px, 10vw, 72px)'
+                    : 'clamp(60px, 8vh, 110px)'
+                  : isMobile
+                    ? 'clamp(28px, 6vw, 44px)'
+                    : 'clamp(34px, 4.6vh, 64px)',
                 width: 'auto',
                 objectFit: 'contain',
                 filter: unit.preserveColor ? 'none' : 'brightness(0) invert(1)',
@@ -137,7 +154,11 @@ function HonorSlide({ unit }: { unit: HonorUnit }) {
   )
 }
 
-export default function HonorBoard({ titulo, descripcion }: HonorBoardProps) {
+/* ------------------------------------------------------------------ */
+/* Mobile layout: header fixed top, slides scroll horizontally below   */
+/* ------------------------------------------------------------------ */
+
+function HonorBoardMobile({ titulo, descripcion }: { titulo: string; descripcion: string }) {
   const wrapperRef = useRef<HTMLDivElement>(null)
 
   const { scrollYProgress } = useScroll({
@@ -153,26 +174,134 @@ export default function HonorBoard({ titulo, descripcion }: HonorBoardProps) {
 
   const total = UNITS.length
 
-  // Layout in scroll space:
-  //   panel 0: text (50vw)
-  //   panels 1..total: each unit slide (50vw each)
-  // Final state centers the LAST unit (TNG) in the viewport.
+  // On mobile each slide takes the full viewport width. Final state centers TNG (last slide).
+  // Track total width = total × 100vw. To leave the last slide centered, we translate by (total - 1) × 100vw.
+  const finalTranslateVw = (total - 1) * 100
+
+  const holdVH = 100
+  const horizontalVH = (total - 1) * 100
+  const pinnedDistanceVH = holdVH + horizontalVH
+  const sectionVH = 100 + pinnedDistanceVH
+  const HOLD_END = holdVH / pinnedDistanceVH
+
+  const trackTranslate = useTransform(
+    smoothProgress,
+    [0, HOLD_END, 1],
+    ['0vw', '0vw', `-${finalTranslateVw}vw`],
+  )
+
+  return (
+    <section
+      ref={wrapperRef}
+      className="relative"
+      style={{
+        backgroundColor: '#002E6D',
+        height: `${sectionVH}vh`,
+      }}
+      aria-label="Cuadro de Honor"
+    >
+      <div
+        className="sticky top-0 left-0 w-full overflow-hidden flex flex-col"
+        style={{ height: '100dvh' }}
+      >
+        {/* background */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/reconocemosfondo.png"
+            alt=""
+            className="w-full h-full object-cover object-center"
+            style={{ opacity: 0.12 }}
+            loading="lazy"
+            decoding="async"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(ellipse at 50% 0%, rgba(0,155,222,0.18) 0%, rgba(0,46,109,0) 60%)',
+            }}
+          />
+        </div>
+
+        {/* header — fixed, centered */}
+        <header
+          className="relative z-10 flex flex-col items-center text-center shrink-0"
+          style={{
+            paddingTop: 'clamp(24px, 6vh, 48px)',
+            paddingLeft: 'clamp(20px, 5vw, 32px)',
+            paddingRight: 'clamp(20px, 5vw, 32px)',
+            paddingBottom: 'clamp(12px, 2vh, 20px)',
+          }}
+        >
+          <h2
+            className="section-title text-white"
+            style={{
+              fontSize: 'clamp(1.6rem, 6vw, 2.2rem)',
+              lineHeight: 1.05,
+              marginBottom: 'clamp(10px, 1.6vh, 16px)',
+            }}
+          >
+            {titulo}
+          </h2>
+          <p
+            className="text-white"
+            style={{
+              ...DescriptionCSS.sm,
+              color: 'rgba(255,255,255,0.88)',
+              fontSize: 'clamp(0.95rem, 3.4vw, 1.05rem)',
+              maxWidth: '38ch',
+            }}
+          >
+            {descripcion}
+          </p>
+        </header>
+
+        {/* horizontal track — fills remaining space */}
+        <div className="relative z-10 flex-1 min-h-0 overflow-hidden">
+          <motion.div
+            className="flex h-full items-stretch will-change-transform"
+            style={{
+              width: `${total * 100}vw`,
+              x: trackTranslate,
+            }}
+          >
+            {UNITS.map((unit) => (
+              <HonorSlide key={unit.name} unit={unit} widthVw={100} variant="mobile" />
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Desktop layout: text + slides as a single horizontal track          */
+/* ------------------------------------------------------------------ */
+
+function HonorBoardDesktop({ titulo, descripcion }: { titulo: string; descripcion: string }) {
+  const wrapperRef = useRef<HTMLDivElement>(null)
+
+  const { scrollYProgress } = useScroll({
+    target: wrapperRef,
+    offset: ['start start', 'end end'],
+  })
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 28,
+    mass: 0.3,
+  })
+
+  const total = UNITS.length
   const finalTranslateVw = total * 50 - 25
 
-  // We split the pinned scroll distance into two phases:
-  //   1) Hold phase (1 viewport of vertical scroll, no horizontal motion) — gives the user
-  //      time to read text + CCI before the carousel kicks in.
-  //   2) Horizontal phase ((finalTranslateVw / 50) viewports of vertical scroll) — track moves
-  //      through all panels, ending with TNG centered.
-  // The pinned content sits inside a section whose height = viewport + holdVH + horizontalVH.
-  const holdVH = 100 // 1 viewport hold
+  const holdVH = 100
   const horizontalVH = (finalTranslateVw / 50) * 100
   const pinnedDistanceVH = holdVH + horizontalVH
   const sectionVH = 100 + pinnedDistanceVH
-
-  // scrollYProgress maps [0..1] across `pinnedDistanceVH` of vertical scroll.
-  // Hold phase ends at holdVH / pinnedDistanceVH.
   const HOLD_END = holdVH / pinnedDistanceVH
+
   const trackTranslate = useTransform(
     smoothProgress,
     [0, HOLD_END, 1],
@@ -233,21 +362,39 @@ export default function HonorBoard({ titulo, descripcion }: HonorBoardProps) {
               className="section-title text-white"
               style={{ fontSize: Type.h2, lineHeight: 1.05, marginBottom: 'clamp(16px, 2.4vh, 32px)' }}
             >
-              {titulo ?? DEFAULTS.titulo}
+              {titulo}
             </h2>
             <p
               className="text-white"
               style={{ ...DescriptionCSS.base, color: '#FFFFFF', maxWidth: '52ch' }}
             >
-              {descripcion ?? DEFAULTS.descripcion}
+              {descripcion}
             </p>
           </div>
 
           {UNITS.map((unit) => (
-            <HonorSlide key={unit.name} unit={unit} />
+            <HonorSlide key={unit.name} unit={unit} widthVw={50} variant="desktop" />
           ))}
         </motion.div>
       </div>
     </section>
+  )
+}
+
+/* ------------------------------------------------------------------ */
+/* Public component                                                    */
+/* ------------------------------------------------------------------ */
+
+export default function HonorBoard(_props: HonorBoardProps) {
+  // CMS desconectado temporalmente — usar DEFAULTS hardcodeados
+  const { isTablet } = useBreakpoint()
+  const t = DEFAULTS.titulo
+  const d = DEFAULTS.descripcion
+
+  // `isTablet` from tokens means width < 1024 — true for mobile + tablet.
+  return isTablet ? (
+    <HonorBoardMobile titulo={t} descripcion={d} />
+  ) : (
+    <HonorBoardDesktop titulo={t} descripcion={d} />
   )
 }

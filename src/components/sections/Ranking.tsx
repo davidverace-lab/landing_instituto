@@ -11,40 +11,45 @@ interface RankingProps {
 }
 
 const DEFAULT_DATA: ProgressChartItem[] = [
-  { name: 'CCI',           value: 21, color: Colors.skyBlue80,    logos: ['/logos/cci.svg'] },
-  { name: 'EIT + ECV',     value: 63, color: Colors.aquaGreen100, logos: ['/logos/eit.svg', '/logos/ecv.svg'] },
-  { name: 'HP LOGISTICS',  value: 67, color: Colors.seaBlue80,    logos: ['/logos/hp-logistics.svg'] },
-  { name: 'HP MÉXICO',     value: 66, color: Colors.sunrayYellow100, logos: ['/logos/hutchisonports.webp'] },
-  { name: 'ICAVE',         value: 90, color: Colors.sunsetOrange100, logos: ['/logos/icave.svg'] },
-  { name: 'LCMT + LCT',    value: 66, color: Colors.seaBlue100,   logos: ['/logos/lcmt.svg', '/logos/lct.svg'] },
-  { name: 'TILH',          value: 66, color: Colors.aquaGreen100, logos: ['/logos/tilh.svg'] },
-  { name: 'TIMSA',         value: 33, color: Colors.sunsetOrange100, logos: ['/logos/timsa.svg'] },
-  { name: 'TNG',           value: 94, color: Colors.skyBlue100,   logos: ['/logos/tng.svg'] },
+  { name: 'CCI',           value: 22, completados: 17,  total: 78,  color: Colors.skyBlue80,    logos: ['/logos/cci.svg'] },
+  { name: 'EIT + ECV',     value: 78, completados: 170, total: 219, color: Colors.aquaGreen100, logos: ['/logos/eit.svg', '/logos/ecv.svg'] },
+  { name: 'HP LOGISTICS',  value: 67, completados: 6,   total: 9,   color: Colors.seaBlue80,    logos: ['/logos/hp-logistics.svg'] },
+  { name: 'HP MÉXICO',     value: 68, completados: 96,  total: 141, color: Colors.sunrayYellow100, logos: ['/logos/hutchisonports.webp'] },
+  { name: 'ICAVE',         value: 85, completados: 311, total: 367, color: Colors.sunsetOrange100, logos: ['/logos/icave.svg'] },
+  { name: 'LCMT + LCT',    value: 78, completados: 170, total: 219, color: Colors.seaBlue100,   logos: ['/logos/lcmt.svg', '/logos/lct.svg'] },
+  { name: 'TILH',          value: 59, completados: 42,  total: 71,  color: Colors.aquaGreen100, logos: ['/logos/tilh.svg'] },
+  { name: 'TIMSA',         value: 83, completados: 157, total: 190, color: Colors.sunsetOrange100, logos: ['/logos/timsa.svg'] },
+  { name: 'TNG',           value: 94, completados: 124, total: 132, color: Colors.skyBlue100,   logos: ['/logos/tng.svg'] },
 ]
 
 const DEFAULTS = {
   titulo: 'EL PODER DE TU UNIDAD DE NEGOCIO',
-  descripcion: '¿Tu Unidad de Negocio está liderando el camino? Tu participación decide la posición de tu equipo en el ranking nacional. Cada módulo completado suma para llevar a tu terminal al primer lugar.',
   etiquetaGrafica: 'Avance por Unidad de Negocio',
 }
 
-export default function Ranking({ titulo: _titulo, descripcion, etiquetaGrafica, data }: RankingProps) {
+export default function Ranking(_props: RankingProps) {
+  // CMS desconectado temporalmente — usar DEFAULTS hardcodeados
+  const etiquetaGrafica = DEFAULTS.etiquetaGrafica
+  const data = DEFAULT_DATA
   return (
     <section
       className="relative overflow-hidden"
       style={{ backgroundColor: Colors.bgSurface }}
     >
       <div className="w-full max-w-7xl mx-auto px-6 md:px-8 lg:pl-8 lg:pr-20 py-16 md:py-24">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-12 lg:gap-12 items-center">
 
-          <div className="lg:pr-4">
+          <div className="lg:pr-2">
             <SectionReveal>
               <h2 className="section-title mb-8" style={{ lineHeight: 1.1, color: '#002E6D' }}>
                 <span style={{ display: 'block', whiteSpace: 'nowrap' }}>EL PODER DE TU</span>
                 <span style={{ display: 'block', whiteSpace: 'nowrap' }}>UNIDAD DE NEGOCIO</span>
               </h2>
-              <p style={{ ...DescriptionCSS.base, color: '#002E6D' }}>
-                {descripcion ?? DEFAULTS.descripcion}
+              <p style={{ ...DescriptionCSS.base, color: '#002E6D', textAlign: 'left', textWrap: 'pretty' as React.CSSProperties['textWrap'], margin: 0 }}>
+                Estamos en la recta final y el verdadero triunfo es <strong className="font-bold">llegar juntos a la meta.</strong> ¿Tu Unidad de Negocio está liderando el camino?
+              </p>
+              <p style={{ ...DescriptionCSS.base, color: '#002E6D', textAlign: 'left', textWrap: 'pretty' as React.CSSProperties['textWrap'], margin: 0 }}>
+                Tu compromiso individual es la fuerza que decide la posición de tu equipo en el ranking Hutchison Ports México. ¡Cada módulo finalizado suma poder a tu Terminal! Respalda a tus compañeros, completa tu etapa de Culturización y llevemos a tu equipo a la cima.
               </p>
             </SectionReveal>
           </div>
@@ -63,9 +68,9 @@ export default function Ranking({ titulo: _titulo, descripcion, etiquetaGrafica,
                 className="font-verlag uppercase tracking-wider mb-6"
                 style={{ fontSize: 'clamp(1rem, 1.4vw, 1.4rem)', color: '#002E6D', letterSpacing: '0.04em' }}
               >
-                {etiquetaGrafica ?? DEFAULTS.etiquetaGrafica}
+                {etiquetaGrafica}
               </p>
-              <ProgressChart data={data ?? DEFAULT_DATA} />
+              <ProgressChart data={data} />
             </motion.div>
           </SectionReveal>
 

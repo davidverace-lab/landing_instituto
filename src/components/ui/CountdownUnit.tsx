@@ -25,7 +25,6 @@ export default function CountdownUnit({ value, label, labelColor = 'text-sky-bra
         >
           {display}
         </span>
-        <div className="absolute inset-x-0 top-1/2 h-px bg-sky-brand/10" />
       </div>
       <span
         className={`mt-3 font-montserrat font-bold uppercase ${labelColor}`}
