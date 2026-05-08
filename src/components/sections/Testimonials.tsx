@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import SectionReveal from '../ui/SectionReveal'
 import { CaretLeft, CaretRight, Play, Pause } from '@phosphor-icons/react'
-import { Colors, DescriptionCSS } from '../../tokens'
+import { Colors } from '../../tokens'
 import type { SanityTestimonial } from '../../types/sanity'
 
 interface TestimonialsProps {
@@ -186,7 +186,7 @@ export default function Testimonials(_props: TestimonialsProps) {
   return (
     <section
       className="relative overflow-hidden"
-      style={{ backgroundColor: '#9ACAEB' }}
+      style={{ backgroundColor: '#B5D5EA' }}
     >
       <div className="absolute inset-0 z-0">
         <img
@@ -201,15 +201,18 @@ export default function Testimonials(_props: TestimonialsProps) {
       <div className="absolute top-0 right-0 w-80 h-80 opacity-5 pointer-events-none"
         style={{ background: `radial-gradient(circle, ${Colors.skyBlue100} 0%, transparent 70%)` }} />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:pl-8 lg:pr-20 py-20 md:py-28 lg:py-36">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-20 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:pl-16 lg:pr-12 py-20 md:py-28 lg:py-36">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-12 items-center">
 
           <SectionReveal>
-            <h2 className="section-title text-navy mb-6">
+            <h2 className="section-title text-navy mb-8 md:mb-10" style={{ textWrap: 'balance' as React.CSSProperties['textWrap'] }}>
               {titulo}
             </h2>
 
-            <div className="mb-6 md:mb-12 relative w-full" style={{ minHeight: 'clamp(180px, 26vh, 380px)' }}>
+            <div
+              className="mb-8 md:mb-10 relative w-full"
+              style={{ minHeight: 'clamp(220px, 28vh, 340px)' }}
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
@@ -219,13 +222,47 @@ export default function Testimonials(_props: TestimonialsProps) {
                   transition={{ duration: 0.35 }}
                   className="absolute inset-x-0 top-0"
                 >
-                  <p className="text-navy font-semibold mb-1" style={DescriptionCSS.sm}>
+                  <p
+                    className="text-navy text-left"
+                    style={{
+                      fontFamily: '"Montserrat", sans-serif',
+                      fontWeight: 700,
+                      fontSize: 'clamp(1.05rem, 1.4vw, 1.3rem)',
+                      lineHeight: 1.3,
+                      letterSpacing: '-0.005em',
+                      marginBottom: '4px',
+                      textWrap: 'wrap' as React.CSSProperties['textWrap'],
+                    }}
+                  >
                     {testimonials[active].name}
                   </p>
-                  <p className="text-navy mb-3" style={DescriptionCSS.sm}>
+                  <p
+                    className="text-navy text-left"
+                    style={{
+                      fontFamily: '"Montserrat", sans-serif',
+                      fontWeight: 500,
+                      fontSize: 'clamp(0.85rem, 1vw, 0.95rem)',
+                      lineHeight: 1.4,
+                      letterSpacing: '0.04em',
+                      textTransform: 'uppercase',
+                      opacity: 0.7,
+                      marginBottom: '20px',
+                      textWrap: 'wrap' as React.CSSProperties['textWrap'],
+                    }}
+                  >
                     {testimonials[active].bu}
                   </p>
-                  <p className="text-navy font-bold" style={{ ...DescriptionCSS.sm, fontSize: 'clamp(0.95rem, 1.15vw, 1.1rem)' }}>
+                  <p
+                    className="text-navy text-left"
+                    style={{
+                      fontFamily: '"Montserrat", sans-serif',
+                      fontWeight: 500,
+                      fontSize: 'clamp(0.95rem, 1.1vw, 1.1rem)',
+                      lineHeight: 1.55,
+                      letterSpacing: '0.005em',
+                      textWrap: 'wrap' as React.CSSProperties['textWrap'],
+                    }}
+                  >
                     "{testimonials[active].quote}"
                   </p>
                 </motion.div>
@@ -268,7 +305,7 @@ export default function Testimonials(_props: TestimonialsProps) {
             </div>
           </SectionReveal>
 
-          <div className="flex justify-center lg:justify-end">
+          <div className="flex justify-center lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-32 xl:translate-x-40">
             <div className="flex items-center gap-3">
 
               <div className="hidden md:block">
