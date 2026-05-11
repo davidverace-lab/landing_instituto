@@ -118,8 +118,7 @@ export default function Challenge(_props: ChallengeProps) {
                   <span className="text-sky-brand font-semibold">{currentGraduados.toLocaleString()}</span>{' '}
                   graduados.
                   <br />
-                  Solo faltas tú para alcanzar los{' '}
-                  <span className="text-white font-bold">{target.toLocaleString()}</span>.
+                  Tu avance es el motor que nos llevará a este hito histórico.
                 </p>
               </div>
 

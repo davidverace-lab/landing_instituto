@@ -68,7 +68,7 @@ function HonorSlideCard({ unit }: { unit: HonorUnit }) {
           gap: 'clamp(8px, 1vw, 16px)',
         }}
       >
-        {unit.photos.map((src, i) => (
+        {['/proximamente 1.jpg', '/proximamente.jpg', '/proximamente 1.jpg'].map((src, i) => (
           <div
             key={`${unit.name}-${i}`}
             className="relative overflow-hidden rounded-2xl"
@@ -80,7 +80,7 @@ function HonorSlideCard({ unit }: { unit: HonorUnit }) {
           >
             <img
               src={src}
-              alt={`Colaborador ${unit.name}`}
+              alt="Próximamente"
               className="w-full h-full object-cover object-center"
               loading="lazy"
               decoding="async"

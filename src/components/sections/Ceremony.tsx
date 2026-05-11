@@ -19,7 +19,7 @@ const DEFAULTS = {
   etiquetaFecha: 'Fecha',
   fecha: 'JULIO 2026',
   videoLabel: 'Video Teaser',
-  videoSubLabel: 'Ceremonia de Clausura 2025',
+  videoSubLabel: 'Ceremonia de Clausura 2026',
 }
 
 export default function Ceremony(_props: CeremonyProps) {
