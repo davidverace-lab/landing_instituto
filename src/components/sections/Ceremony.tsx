@@ -102,7 +102,7 @@ export default function Ceremony(_props: CeremonyProps) {
                 ref={videoRef}
                 onClick={togglePlay}
                 className="absolute inset-0 w-full h-full object-cover cursor-pointer"
-                poster="/Teaser1-poster.jpg"
+                poster="/Teaser1-poster.webp"
                 playsInline
                 preload="metadata"
                 controls={playing}

@@ -41,7 +41,7 @@ export default function FinalCTA(_props: FinalCTAProps) {
       >
         <div className="absolute inset-0 z-0 overflow-hidden">
           <img
-            src="/fondocompleta.jpeg"
+            src="/fondocompleta.webp"
             alt=""
             className="w-full h-full object-cover object-center"
             style={{ opacity: 0.15 }}

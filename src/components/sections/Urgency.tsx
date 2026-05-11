@@ -42,7 +42,7 @@ export default function Urgency(_props: UrgencyProps) {
       {/* Foto de fondo sutil */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/fondotiempo.jpg"
+          src="/fondotiempo.webp"
           alt=""
           className="w-full h-full object-cover"
           style={{ opacity: 0.18, objectPosition: 'center 90%' }}

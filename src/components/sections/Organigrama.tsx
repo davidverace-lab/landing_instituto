@@ -107,7 +107,7 @@ export default function Organigrama(_props: OrganigramaProps) {
     >
       <div className="absolute inset-0 z-0">
         <img
-          src="/fondorganigrama.jpg"
+          src="/fondorganigrama.webp"
           alt=""
           className="w-full h-full object-cover object-center"
           style={{ opacity: 0.12 }}

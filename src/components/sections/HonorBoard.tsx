@@ -68,7 +68,7 @@ function HonorSlideCard({ unit }: { unit: HonorUnit }) {
           gap: 'clamp(8px, 1vw, 16px)',
         }}
       >
-        {['/proximamente 1.jpg', '/proximamente.jpg', '/proximamente 1.jpg'].map((src, i) => (
+        {['/proximamente 1.webp', '/proximamente.webp', '/proximamente 1.webp'].map((src, i) => (
           <div
             key={`${unit.name}-${i}`}
             className="relative overflow-hidden rounded-2xl"

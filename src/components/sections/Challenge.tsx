@@ -31,7 +31,7 @@ export default function Challenge(_props: ChallengeProps) {
       {/* Imagen de fondo compartida */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/Terminal.jpg"
+          src="/Terminal.webp"
           alt=""
           className="w-full h-full object-cover object-center"
           style={{ opacity: 0.22 }}
