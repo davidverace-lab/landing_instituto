@@ -52,7 +52,8 @@
       "PowerShell(Get-Content *)",
       "PowerShell(node -e \"const sharp=require\\('sharp'\\);sharp\\('public/ICAVE CO - 135.jpeg'\\).rotate\\(\\).resize\\({width:1600,withoutEnlargement:true}\\).webp\\({quality:82}\\).toFile\\('public/webp/ICAVE-CO-135.webp'\\).then\\(i=>console.log\\('OK',i.size\\)\\).catch\\(e=>{console.error\\(e\\);process.exit\\(1\\)}\\)\")",
       "Bash(git check-ignore *)",
-      "PowerShell($ffprobe = \"C:\\\\Users\\\\david\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-8.1.1-full_build\\\\bin\\\\ffprobe.exe\"; & $ffprobe -v error -show_entries stream=index,codec_type,codec_name,channels,sample_rate -of default=noprint_wrappers=1 \"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\public\\\\Teaser1.mp4\")"
+      "PowerShell($ffprobe = \"C:\\\\Users\\\\david\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\ffmpeg-8.1.1-full_build\\\\bin\\\\ffprobe.exe\"; & $ffprobe -v error -show_entries stream=index,codec_type,codec_name,channels,sample_rate -of default=noprint_wrappers=1 \"C:\\\\Users\\\\david\\\\Documents\\\\landinginstituto\\\\public\\\\Teaser1.mp4\")",
+      "Bash(identify public/logos/hutchisonports.webp)"
     ]
   }
 }

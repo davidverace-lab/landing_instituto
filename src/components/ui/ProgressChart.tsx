@@ -65,7 +65,7 @@ export default function ProgressChart({
           <div
             key={item.name}
             className="row grid items-center cursor-pointer"
-            style={{ gridTemplateColumns: 'clamp(96px, 22vw, 220px) 1fr', columnGap: 8 }}
+            style={{ gridTemplateColumns: 'var(--logo-col, clamp(96px, 22vw, 220px)) 1fr', columnGap: 8 }}
             onMouseMove={(e) => handleMouseMove(e, idx)}
             onMouseLeave={handleMouseLeave}
             onTouchStart={(e) => {
@@ -88,23 +88,13 @@ export default function ProgressChart({
                   aria-label={item.name}
                 >
                   {item.logos.map((logo, i) => (
-                    <div
+                    <img
                       key={`${item.name}-slot-${i}`}
-                      className="logo-container flex items-center min-w-0"
-                      style={{ height: 26 }}
-                    >
-                      <img
-                        src={logo}
-                        alt={item.name}
-                        className="block select-none pointer-events-none max-w-full"
-                        style={{
-                          height: '100%',
-                          width: 'auto',
-                          objectFit: 'contain',
-                        }}
-                        draggable={false}
-                      />
-                    </div>
+                      src={logo}
+                      alt={item.name}
+                      className="logo-img block select-none pointer-events-none"
+                      draggable={false}
+                    />
                   ))}
                 </motion.div>
               ) : (

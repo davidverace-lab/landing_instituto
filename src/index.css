@@ -174,12 +174,102 @@
 }
 
 /* HonorBoard carousel — altura responsiva.
-   Mobile: compacto y cercano a controles. Desktop: altura amplia. */
+   Mobile: compacto y cercano a controles. Desktop: altura amplia.
+   Los logos escalan proporcionalmente al ancho del propio carousel
+   (container query) para mantener la misma proporción visual que en web
+   en cualquier dimensión (móvil, foldable, tablet, desktop). */
 .honor-carousel {
-  height: clamp(280px, 50vh, 360px);
+  height: clamp(200px, 42vh, 320px);
+  container-type: inline-size;
+  container-name: honor;
+}
+.honor-logos {
+  /* Proporcional al ancho del carousel: en desktop (640px) → ~58px y ~90px,
+     idéntico al diseño original. En móvil escala a la baja sin pegarse a vh. */
+  --logo-h: clamp(28px, 9cqw, 58px);
+  --logo-h-lg: clamp(44px, 14cqw, 90px);
+  --logo-gap: clamp(20px, 7cqw, 48px);
+  padding-top: clamp(8px, 2cqw, 16px);
+}
+/* Fallback para navegadores sin soporte de container queries */
+@supports not (container-type: inline-size) {
+  .honor-logos {
+    --logo-h: clamp(32px, 4vw, 56px);
+    --logo-h-lg: clamp(48px, 6vw, 88px);
+    --logo-gap: clamp(24px, 4vw, 48px);
+  }
+}
+/* Foldables (Z Fold cerrado: 280-360px ancho) */
+@media (max-width: 380px) {
+  .honor-carousel {
+    height: clamp(180px, 38vh, 240px);
+  }
 }
 @media (min-width: 768px) {
   .honor-carousel {
     height: clamp(360px, 56vh, 560px);
+  }
+  .honor-carousel-mask {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+  }
+}
+
+/* ProgressChart — logos por unidad de negocio.
+   Regla: TODOS los logos comparten la misma altura. La columna del grid
+   se dimensiona al ancho del logo más grande (CCI/HP-Logistics ratio 7.4
+   y los dobles con su gap). La barra se adapta a lo que quede.
+   Altura en px (no 100%) para fix de iOS Safari. */
+.logo-img {
+  height: 26px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* Mobile (≤768px): altura uniforme 18px → ancho máximo ≈18×7.4 = 133px
+   para CCI/HP-Logistics, y 18+18+8 = 44px... no, los dobles a 18px de alto
+   miden 18×3.78 + 8 + 18×3.78 ≈ 144px. Reservamos 150px de columna. */
+@media (max-width: 768px) {
+  .row {
+    --logo-col: 150px;
+  }
+  .logo-img {
+    height: 18px;
+  }
+}
+
+/* Foldables / iPhone SE (≤380px): bajamos a 16px y columna 130px. */
+@media (max-width: 380px) {
+  .row {
+    --logo-col: 130px;
+  }
+  .logo-img {
+    height: 16px;
+  }
+}
+
+/* Testimonials — contenedor del texto.
+   Mobile: crece con el contenido (relative + flow normal) para que citas
+   largas como la de Jafet Salas no se solapen con los botones del carousel.
+   Desktop: altura mínima fija + slide en absolute para evitar saltos al
+   cambiar de testimonio. */
+.testimonial-text-wrap {
+  /* default mobile: sin minHeight, contenedor crece naturalmente */
+}
+.testimonial-text-inner {
+  position: relative;
+  inset: auto;
+}
+@media (min-width: 1024px) {
+  .testimonial-text-wrap {
+    min-height: clamp(220px, 30vh, 340px);
+  }
+  .testimonial-text-inner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
   }
 }

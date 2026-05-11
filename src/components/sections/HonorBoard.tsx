@@ -91,10 +91,9 @@ function HonorSlideCard({ unit }: { unit: HonorUnit }) {
       </div>
 
       <div
-        className="w-full flex items-center justify-center"
+        className="honor-logos w-full flex items-center justify-center"
         style={{
-          paddingTop: 'clamp(8px, 1.4vh, 16px)',
-          gap: isDouble ? 'clamp(24px, 4vw, 48px)' : 0,
+          gap: isDouble ? 'var(--logo-gap)' : 0,
         }}
       >
         {unit.logos.map((logo, i) => (
@@ -105,9 +104,10 @@ function HonorSlideCard({ unit }: { unit: HonorUnit }) {
             className="block select-none pointer-events-none"
             style={{
               height: unit.preserveColor
-                ? 'clamp(48px, 6vw, 88px)'
-                : 'clamp(32px, 4vw, 56px)',
+                ? 'var(--logo-h-lg)'
+                : 'var(--logo-h)',
               width: 'auto',
+              maxWidth: '100%',
               objectFit: 'contain',
               filter: unit.preserveColor ? 'none' : 'brightness(0) invert(1)',
             }}
@@ -188,20 +188,20 @@ export default function HonorBoard(_props: HonorBoardProps) {
         />
       </div>
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-20 py-8 md:py-24 lg:py-28">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-4 md:gap-14 lg:gap-16 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-20 py-10 md:py-24 lg:py-28">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-5 sm:gap-6 md:gap-14 lg:gap-16 items-center">
 
           {/* Header */}
           <div className="text-center lg:text-left">
             <h2
-              className="section-title text-white mb-5 md:mb-6"
+              className="section-title text-white mb-3 md:mb-6"
               style={{ fontSize: Type.h2, lineHeight: 1.05, textWrap: 'balance' as React.CSSProperties['textWrap'] }}
             >
               {titulo}
             </h2>
             <p
               className="text-white mx-auto lg:mx-0"
-              style={{ ...DescriptionCSS.base, color: '#FFFFFF', maxWidth: '52ch', marginBottom: '1rem' }}
+              style={{ ...DescriptionCSS.base, color: '#FFFFFF', maxWidth: '52ch', marginBottom: '0.75rem' }}
             >
               {descripcion}
             </p>
@@ -213,17 +213,17 @@ export default function HonorBoard(_props: HonorBoardProps) {
             </p>
 
             {/* Controles */}
-            <div className="mt-4 md:mt-10 flex items-center justify-center lg:justify-start gap-4 md:gap-6 flex-wrap">
+            <div className="mt-5 md:mt-10 flex items-center justify-center lg:justify-start gap-3 md:gap-6 flex-wrap">
               <motion.button
                 onClick={handlePrev}
-                className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center shrink-0"
+                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center shrink-0"
                 style={{ border: '2px solid #FFFFFF', background: 'transparent' }}
                 whileHover={{ backgroundColor: Colors.skyBlue100, borderColor: Colors.skyBlue100, scale: 1.08 }}
                 whileTap={{ scale: 0.93 }}
                 transition={{ duration: 0.18 }}
                 aria-label="Unidad anterior"
               >
-                <CaretLeft size={24} color="#FFFFFF" weight="bold" />
+                <CaretLeft size={22} color="#FFFFFF" weight="bold" />
               </motion.button>
 
               <div className="flex items-center gap-2">
@@ -247,27 +247,23 @@ export default function HonorBoard(_props: HonorBoardProps) {
 
               <motion.button
                 onClick={handleNext}
-                className="w-12 h-12 md:w-14 md:h-14 flex items-center justify-center shrink-0"
+                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center shrink-0"
                 style={{ border: '2px solid #FFFFFF', background: 'transparent' }}
                 whileHover={{ backgroundColor: Colors.skyBlue100, borderColor: Colors.skyBlue100, scale: 1.08 }}
                 whileTap={{ scale: 0.93 }}
                 transition={{ duration: 0.18 }}
                 aria-label="Siguiente unidad"
               >
-                <CaretRight size={24} color="#FFFFFF" weight="bold" />
+                <CaretRight size={22} color="#FFFFFF" weight="bold" />
               </motion.button>
             </div>
           </div>
 
           {/* Carousel — transición vertical: sube hacia arriba, entra desde abajo */}
           <div
-            className="honor-carousel relative w-full mx-auto overflow-hidden"
+            className="honor-carousel relative w-full mx-auto overflow-hidden honor-carousel-mask"
             style={{
               maxWidth: 'min(640px, 100%)',
-              WebkitMaskImage:
-                'linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)',
-              maskImage:
-                'linear-gradient(to bottom, transparent 0%, black 14%, black 86%, transparent 100%)',
             }}
           >
             <AnimatePresence initial={false} custom={direction} mode="popLayout">

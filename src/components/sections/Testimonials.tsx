@@ -201,18 +201,15 @@ export default function Testimonials(_props: TestimonialsProps) {
       <div className="absolute top-0 right-0 w-80 h-80 opacity-5 pointer-events-none"
         style={{ background: `radial-gradient(circle, ${Colors.skyBlue100} 0%, transparent 70%)` }} />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:pl-16 lg:pr-12 py-20 md:py-28 lg:py-36">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-12 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:pl-16 lg:pr-12 py-10 md:py-20 lg:py-36">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 md:gap-10 lg:gap-12 items-center">
 
           <SectionReveal>
-            <h2 className="section-title text-navy mb-8 md:mb-10" style={{ textWrap: 'balance' as React.CSSProperties['textWrap'] }}>
+            <h2 className="section-title text-navy mb-4 md:mb-8 lg:mb-10" style={{ textWrap: 'balance' as React.CSSProperties['textWrap'] }}>
               {titulo}
             </h2>
 
-            <div
-              className="mb-8 md:mb-10 relative w-full"
-              style={{ minHeight: 'clamp(220px, 28vh, 340px)' }}
-            >
+            <div className="testimonial-text-wrap mb-4 sm:mb-5 md:mb-8 lg:mb-10 relative w-full">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
@@ -220,7 +217,7 @@ export default function Testimonials(_props: TestimonialsProps) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -12 }}
                   transition={{ duration: 0.35 }}
-                  className="absolute inset-x-0 top-0"
+                  className="testimonial-text-inner"
                 >
                   <p
                     className="text-navy text-left"
@@ -269,15 +266,15 @@ export default function Testimonials(_props: TestimonialsProps) {
               </AnimatePresence>
             </div>
 
-            <div className="flex items-center justify-center lg:justify-start gap-4 md:gap-6 flex-wrap">
+            <div className="flex items-center justify-center lg:justify-start gap-3 sm:gap-4 md:gap-6 flex-wrap">
               <motion.button onClick={handlePrev}
-                className="w-14 h-14 flex items-center justify-center shrink-0"
+                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center shrink-0"
                 style={{ border: '2px solid #FFFFFF', background: 'transparent' }}
                 whileHover={{ backgroundColor: Colors.skyBlue100, borderColor: Colors.skyBlue100, scale: 1.08 }}
                 whileTap={{ scale: 0.93 }}
                 transition={{ duration: 0.18 }}
                 aria-label="Anterior">
-                <CaretLeft size={26} color="#FFFFFF" weight="bold" />
+                <CaretLeft size={22} color="#FFFFFF" weight="bold" />
               </motion.button>
 
               <div className="flex items-center gap-2">
@@ -285,7 +282,7 @@ export default function Testimonials(_props: TestimonialsProps) {
                   <button key={i} onClick={() => { goTo(i, i > active ? 1 : -1); resetInterval() }}
                     aria-label={`Testimonio ${i + 1}`}>
                     <motion.div
-                      animate={{ width: i === active ? 28 : 12, backgroundColor: i === active ? Colors.skyBlue100 : 'rgba(255,255,255,0.2)' }}
+                      animate={{ width: i === active ? 24 : 10, backgroundColor: i === active ? Colors.skyBlue100 : 'rgba(255,255,255,0.2)' }}
                       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                       style={{ height: '3px' }}
                     />
@@ -294,13 +291,13 @@ export default function Testimonials(_props: TestimonialsProps) {
               </div>
 
               <motion.button onClick={handleNext}
-                className="w-14 h-14 flex items-center justify-center shrink-0"
+                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center shrink-0"
                 style={{ border: '2px solid #FFFFFF', background: 'transparent' }}
                 whileHover={{ backgroundColor: Colors.skyBlue100, borderColor: Colors.skyBlue100, scale: 1.08 }}
                 whileTap={{ scale: 0.93 }}
                 transition={{ duration: 0.18 }}
                 aria-label="Siguiente">
-                <CaretRight size={26} color="#FFFFFF" weight="bold" />
+                <CaretRight size={22} color="#FFFFFF" weight="bold" />
               </motion.button>
             </div>
           </SectionReveal>
@@ -315,8 +312,8 @@ export default function Testimonials(_props: TestimonialsProps) {
               <div
                 className="relative shrink-0"
                 style={{
-                  width: 'min(360px, 82vw)',
-                  height: 'clamp(360px, 70vw, 460px)',
+                  width: 'min(360px, 88vw)',
+                  height: 'clamp(240px, 78vw, 460px)',
                 }}
               >
                 <AnimatePresence initial={false} custom={direction} mode="popLayout">
