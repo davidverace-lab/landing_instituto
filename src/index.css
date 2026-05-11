@@ -251,25 +251,32 @@
 }
 
 /* Testimonials — contenedor del texto.
-   Mobile: crece con el contenido (relative + flow normal) para que citas
-   largas como la de Jafet Salas no se solapen con los botones del carousel.
-   Desktop: altura mínima fija + slide en absolute para evitar saltos al
-   cambiar de testimonio. */
+   Altura fija basada en el testimonio más largo para evitar que el
+   contenedor "salte" al cambiar de slide. Slides en absolute para que la
+   transición no afecte la altura.
+   Tuneado para iPhone estándar (~390px) con la cita más larga de Jafet
+   Salas Díaz (~340 caracteres). */
 .testimonial-text-wrap {
-  /* default mobile: sin minHeight, contenedor crece naturalmente */
+  min-height: 420px;
 }
 .testimonial-text-inner {
-  position: relative;
-  inset: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+@media (min-width: 380px) {
+  .testimonial-text-wrap {
+    min-height: 400px;
+  }
+}
+@media (min-width: 640px) {
+  .testimonial-text-wrap {
+    min-height: 320px;
+  }
 }
 @media (min-width: 1024px) {
   .testimonial-text-wrap {
     min-height: clamp(220px, 30vh, 340px);
-  }
-  .testimonial-text-inner {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
   }
 }
