@@ -259,7 +259,7 @@ export default function Testimonials(_props: TestimonialsProps) {
           </div>
 
           {/* Foto */}
-          <div className="flex justify-center mt-4">
+          <div className="flex justify-center mt-1">
             <div
               className="relative shrink-0 overflow-hidden rounded-2xl"
               style={{ width: 'min(300px, 80vw)', height: 'clamp(180px, 55vw, 320px)' }}
