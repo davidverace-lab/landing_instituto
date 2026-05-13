@@ -56,7 +56,12 @@
       "Bash(identify public/logos/hutchisonports.webp)",
       "Bash(where ffmpeg *)",
       "Bash(where cwebp *)",
-      "Bash(awk '{print $9, $5}')"
+      "Bash(awk '{print $9, $5}')",
+      "Bash(ren \"Hector Raul Acosta Ponce.png\" \"hector-raul-acosta-ponce.png\")",
+      "Bash(ren \"Jafet salas.png\" \"jafet-salas.png\")",
+      "Bash(ren \"Jaime Ortiz Sosa.png\" \"jaime-ortiz-sosa.png\")",
+      "Bash(ren \"Lucila Mora.png\" \"lucila-mora.png\")",
+      "Bash(ren \"Susana Aguileta.png\" \"susana-aguileta.png\")"
     ]
   }
 }

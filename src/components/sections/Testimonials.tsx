@@ -28,7 +28,7 @@ const DEFAULT_TESTIMONIALS: TestimonialVideo[] = [
     bu: 'TIMSA',
     quote: 'Formar parte del Instituto me ha permitido conocer a mayor detalle la filosofía del grupo, su historia, visión estratégica actual y planes a futuro. Todo ello sin duda suma al fortalecimiento de las competencias de cada uno de los que conformamos Hutchison Ports.',
     videoSrc: '',
-    poster: '/webp/Hector Raul Acosta Ponce.png',
+    poster: '/webp/hector-raul-acosta-ponce.png',
   },
   {
     name: 'Jafet Salas Díaz',
@@ -36,7 +36,7 @@ const DEFAULT_TESTIMONIALS: TestimonialVideo[] = [
     bu: 'ICAVE',
     quote: 'Me ha reforzado los conocimientos generales, adquiriendo una comprensión global sobre todas las áreas de la organización, objetivos comunes y un funcionamiento más efectivo, siendo una experiencia útil para sentirme identificado con la empresa y comprender de manera general cómo contribuye mi trabajo a los objetivos del grupo.',
     videoSrc: '',
-    poster: '/webp/Jafet salas.png',
+    poster: '/webp/jafet-salas.png',
   },
   {
     name: 'Jaime Ortiz Sosa',
@@ -44,7 +44,7 @@ const DEFAULT_TESTIMONIALS: TestimonialVideo[] = [
     bu: 'Container Care',
     quote: 'Formar parte del Instituto Hutchison Ports ha sido una gran oportunidad de crecimiento personal y profesional, comprendiendo el valor de cada departamento, ya que todos contribuyen al éxito del Grupo.',
     videoSrc: '',
-    poster: '/webp/Jaime Ortiz Sosa.png',
+    poster: '/webp/jaime-ortiz-sosa.png',
   },
   {
     name: 'Lucila del Carmen Mora Bravo',
@@ -52,7 +52,7 @@ const DEFAULT_TESTIMONIALS: TestimonialVideo[] = [
     bu: 'Corporativo Hutchison Ports',
     quote: 'El Instituto Hutchison Ports ha representado una gran experiencia de vanguardia tecnológica aplicada a la capacitación. Es una plataforma muy enriquecedora que contempla todos los procesos y aristas que nos permite que la operación se lleve a cabo de manera eficiente en tiempo y forma.',
     videoSrc: '',
-    poster: '/webp/Lucila Mora.png',
+    poster: '/webp/lucila-mora.png',
   },
   {
     name: 'María Susana Aguileta Roquet',
@@ -60,7 +60,7 @@ const DEFAULT_TESTIMONIALS: TestimonialVideo[] = [
     bu: 'TNG',
     quote: 'Aprendí sobre la Filosofía del Grupo, las Operaciones Portuarias, la seguridad de las mismas, la sostenibilidad y demás temas clave que fortalecen y exhortan el trabajo en equipo. Sin duda esta experiencia me ha inspirado a seguir creciendo y a continuar aportando lo mejor de mi en Hutchison Ports.',
     videoSrc: '',
-    poster: '/webp/Susana Aguileta.png',
+    poster: '/webp/susana-aguileta.png',
   },
 ]
 
