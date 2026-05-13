@@ -264,7 +264,7 @@ export default function Testimonials(_props: TestimonialsProps) {
               className="relative shrink-0 overflow-hidden rounded-2xl"
               style={{ width: 'min(300px, 80vw)', height: 'clamp(180px, 55vw, 320px)' }}
             >
-              <AnimatePresence initial={false} custom={direction} mode="wait">
+              <AnimatePresence initial={false} custom={direction} mode="sync">
                 <motion.div
                   key={active}
                   custom={direction}
