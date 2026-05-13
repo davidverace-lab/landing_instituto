@@ -11,7 +11,7 @@ interface ChallengeProps {
 }
 
 const DEFAULTS = {
-  graduadosActuales: 1153,
+  graduadosActuales: 1212,
   meta: 1510,
   tituloIzquierda: 'NAVEGANDO HACIA LA EXCELENCIA',
 }
