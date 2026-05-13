@@ -261,10 +261,10 @@ export default function Testimonials(_props: TestimonialsProps) {
           {/* Foto */}
           <div className="flex justify-center mt-4">
             <div
-              className="relative shrink-0"
+              className="relative shrink-0 overflow-hidden rounded-2xl"
               style={{ width: 'min(300px, 80vw)', height: 'clamp(180px, 55vw, 320px)' }}
             >
-              <AnimatePresence initial={false} custom={direction} mode="popLayout">
+              <AnimatePresence initial={false} custom={direction} mode="wait">
                 <motion.div
                   key={active}
                   custom={direction}
