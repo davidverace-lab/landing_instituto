@@ -201,15 +201,133 @@ export default function Testimonials(_props: TestimonialsProps) {
       <div className="absolute top-0 right-0 w-80 h-80 opacity-5 pointer-events-none"
         style={{ background: `radial-gradient(circle, ${Colors.skyBlue100} 0%, transparent 70%)` }} />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:pl-16 lg:pr-12 py-10 md:py-20 lg:py-36">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 md:gap-10 lg:gap-12 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:pl-16 lg:pr-12 py-6 sm:py-8 md:py-20 lg:py-36">
 
-          <SectionReveal>
-            <h2 className="section-title text-navy mb-4 md:mb-8 lg:mb-10" style={{ textWrap: 'balance' as React.CSSProperties['textWrap'] }}>
+        {/* ── MÓVIL: texto arriba (altura fija) + foto abajo ── */}
+        <div className="flex flex-col gap-3 lg:hidden">
+
+          {/* Texto — contenedor con altura fija: todos los items apilados invisibles para que ocupe el más largo */}
+          <div className="w-full">
+            <h2 className="section-title text-navy mb-2" style={{ textWrap: 'balance' as React.CSSProperties['textWrap'] }}>
               {titulo}
             </h2>
 
-            <div className="testimonial-text-wrap mb-4 sm:mb-5 md:mb-8 lg:mb-10 relative w-full">
+            {/* Contenedor con altura determinada por el testimonio más largo */}
+            <div className="relative w-full" style={{ paddingBottom: '2.5rem' }}>
+              {/* Items invisibles para fijar la altura al más largo */}
+              {testimonials.map((t, i) => (
+                <div
+                  key={i}
+                  aria-hidden="true"
+                  style={{ visibility: 'hidden', position: i === 0 ? 'relative' : 'absolute', top: 0, left: 0, width: '100%', pointerEvents: 'none' }}
+                >
+                  <p style={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 700, fontSize: '1.05rem', lineHeight: 1.3, marginBottom: '4px' }}>
+                    {t.name}
+                  </p>
+                  <p style={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 500, fontSize: '0.8rem', letterSpacing: '0.04em', textTransform: 'uppercase', marginBottom: '12px' }}>
+                    {t.bu}
+                  </p>
+                  <p style={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 500, fontSize: '0.9rem', lineHeight: 1.55 }}>
+                    "{t.quote}"
+                  </p>
+                </div>
+              ))}
+
+              {/* Texto visible animado encima */}
+              <div className="absolute inset-0">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={active}
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    transition={{ duration: 0.35 }}
+                  >
+                    <p style={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 700, fontSize: '1.05rem', lineHeight: 1.3, marginBottom: '4px' }} className="text-navy">
+                      {testimonials[active].name}
+                    </p>
+                    <p style={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 500, fontSize: '0.8rem', letterSpacing: '0.04em', textTransform: 'uppercase', opacity: 0.7, marginBottom: '12px' }} className="text-navy">
+                      {testimonials[active].bu}
+                    </p>
+                    <p style={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 500, fontSize: '0.9rem', lineHeight: 1.55 }} className="text-navy">
+                      "{testimonials[active].quote}"
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
+
+          {/* Foto */}
+          <div className="flex justify-center mt-4">
+            <div
+              className="relative shrink-0"
+              style={{ width: 'min(300px, 80vw)', height: 'clamp(180px, 55vw, 320px)' }}
+            >
+              <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                <motion.div
+                  key={active}
+                  custom={direction}
+                  variants={cardVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className="absolute inset-0"
+                  style={{ willChange: 'transform, opacity' }}
+                >
+                  <ActiveCard t={testimonials[active]} />
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* Botones de navegación debajo de la foto */}
+          <div className="flex items-center justify-center gap-3">
+            <motion.button onClick={handlePrev}
+              className="w-10 h-10 flex items-center justify-center shrink-0"
+              style={{ border: '2px solid #FFFFFF', background: 'transparent' }}
+              whileHover={{ backgroundColor: Colors.skyBlue100, borderColor: Colors.skyBlue100, scale: 1.08 }}
+              whileTap={{ scale: 0.93 }}
+              transition={{ duration: 0.18 }}
+              aria-label="Anterior">
+              <CaretLeft size={20} color="#FFFFFF" weight="bold" />
+            </motion.button>
+
+            <div className="flex items-center gap-2">
+              {testimonials.map((_, i) => (
+                <button key={i} onClick={() => { goTo(i, i > active ? 1 : -1); resetInterval() }}
+                  aria-label={`Testimonio ${i + 1}`}>
+                  <motion.div
+                    animate={{ width: i === active ? 24 : 10, backgroundColor: i === active ? Colors.skyBlue100 : 'rgba(255,255,255,0.2)' }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                    style={{ height: '3px' }}
+                  />
+                </button>
+              ))}
+            </div>
+
+            <motion.button onClick={handleNext}
+              className="w-10 h-10 flex items-center justify-center shrink-0"
+              style={{ border: '2px solid #FFFFFF', background: 'transparent' }}
+              whileHover={{ backgroundColor: Colors.skyBlue100, borderColor: Colors.skyBlue100, scale: 1.08 }}
+              whileTap={{ scale: 0.93 }}
+              transition={{ duration: 0.18 }}
+              aria-label="Siguiente">
+              <CaretRight size={20} color="#FFFFFF" weight="bold" />
+            </motion.button>
+          </div>
+
+        </div>
+
+        {/* ── DESKTOP: layout original grid 2 col ── */}
+        <div className="hidden lg:grid grid-cols-2 gap-12 items-center">
+
+          <SectionReveal>
+            <h2 className="section-title text-navy mb-8 lg:mb-10" style={{ textWrap: 'balance' as React.CSSProperties['textWrap'] }}>
+              {titulo}
+            </h2>
+
+            <div className="testimonial-text-wrap mb-8 lg:mb-10 relative w-full">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
@@ -219,56 +337,22 @@ export default function Testimonials(_props: TestimonialsProps) {
                   transition={{ duration: 0.35 }}
                   className="testimonial-text-inner"
                 >
-                  <p
-                    className="text-navy text-left"
-                    style={{
-                      fontFamily: '"Montserrat", sans-serif',
-                      fontWeight: 700,
-                      fontSize: 'clamp(1.05rem, 1.4vw, 1.3rem)',
-                      lineHeight: 1.3,
-                      letterSpacing: '-0.005em',
-                      marginBottom: '4px',
-                      textWrap: 'wrap' as React.CSSProperties['textWrap'],
-                    }}
-                  >
+                  <p className="text-navy text-left" style={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 700, fontSize: 'clamp(1.05rem, 1.4vw, 1.3rem)', lineHeight: 1.3, letterSpacing: '-0.005em', marginBottom: '4px' }}>
                     {testimonials[active].name}
                   </p>
-                  <p
-                    className="text-navy text-left"
-                    style={{
-                      fontFamily: '"Montserrat", sans-serif',
-                      fontWeight: 500,
-                      fontSize: 'clamp(0.85rem, 1vw, 0.95rem)',
-                      lineHeight: 1.4,
-                      letterSpacing: '0.04em',
-                      textTransform: 'uppercase',
-                      opacity: 0.7,
-                      marginBottom: '20px',
-                      textWrap: 'wrap' as React.CSSProperties['textWrap'],
-                    }}
-                  >
+                  <p className="text-navy text-left" style={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 500, fontSize: 'clamp(0.85rem, 1vw, 0.95rem)', lineHeight: 1.4, letterSpacing: '0.04em', textTransform: 'uppercase', opacity: 0.7, marginBottom: '20px' }}>
                     {testimonials[active].bu}
                   </p>
-                  <p
-                    className="text-navy text-left"
-                    style={{
-                      fontFamily: '"Montserrat", sans-serif',
-                      fontWeight: 500,
-                      fontSize: 'clamp(0.95rem, 1.1vw, 1.1rem)',
-                      lineHeight: 1.55,
-                      letterSpacing: '0.005em',
-                      textWrap: 'wrap' as React.CSSProperties['textWrap'],
-                    }}
-                  >
+                  <p className="text-navy text-left" style={{ fontFamily: '"Montserrat", sans-serif', fontWeight: 500, fontSize: 'clamp(0.95rem, 1.1vw, 1.1rem)', lineHeight: 1.55, letterSpacing: '0.005em' }}>
                     "{testimonials[active].quote}"
                   </p>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            <div className="flex items-center justify-center lg:justify-start gap-3 sm:gap-4 md:gap-6 flex-wrap">
+            <div className="flex items-center justify-start gap-6">
               <motion.button onClick={handlePrev}
-                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center shrink-0"
+                className="w-14 h-14 flex items-center justify-center shrink-0"
                 style={{ border: '2px solid #FFFFFF', background: 'transparent' }}
                 whileHover={{ backgroundColor: Colors.skyBlue100, borderColor: Colors.skyBlue100, scale: 1.08 }}
                 whileTap={{ scale: 0.93 }}
@@ -291,7 +375,7 @@ export default function Testimonials(_props: TestimonialsProps) {
               </div>
 
               <motion.button onClick={handleNext}
-                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center shrink-0"
+                className="w-14 h-14 flex items-center justify-center shrink-0"
                 style={{ border: '2px solid #FFFFFF', background: 'transparent' }}
                 whileHover={{ backgroundColor: Colors.skyBlue100, borderColor: Colors.skyBlue100, scale: 1.08 }}
                 whileTap={{ scale: 0.93 }}
@@ -304,18 +388,8 @@ export default function Testimonials(_props: TestimonialsProps) {
 
           <div className="flex justify-center lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-32 xl:translate-x-40">
             <div className="flex items-center gap-3">
-
-              <div className="hidden md:block">
-                <GhostCard t={testimonials[prevIdx]} side="left" />
-              </div>
-
-              <div
-                className="relative shrink-0"
-                style={{
-                  width: 'min(360px, 88vw)',
-                  height: 'clamp(240px, 78vw, 460px)',
-                }}
-              >
+              <GhostCard t={testimonials[prevIdx]} side="left" />
+              <div className="relative shrink-0" style={{ width: 'min(360px, 88vw)', height: 'clamp(240px, 78vw, 460px)' }}>
                 <AnimatePresence initial={false} custom={direction} mode="popLayout">
                   <motion.div
                     key={active}
@@ -331,15 +405,12 @@ export default function Testimonials(_props: TestimonialsProps) {
                   </motion.div>
                 </AnimatePresence>
               </div>
-
-              <div className="hidden md:block">
-                <GhostCard t={testimonials[nextIdx]} side="right" />
-              </div>
-
+              <GhostCard t={testimonials[nextIdx]} side="right" />
             </div>
           </div>
 
         </div>
+
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px bg-white/10" />
