@@ -61,7 +61,9 @@
       "Bash(ren \"Jafet salas.png\" \"jafet-salas.png\")",
       "Bash(ren \"Jaime Ortiz Sosa.png\" \"jaime-ortiz-sosa.png\")",
       "Bash(ren \"Lucila Mora.png\" \"lucila-mora.png\")",
-      "Bash(ren \"Susana Aguileta.png\" \"susana-aguileta.png\")"
+      "Bash(ren \"Susana Aguileta.png\" \"susana-aguileta.png\")",
+      "Bash(ffprobe *)",
+      "Bash(ffmpeg -y -i \"public/Teaser actualizado.mov\" -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p -movflags +faststart -c:a aac -b:a 128k \"public/Teaser1.mp4\")"
     ]
   }
 }

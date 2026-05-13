@@ -14,12 +14,12 @@ interface FinalCTAProps {
 }
 
 const DEFAULTS = {
-  ctaTitulo: '¡TERMINAR MIS MÓDULOS AHORA!',
+  ctaTitulo: '¡TERMINAR MIS MÓDULOS AQUI!',
   ctaDescripcion: 'Solo te tomará unos minutos completar lo que empezaste.',
   ctaButtonText: 'CONTINUAR EN LA PLATAFORMA',
   ctaButtonUrl: 'https://mxhutchisonports.csod.com/',
   sloganLinea1: 'NAVEGANDO JUNTOS DESDE LA',
-  sloganHighlight1: 'CULTURA ORGANIZACIONAL',
+  sloganHighlight1: 'CULTURA INSTITUCIONAL',
   sloganLinea2: 'HASTA EL',
   sloganHighlight2: 'LIDERAZGO PROFESIONAL',
 }
@@ -87,7 +87,7 @@ export default function FinalCTA(_props: FinalCTAProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-verlag uppercase inline-block transition-all duration-300 hover:scale-[1.04] active:scale-[0.97]"
-                aria-label="Terminar mis módulos ahora"
+                aria-label="Terminar mis módulos aquí"
                 style={{
                   background: Colors.seaBlue100,
                   padding: 'clamp(12px, 1.4vw, 18px) clamp(20px, 2.6vw, 36px)',
@@ -100,7 +100,7 @@ export default function FinalCTA(_props: FinalCTAProps) {
                 <span style={{ color: '#FFFFFF' }}>¡</span>
                 <span style={{ color: '#FFC627' }}>TERMINAR </span>
                 <span style={{ color: '#FFFFFF' }}>MIS MÓDULOS </span>
-                <span style={{ color: '#FFC627' }}>AHORA</span>
+                <span style={{ color: '#FFC627' }}>AQUÍ</span>
                 <span style={{ color: '#FFFFFF' }}>!</span>
               </a>
             </SectionReveal>

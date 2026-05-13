@@ -151,6 +151,7 @@ export default function Testimonials(_props: TestimonialsProps) {
 
   const [active, setActive] = useState(0)
   const [direction, setDirection] = useState(1)
+  const [isPlaying, setIsPlaying] = useState(true)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   const goTo = useCallback((idx: number, dir: number) => {
@@ -158,18 +159,28 @@ export default function Testimonials(_props: TestimonialsProps) {
     setActive(idx)
   }, [])
 
+  const clearAutoplay = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+  }, [])
+
   const resetInterval = useCallback(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current)
+    clearAutoplay()
+    if (!isPlaying) return
     intervalRef.current = setInterval(() => {
       setDirection(1)
       setActive(a => (a + 1) % n)
-    }, 5000)
-  }, [n])
+    }, 8500)
+  }, [n, isPlaying, clearAutoplay])
 
   useEffect(() => {
     resetInterval()
-    return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
-  }, [resetInterval])
+    return () => { clearAutoplay() }
+  }, [resetInterval, clearAutoplay])
+
+  const togglePlayPause = () => setIsPlaying(p => !p)
 
   const handlePrev = () => { goTo((active - 1 + n) % n, -1); resetInterval() }
   const handleNext = () => { goTo((active + 1) % n, 1); resetInterval() }
@@ -298,13 +309,25 @@ export default function Testimonials(_props: TestimonialsProps) {
                 <button key={i} onClick={() => { goTo(i, i > active ? 1 : -1); resetInterval() }}
                   aria-label={`Testimonio ${i + 1}`}>
                   <motion.div
-                    animate={{ width: i === active ? 24 : 10, backgroundColor: i === active ? Colors.skyBlue100 : 'rgba(255,255,255,0.2)' }}
+                    animate={{ width: i === active ? 28 : 14, backgroundColor: i === active ? Colors.skyBlue100 : 'rgba(0,46,109,0.55)' }}
                     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                    style={{ height: '3px' }}
+                    style={{ height: '4px', borderRadius: '2px' }}
                   />
                 </button>
               ))}
             </div>
+
+            <motion.button onClick={togglePlayPause}
+              className="w-10 h-10 flex items-center justify-center shrink-0"
+              style={{ border: '2px solid #FFFFFF', background: 'transparent' }}
+              whileHover={{ backgroundColor: Colors.skyBlue100, borderColor: Colors.skyBlue100, scale: 1.08 }}
+              whileTap={{ scale: 0.93 }}
+              transition={{ duration: 0.18 }}
+              aria-label={isPlaying ? 'Pausar carrusel' : 'Reproducir carrusel'}>
+              {isPlaying
+                ? <Pause size={18} color="#FFFFFF" weight="fill" />
+                : <Play size={18} color="#FFFFFF" weight="fill" style={{ marginLeft: '2px' }} />}
+            </motion.button>
 
             <motion.button onClick={handleNext}
               className="w-10 h-10 flex items-center justify-center shrink-0"
@@ -366,13 +389,25 @@ export default function Testimonials(_props: TestimonialsProps) {
                   <button key={i} onClick={() => { goTo(i, i > active ? 1 : -1); resetInterval() }}
                     aria-label={`Testimonio ${i + 1}`}>
                     <motion.div
-                      animate={{ width: i === active ? 24 : 10, backgroundColor: i === active ? Colors.skyBlue100 : 'rgba(255,255,255,0.2)' }}
+                      animate={{ width: i === active ? 32 : 16, backgroundColor: i === active ? Colors.skyBlue100 : 'rgba(0,46,109,0.55)' }}
                       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                      style={{ height: '3px' }}
+                      style={{ height: '4px', borderRadius: '2px' }}
                     />
                   </button>
                 ))}
               </div>
+
+              <motion.button onClick={togglePlayPause}
+                className="w-14 h-14 flex items-center justify-center shrink-0"
+                style={{ border: '2px solid #FFFFFF', background: 'transparent' }}
+                whileHover={{ backgroundColor: Colors.skyBlue100, borderColor: Colors.skyBlue100, scale: 1.08 }}
+                whileTap={{ scale: 0.93 }}
+                transition={{ duration: 0.18 }}
+                aria-label={isPlaying ? 'Pausar carrusel' : 'Reproducir carrusel'}>
+                {isPlaying
+                  ? <Pause size={20} color="#FFFFFF" weight="fill" />
+                  : <Play size={20} color="#FFFFFF" weight="fill" style={{ marginLeft: '2px' }} />}
+              </motion.button>
 
               <motion.button onClick={handleNext}
                 className="w-14 h-14 flex items-center justify-center shrink-0"

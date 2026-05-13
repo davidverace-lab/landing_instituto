@@ -99,7 +99,7 @@ export default function Hero(_props: HeroProps) {
               href={url}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-gold inline-block text-sm md:text-base lg:text-lg py-3 px-8 md:py-4 md:px-12"
+              className="btn-gold !text-[0.78rem] md:!text-lg !py-2 !px-5 md:!py-4 md:!px-10 !tracking-[0.05em] md:!tracking-[0.08em]"
             >
               {b}
             </a>

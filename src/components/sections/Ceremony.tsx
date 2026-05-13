@@ -15,7 +15,7 @@ interface CeremonyProps {
 const DEFAULTS = {
   tituloLinea1: '¡NOS VEMOS EN LA CEREMONIA DE CLAUSURA!',
   tituloLinea2: '',
-  descripcion: 'Julio será el mes donde nos daremos cita para reconocer la dedicación de quienes han completado su trayectoria en la etapa de culturización: Tronco Común. Celebraremos tu esfuerzo y compromiso en un evento exclusivo de graduación. No te puedes perder este momento.',
+  descripcion: 'Julio será el mes donde nos daremos cita para reconocer la dedicación de quienes han completado su trayectoria en los Fundamentos de la Cultura Organizacional: Tronco Común. Celebraremos tu esfuerzo y compromiso en un evento exclusivo de graduación. No te puedes perder este momento',
   etiquetaFecha: 'Fecha',
   fecha: 'JULIO 2026',
   videoLabel: 'Video Teaser',

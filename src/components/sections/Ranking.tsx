@@ -49,7 +49,7 @@ export default function Ranking(_props: RankingProps) {
                 Estamos en la recta final y el verdadero triunfo es <strong className="font-bold">llegar juntos a la meta.</strong> ¿Tu Unidad de Negocio está liderando el camino?
               </p>
               <p style={{ ...DescriptionCSS.base, color: '#002E6D', textAlign: 'left', textWrap: 'pretty' as React.CSSProperties['textWrap'], margin: 0 }}>
-                Tu compromiso individual es la fuerza que decide la posición de tu equipo en el ranking Hutchison Ports México. ¡Cada módulo finalizado suma poder a tu Terminal! Respalda a tus compañeros, completa tu etapa de Culturización y llevemos a tu equipo a la cima.
+                Tu compromiso individual es la fuerza que decide el avance de tu Unidad de Negocios. ¡Cada módulo finalizado aporta al liderazgo del Grupo Hutchison Ports! Acompaña a tus compañeros en esta experiencia y lleguemos juntos a esta primera etapa.
               </p>
             </SectionReveal>
           </div>

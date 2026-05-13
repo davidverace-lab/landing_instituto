@@ -18,10 +18,10 @@ interface UrgencyProps {
 const DEFAULTS = {
   deadline: '2026-06-30T23:59:59',
   titulo: 'EL TIEMPO CORRE:',
-  subtitulo: 'LA ETAPA DE CULTURIZACIÓN LLEGA A SU FIN',
+  subtitulo: 'LA ETAPA DE FUNDAMENTOS DE LA CULTURA ORGANIZACIONAL LLEGA A SU FIN',
   panelIzquierdoFecha: '30 DE JUNIO',
-  panelIzquierdoTexto: 'Al cerrar los módulos el 30 de junio, las puertas a la fase de profesionalización se abrirán sólo para quienes hayan completado el Tronco Común.',
-  panelDerechoTitulo: '¡NO TE QUEDES SIN PARTE DE ESTE HISTÓRICO MOMENTO!',
+  panelIzquierdoTexto: 'Al cerrar los módulos el 30 de junio, las puertas a la fase de profesionalización se abrirán solo para quienes hayan completado los Fundamentos de la Cultura Organizacional (Tronco común). ',
+  panelDerechoTitulo: '¡NO TE QUEDES SIN SER PARTE DE ESTE HISTÓRICO MOMENTO!',
   panelDerechoTexto: 'Tu próxima etapa depende de lo que hagas hoy.',
 }
 
@@ -121,7 +121,7 @@ export default function Urgency(_props: UrgencyProps) {
                 </span>
               </div>
               <p className="text-white" style={{ ...DescriptionCSS.sm, fontSize: 'clamp(1.05rem, 1.4vw, 1.2rem)' }}>
-                Al cerrar los módulos el <strong className="font-bold">30 de junio</strong>, las puertas a la <strong className="font-bold">fase de profesionalización</strong> se abrirán sólo para quienes hayan completado el Tronco Común.
+                Al cerrar los módulos el <strong className="font-bold">30 de junio</strong>, las puertas a la <strong className="font-bold">fase de profesionalización</strong> se abrirán solo para quienes hayan completado los <strong className="font-bold">Fundamentos de la Cultura Organizacional (Tronco común)</strong>.
               </p>
             </motion.div>
 

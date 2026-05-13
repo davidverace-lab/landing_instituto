@@ -46,7 +46,8 @@ const UNITS: HonorUnit[] = [
 ]
 
 const DEFAULTS = {
-  titulo: 'RECONOCEMOS TU EXCELENCIA',
+  tituloLinea1: 'RECONOCEMOS TU',
+  tituloLinea2: 'EXCELENCIA ACADÉMICA',
   descripcion:
     'En el Instituto Hutchison Ports, valoramos profundamente tu dedicación. El Cuadro de Honor distingue a los colaboradores que destacan por su desempeño académico y proactividad.',
   descripcion2: '¡Su compromiso es una inspiración para toda nuestra comunidad!',
@@ -120,7 +121,8 @@ function HonorSlideCard({ unit }: { unit: HonorUnit }) {
 }
 
 export default function HonorBoard(_props: HonorBoardProps) {
-  const titulo = DEFAULTS.titulo
+  const tituloLinea1 = DEFAULTS.tituloLinea1
+  const tituloLinea2 = DEFAULTS.tituloLinea2
   const descripcion = DEFAULTS.descripcion
   const descripcion2 = DEFAULTS.descripcion2
   const total = UNITS.length
@@ -172,7 +174,7 @@ export default function HonorBoard(_props: HonorBoardProps) {
     >
       <div className="absolute inset-0 z-0">
         <img
-          src="/reconocemosfondo.png"
+          src="/fondo3.webp"
           alt=""
           className="w-full h-full object-cover object-center"
           style={{ opacity: 0.12 }}
@@ -195,9 +197,10 @@ export default function HonorBoard(_props: HonorBoardProps) {
           <div className="text-center lg:text-left">
             <h2
               className="section-title text-white mb-3 md:mb-6"
-              style={{ fontSize: Type.h2, lineHeight: 1.05, textWrap: 'balance' as React.CSSProperties['textWrap'] }}
+              style={{ fontSize: Type.h2, lineHeight: 1.05 }}
             >
-              {titulo}
+              <span className="block whitespace-nowrap">{tituloLinea1}</span>
+              <span className="block whitespace-nowrap">{tituloLinea2}</span>
             </h2>
             <p
               className="text-white mx-auto lg:mx-0"
@@ -209,7 +212,7 @@ export default function HonorBoard(_props: HonorBoardProps) {
               className="text-white mx-auto lg:mx-0"
               style={{ ...DescriptionCSS.base, color: '#FFFFFF', maxWidth: '52ch' }}
             >
-              {descripcion2}
+              <strong>{descripcion2}</strong>
             </p>
 
             {/* Controles */}
