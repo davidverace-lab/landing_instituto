@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CaretLeft, CaretRight } from '@phosphor-icons/react'
+import { CaretLeft, CaretRight, Play, Pause } from '@phosphor-icons/react'
 import { Type, DescriptionCSS, Colors } from '../../tokens'
 
 interface HonorBoardProps {
@@ -47,10 +47,10 @@ const UNITS: HonorUnit[] = [
 
 const DEFAULTS = {
   tituloLinea1: 'RECONOCEMOS TU',
-  tituloLinea2: 'EXCELENCIA ACADÉMICA',
+  tituloLinea2: 'EXCELENCIA',
   descripcion:
-    'En el Instituto Hutchison Ports, valoramos profundamente tu dedicación. El Cuadro de Honor distingue a los colaboradores que destacan por su desempeño académico y proactividad.',
-  descripcion2: '¡Su compromiso es una inspiración para toda nuestra comunidad!',
+    'En el Instituto Hutchison Ports, valoramos profundamente tu dedicación. El Cuadro de Honor distingue a los colaboradores que destacan por su excelencia académica.',
+  descripcion2: '¡Su compromiso es una inspiración para toda nuestra Comunidad Hutchison Ports!',
 }
 
 function HonorSlideCard({ unit }: { unit: HonorUnit }) {
@@ -129,6 +129,7 @@ export default function HonorBoard(_props: HonorBoardProps) {
 
   const [active, setActive] = useState(0)
   const [direction, setDirection] = useState(1)
+  const [isPlaying, setIsPlaying] = useState(true)
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   const goTo = useCallback((idx: number, dir: number) => {
@@ -136,19 +137,28 @@ export default function HonorBoard(_props: HonorBoardProps) {
     setActive(((idx % total) + total) % total)
   }, [total])
 
+  const clearAutoplay = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+      intervalRef.current = null
+    }
+  }, [])
+
   const resetInterval = useCallback(() => {
-    if (intervalRef.current) clearInterval(intervalRef.current)
+    clearAutoplay()
+    if (!isPlaying) return
     intervalRef.current = setInterval(() => {
       setDirection(1)
       setActive(a => (a + 1) % total)
     }, 4500)
-  }, [total])
+  }, [total, isPlaying, clearAutoplay])
 
   useEffect(() => {
     resetInterval()
-    return () => { if (intervalRef.current) clearInterval(intervalRef.current) }
-  }, [resetInterval])
+    return () => { clearAutoplay() }
+  }, [resetInterval, clearAutoplay])
 
+  const togglePlayPause = () => setIsPlaying(p => !p)
   const handlePrev = () => { goTo(active - 1, -1); resetInterval() }
   const handleNext = () => { goTo(active + 1, 1); resetInterval() }
 
@@ -219,7 +229,7 @@ export default function HonorBoard(_props: HonorBoardProps) {
             <div className="mt-5 md:mt-10 flex items-center justify-center lg:justify-start gap-3 md:gap-6 flex-wrap">
               <motion.button
                 onClick={handlePrev}
-                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center shrink-0"
+                className="w-10 h-10 md:w-14 md:h-14 flex items-center justify-center shrink-0"
                 style={{ border: '2px solid #FFFFFF', background: 'transparent' }}
                 whileHover={{ backgroundColor: Colors.skyBlue100, borderColor: Colors.skyBlue100, scale: 1.08 }}
                 whileTap={{ scale: 0.93 }}
@@ -238,19 +248,33 @@ export default function HonorBoard(_props: HonorBoardProps) {
                   >
                     <motion.div
                       animate={{
-                        width: i === active ? 28 : 12,
-                        backgroundColor: i === active ? Colors.skyBlue100 : 'rgba(255,255,255,0.28)',
+                        width: i === active ? 32 : 16,
+                        backgroundColor: i === active ? Colors.skyBlue100 : 'rgba(255,255,255,0.55)',
                       }}
                       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                      style={{ height: 3 }}
+                      style={{ height: '4px', borderRadius: '2px' }}
                     />
                   </button>
                 ))}
               </div>
 
               <motion.button
+                onClick={togglePlayPause}
+                className="w-10 h-10 md:w-14 md:h-14 flex items-center justify-center shrink-0"
+                style={{ border: '2px solid #FFFFFF', background: 'transparent' }}
+                whileHover={{ backgroundColor: Colors.skyBlue100, borderColor: Colors.skyBlue100, scale: 1.08 }}
+                whileTap={{ scale: 0.93 }}
+                transition={{ duration: 0.18 }}
+                aria-label={isPlaying ? 'Pausar carrusel' : 'Reproducir carrusel'}
+              >
+                {isPlaying
+                  ? <Pause size={20} color="#FFFFFF" weight="fill" />
+                  : <Play size={20} color="#FFFFFF" weight="fill" style={{ marginLeft: '2px' }} />}
+              </motion.button>
+
+              <motion.button
                 onClick={handleNext}
-                className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 flex items-center justify-center shrink-0"
+                className="w-10 h-10 md:w-14 md:h-14 flex items-center justify-center shrink-0"
                 style={{ border: '2px solid #FFFFFF', background: 'transparent' }}
                 whileHover={{ backgroundColor: Colors.skyBlue100, borderColor: Colors.skyBlue100, scale: 1.08 }}
                 whileTap={{ scale: 0.93 }}
