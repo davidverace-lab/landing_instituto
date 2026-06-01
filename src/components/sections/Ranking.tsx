@@ -11,14 +11,14 @@ interface RankingProps {
 }
 
 const DEFAULT_DATA: ProgressChartItem[] = [
-  { name: 'CCI',           value: 33,  completados: 26,  total: 78,  color: Colors.skyBlue80,    logos: ['/logos/cci.svg'] },
-  { name: 'EIT + ECV',     value: 91,  completados: 273, total: 299, color: Colors.aquaGreen100, logos: ['/logos/eit.svg', '/logos/ecv.svg'] },
+  { name: 'CCI',           value: 36,  completados: 28,  total: 78,  color: Colors.skyBlue80,    logos: ['/logos/cci.svg'] },
+  { name: 'EIT + ECV',     value: 92,  completados: 273, total: 298, color: Colors.aquaGreen100, logos: ['/logos/eit.svg', '/logos/ecv.svg'] },
   { name: 'HP LOGISTICS',  value: 70,  completados: 7,   total: 10,  color: Colors.seaBlue80,    logos: ['/logos/hp-logistics.svg'] },
-  { name: 'HP MÉXICO',     value: 83,  completados: 132, total: 160, color: Colors.sunrayYellow100, logos: ['/logos/hutchisonports.webp'] },
-  { name: 'ICAVE',         value: 96,  completados: 332, total: 346, color: Colors.sunsetOrange100, logos: ['/logos/icave.svg'] },
-  { name: 'LCMT + LCT',    value: 85,  completados: 191, total: 224, color: Colors.seaBlue100,   logos: ['/logos/lcmt.svg', '/logos/lct.svg'] },
-  { name: 'TILH',          value: 79,  completados: 56,  total: 71,  color: Colors.aquaGreen100, logos: ['/logos/tilh.svg'] },
-  { name: 'TIMSA',         value: 95,  completados: 178, total: 187, color: Colors.sunsetOrange100, logos: ['/logos/timsa.svg'] },
+  { name: 'HP MÉXICO',     value: 84,  completados: 134, total: 160, color: Colors.sunrayYellow100, logos: ['/logos/hutchisonports.webp'] },
+  { name: 'ICAVE',         value: 97,  completados: 333, total: 345, color: Colors.sunsetOrange100, logos: ['/logos/icave.svg'] },
+  { name: 'LCMT + LCT',    value: 87,  completados: 195, total: 224, color: Colors.seaBlue100,   logos: ['/logos/lcmt.svg', '/logos/lct.svg'] },
+  { name: 'TILH',          value: 80,  completados: 57,  total: 71,  color: Colors.aquaGreen100, logos: ['/logos/tilh.svg'] },
+  { name: 'TIMSA',         value: 97,  completados: 182, total: 187, color: Colors.sunsetOrange100, logos: ['/logos/timsa.svg'] },
   { name: 'TNG',           value: 100, completados: 132, total: 132, color: Colors.skyBlue100,   logos: ['/logos/tng.svg'] },
 ]
 
