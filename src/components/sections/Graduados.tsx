@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import SectionReveal from '../ui/SectionReveal'
 import VideoBox from '../ui/VideoBox'
 import { Colors, DescriptionCSS, Section } from '../../tokens'
@@ -68,64 +67,17 @@ export default function Graduados() {
           </Frase>
         </SectionReveal>
 
-        {/* Marco tipo diploma con el video */}
+        {/* Video sin marco, igual que el resto de los videos de la página */}
         <SectionReveal delay={0.2} className="w-full mt-10 md:mt-14">
-          <motion.div
-            className="relative mx-auto w-full float-slow"
-            style={{ maxWidth: 880 }}
-            whileHover={{ y: -4 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 22 }}
-          >
-            <div
-              className="relative p-2 md:p-3"
-              style={{
-                background: '#FFFFFF',
-                boxShadow: '0 30px 70px -20px rgba(0,46,109,0.35)',
-                borderRadius: 16,
-              }}
-            >
-              {/* Esquinas en azul marino, como el diploma de la referencia */}
-              {(['tl', 'tr', 'bl', 'br'] as const).map(c => (
-                <span
-                  key={c}
-                  aria-hidden
-                  className="absolute pointer-events-none"
-                  style={{
-                    width: 'clamp(40px, 9%, 84px)',
-                    height: 'clamp(40px, 9%, 84px)',
-                    top: c.startsWith('t') ? 0 : 'auto',
-                    bottom: c.startsWith('b') ? 0 : 'auto',
-                    left: c.endsWith('l') ? 0 : 'auto',
-                    right: c.endsWith('r') ? 0 : 'auto',
-                    background: `linear-gradient(${c === 'tl' ? '135deg' : c === 'tr' ? '225deg' : c === 'bl' ? '45deg' : '315deg'}, ${Colors.seaBlue100} 0 46%, ${Colors.sunrayYellow100} 46% 52%, transparent 52%)`,
-                    borderRadius: c === 'tl' ? '16px 0 0 0' : c === 'tr' ? '0 16px 0 0' : c === 'bl' ? '0 0 0 16px' : '0 0 16px 0',
-                  }}
-                />
-              ))}
-
-              <div
-                className="relative rounded-xl overflow-hidden"
-                style={{ border: `1px solid rgba(0,46,109,0.12)`, background: '#F3F6FA' }}
-              >
-                <div className="flex items-center justify-between px-4 md:px-6 pt-4 md:pt-5">
-                  <img src="/webp/LogoInstitutoHP-azul.webp" alt="Instituto Hutchison Ports" style={{ height: 'clamp(18px, 3vw, 30px)', width: 'auto' }} loading="lazy" decoding="async" />
-                  <p className="font-verlag uppercase text-navy" style={{ fontSize: 'clamp(0.6rem, 1.4vw, 0.85rem)', letterSpacing: '0.16em', margin: 0 }}>
-                    Graduados del Tronco Común <span style={{ color: Colors.skyBlue100 }}>2026</span>
-                  </p>
-                  <img src="/webp/hutchisonports.webp" alt="Hutchison Ports" style={{ height: 'clamp(16px, 2.6vw, 26px)', width: 'auto' }} loading="lazy" decoding="async" />
-                </div>
-                <div className="p-4 md:p-6">
-                  <VideoBox
-                    poster={VIDEO.poster}
-                    sources={VIDEO.sources}
-                    label={COPY.videoLabel}
-                    sublabel={COPY.videoSub}
-                    radius={10}
-                  />
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          <VideoBox
+            poster={VIDEO.poster}
+            sources={VIDEO.sources}
+            label={COPY.videoLabel}
+            sublabel={COPY.videoSub}
+            radius={10}
+            className="mx-auto"
+            style={{ maxWidth: 1000, border: '3px solid #FFFFFF', boxShadow: '0 30px 70px -20px rgba(0,46,109,0.4)' }}
+          />
         </SectionReveal>
       </div>
     </section>
