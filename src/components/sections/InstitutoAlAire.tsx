@@ -34,11 +34,23 @@ const CHEVRON = 'polygon(18% 0, 100% 0, 100% 100%, 18% 100%, 0 50%)'
 export default function InstitutoAlAire() {
   return (
     <section className="relative overflow-hidden" style={{ backgroundColor: '#03153A' }}>
-      {/* Puntos de red sutiles en toda la sección */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{ opacity: 0.12, backgroundImage: `radial-gradient(${Colors.skyBlue100} 1px, transparent 1px)`, backgroundSize: '26px 26px' }}
-      />
+      {/* Fondo: puerto de noche con el mapamundi digital, velado en azul para que se lea el texto */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <img
+          src="/webp/fondo-alaire.webp"
+          alt=""
+          aria-hidden
+          className="w-full h-full object-cover object-center select-none"
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+        />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(90deg, rgba(3,21,58,0.94) 0%, rgba(3,21,58,0.82) 45%, rgba(3,21,58,0.45) 100%)' }}
+        />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(3,21,58,0.85) 0%, transparent 40%)' }} />
+      </div>
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.05fr_1fr]" style={{ minHeight: 'min(88dvh, 820px)' }}>
 
