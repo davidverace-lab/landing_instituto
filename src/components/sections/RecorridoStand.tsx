@@ -62,7 +62,6 @@ export default function RecorridoStand() {
             sources={VIDEO.sources}
             label={COPY.videoLabel}
             radius={10}
-            playShape="square"
             hideCaption
             className="mx-auto"
             style={{ maxWidth: 1000, border: '3px solid #FFFFFF', boxShadow: '0 30px 70px -20px rgba(0,46,109,0.4)' }}

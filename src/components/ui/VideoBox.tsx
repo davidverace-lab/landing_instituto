@@ -1,9 +1,13 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Colors } from '../../tokens'
 
 /**
  * Reproductor de video con carátula (.webp) y fuentes WebM + MP4.
+ *
+ * Mientras no se reproduce, siempre muestra la portada con el botón de play
+ * (cuadrado azul): antes de empezar, en pausa y al terminar. Sólo suena un
+ * video a la vez, y se pausa solo al salir de la pantalla.
  *
  * Sin `sources` funciona como carátula lista para incrustar: muestra la portada
  * y el botón de play desactivado, para cuando todavía no llega el material.
@@ -18,13 +22,14 @@ export interface VideoBoxProps {
   radius?: number
   /** Oculta el rótulo sobre la portada cuando el marco de alrededor ya lo dice. */
   hideCaption?: boolean
-  /** Botón de play: círculo blanco (por defecto) o cuadrado azul redondeado. */
-  playShape?: 'circle' | 'square'
   /** Avisa cuando el video empieza o deja de reproducirse. */
   onPlayingChange?: (playing: boolean) => void
   className?: string
   style?: React.CSSProperties
 }
+
+/** El video que está sonando, para pausarlo cuando arranca otro. */
+let current: HTMLVideoElement | null = null
 
 export default function VideoBox({
   poster,
@@ -34,30 +39,43 @@ export default function VideoBox({
   ratio = '16 / 9',
   radius = 12,
   hideCaption = false,
-  playShape = 'circle',
   onPlayingChange,
   className = '',
   style,
 }: VideoBoxProps) {
   const ref = useRef<HTMLVideoElement>(null)
+  const box = useRef<HTMLDivElement>(null)
   const [playing, setPlaying] = useState(false)
   const playable = sources.length > 0
   const setPlay = (v: boolean) => { setPlaying(v); onPlayingChange?.(v) }
-  const square = playShape === 'square'
 
   const toggle = () => {
-    if (!playable || !ref.current) return
-    if (playing) { ref.current.pause() } else { void ref.current.play() }
+    const v = ref.current
+    if (!playable || !v) return
+    if (playing) { v.pause(); return }
+    if (current && current !== v) current.pause()
+    current = v
+    void v.play()
   }
+
+  // Al salir de la pantalla se pausa y vuelve a la portada.
+  useEffect(() => {
+    const el = box.current
+    if (!el || !playable) return
+    const io = new IntersectionObserver(([e]) => { if (!e.isIntersecting) ref.current?.pause() }, { threshold: 0.25 })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [playable])
 
   return (
     <motion.div
+      ref={box}
       className={`relative overflow-hidden ${className}`}
       style={{ aspectRatio: ratio, borderRadius: radius, background: '#001840', boxShadow: '0 30px 60px -24px rgba(0,46,109,0.45)', ...style }}
       whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 200, damping: 22 }}
     >
-      {playable ? (
+      {playable && (
         <video
           ref={ref}
           className="absolute inset-0 w-full h-full object-cover cursor-pointer"
@@ -68,21 +86,29 @@ export default function VideoBox({
           onClick={toggle}
           onPlay={() => setPlay(true)}
           onPause={() => setPlay(false)}
-          onEnded={() => setPlay(false)}
+          onEnded={() => { if (ref.current) ref.current.currentTime = 0; setPlay(false) }}
         >
           {sources.map(s => <source key={s.src} src={s.src} type={s.type} />)}
         </video>
-      ) : (
-        <img src={poster} alt={label} className="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" draggable={false} />
       )}
 
       {!playing && (
         <>
+          {/* Portada encima del cuadro en pausa: siempre vuelve a la vista previa */}
+          <img
+            src={poster}
+            alt={playable ? '' : label}
+            aria-hidden={playable}
+            className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+            loading="lazy"
+            decoding="async"
+            draggable={false}
+          />
           {/* Velo para que el botón y el rótulo se lean sobre cualquier portada */}
           <div
             aria-hidden
             className="absolute inset-0 pointer-events-none"
-            style={{ background: 'linear-gradient(to top, rgba(0,24,64,0.72) 0%, rgba(0,24,64,0.12) 45%, rgba(0,24,64,0.18) 100%)' }}
+            style={{ background: 'linear-gradient(to top, rgba(0,24,64,0.6) 0%, rgba(0,24,64,0.08) 45%, rgba(0,24,64,0.12) 100%)' }}
           />
 
           <button
@@ -91,13 +117,9 @@ export default function VideoBox({
             aria-label={playable ? `Reproducir ${label}` : label}
             disabled={!playable}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center transition-transform duration-200 hover:scale-105 disabled:cursor-default"
-            style={
-              square
-                ? { width: 'clamp(60px, 9%, 96px)', aspectRatio: '1', borderRadius: 14, background: Colors.seaBlue100, border: '3px solid #FFFFFF', boxShadow: '0 8px 30px rgba(0,0,0,0.35)' }
-                : { width: 'clamp(56px, 8%, 76px)', aspectRatio: '1', borderRadius: '50%', background: '#FFFFFF', boxShadow: '0 8px 30px rgba(0,0,0,0.35)' }
-            }
+            style={{ width: 'clamp(56px, 9%, 96px)', aspectRatio: '1', borderRadius: 14, background: Colors.seaBlue100, border: '3px solid #FFFFFF', boxShadow: '0 8px 30px rgba(0,0,0,0.35)' }}
           >
-            <svg width={square ? 36 : 26} height={square ? 36 : 26} viewBox="0 0 24 24" fill={square ? '#FFFFFF' : Colors.seaBlue100} aria-hidden style={{ marginLeft: 4 }}><path d="M8 5v14l11-7z" /></svg>
+            <svg width="55%" height="55%" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden style={{ marginLeft: '6%' }}><path d="M8 5v14l11-7z" /></svg>
           </button>
 
           {!hideCaption && (
