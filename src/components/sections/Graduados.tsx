@@ -121,7 +121,6 @@ export default function Graduados() {
                     label={COPY.videoLabel}
                     sublabel={COPY.videoSub}
                     radius={10}
-                    hideCaption
                   />
                 </div>
               </div>

@@ -6,7 +6,7 @@ import { Colors } from '../../tokens'
  * Reproductor de video con carátula (.webp) y fuentes WebM + MP4.
  *
  * Mientras no se reproduce, siempre muestra la portada con el botón de play
- * (cuadrado azul): antes de empezar, en pausa y al terminar. Sólo suena un
+ * (círculo blanco) y su descripción: antes de empezar, en pausa y al terminar. Sólo suena un
  * video a la vez, y se pausa solo al salir de la pantalla.
  *
  * Sin `sources` funciona como carátula lista para incrustar: muestra la portada
@@ -20,8 +20,10 @@ export interface VideoBoxProps {
   sublabel?: string
   ratio?: string
   radius?: number
-  /** Oculta el rótulo sobre la portada cuando el marco de alrededor ya lo dice. */
+  /** Oculta la descripción cuando el marco de alrededor ya la dice. */
   hideCaption?: boolean
+  /** Color de la descripción bajo el video: 'light' sobre fondo claro, 'dark' sobre fondo oscuro. */
+  tone?: 'light' | 'dark'
   /** Avisa cuando el video empieza o deja de reproducirse. */
   onPlayingChange?: (playing: boolean) => void
   className?: string
@@ -39,6 +41,7 @@ export default function VideoBox({
   ratio = '16 / 9',
   radius = 12,
   hideCaption = false,
+  tone = 'light',
   onPlayingChange,
   className = '',
   style,
@@ -67,11 +70,15 @@ export default function VideoBox({
     return () => io.disconnect()
   }, [playable])
 
+  // El ancho va en el contenedor para que la descripción de abajo lo respete.
+  const { maxWidth, width, ...boxStyle } = style ?? {}
+
   return (
+    <div className={className} style={{ maxWidth, width: width ?? '100%' }}>
     <motion.div
       ref={box}
-      className={`relative overflow-hidden ${className}`}
-      style={{ aspectRatio: ratio, borderRadius: radius, background: '#001840', boxShadow: '0 30px 60px -24px rgba(0,46,109,0.45)', ...style }}
+      className="relative overflow-hidden"
+      style={{ aspectRatio: ratio, borderRadius: radius, background: '#001840', boxShadow: '0 30px 60px -24px rgba(0,46,109,0.45)', ...boxStyle }}
       whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 200, damping: 22 }}
     >
@@ -108,7 +115,7 @@ export default function VideoBox({
           <div
             aria-hidden
             className="absolute inset-0 pointer-events-none"
-            style={{ background: 'linear-gradient(to top, rgba(0,24,64,0.6) 0%, rgba(0,24,64,0.08) 45%, rgba(0,24,64,0.12) 100%)' }}
+            style={{ background: 'linear-gradient(to top, rgba(0,24,64,0.45) 0%, rgba(0,24,64,0.08) 45%, rgba(0,24,64,0.12) 100%)' }}
           />
 
           <button
@@ -117,25 +124,28 @@ export default function VideoBox({
             aria-label={playable ? `Reproducir ${label}` : label}
             disabled={!playable}
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center transition-transform duration-200 hover:scale-105 disabled:cursor-default"
-            style={{ width: 'clamp(56px, 9%, 96px)', aspectRatio: '1', borderRadius: 14, background: Colors.seaBlue100, border: '3px solid #FFFFFF', boxShadow: '0 8px 30px rgba(0,0,0,0.35)' }}
+            style={{ width: 'clamp(56px, 8%, 76px)', aspectRatio: '1', borderRadius: '50%', background: '#FFFFFF', boxShadow: '0 8px 30px rgba(0,0,0,0.35)' }}
           >
-            <svg width="55%" height="55%" viewBox="0 0 24 24" fill="#FFFFFF" aria-hidden style={{ marginLeft: '6%' }}><path d="M8 5v14l11-7z" /></svg>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill={Colors.seaBlue100} aria-hidden style={{ marginLeft: 4 }}><path d="M8 5v14l11-7z" /></svg>
           </button>
 
-          {!hideCaption && (
-          <div className="absolute inset-x-0 bottom-0 px-4 md:px-6 pb-4 md:pb-5 pointer-events-none text-center">
-            <p className="font-verlag uppercase text-white" style={{ fontSize: 'clamp(0.72rem, 1.5vw, 1rem)', letterSpacing: '0.14em', margin: 0 }}>
-              {label}
-            </p>
-            {sublabel && (
-              <p className="font-montserrat text-white" style={{ fontSize: 'clamp(0.66rem, 1.1vw, 0.82rem)', opacity: 0.85, marginTop: 4 }}>
-                {sublabel}
-              </p>
-            )}
-          </div>
-          )}
         </>
       )}
     </motion.div>
+
+    {/* Descripción debajo, para no taparse con los logos que traen grabados los videos */}
+    {!hideCaption && (
+      <div className="text-center mt-4">
+        <p className="font-verlag uppercase" style={{ color: tone === 'dark' ? '#FFFFFF' : Colors.seaBlue100, fontSize: 'clamp(0.8rem, 1.3vw, 1rem)', letterSpacing: '0.16em', margin: 0 }}>
+          {label}
+        </p>
+        {sublabel && (
+          <p className="font-montserrat" style={{ color: Colors.skyBlue100, fontSize: 'clamp(0.7rem, 1.1vw, 0.85rem)', marginTop: 2 }}>
+            {sublabel}
+          </p>
+        )}
+      </div>
+    )}
+    </div>
   )
 }

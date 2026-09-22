@@ -99,16 +99,9 @@ export default function InstitutoAlAire() {
               sublabel={COPY.videoSub}
               ratio="16/9"
               radius={14}
-              hideCaption
+              tone="dark"
               style={{ border: '2px solid rgba(255,255,255,0.25)', boxShadow: '0 40px 80px -30px rgba(0,0,0,0.7)' }}
             />
-            {/* Rótulo fuera del video para no encimarse con los logos que trae grabados */}
-            <p className="font-verlag uppercase text-white text-center mt-4" style={{ fontSize: 'clamp(0.8rem, 1.3vw, 1rem)', letterSpacing: '0.16em' }}>
-              {COPY.videoLabel}
-            </p>
-            <p className="font-montserrat text-center" style={{ color: Colors.skyBlue100, fontSize: 'clamp(0.7rem, 1.1vw, 0.85rem)', marginTop: 2 }}>
-              {COPY.videoSub}
-            </p>
           </SectionReveal>
         </div>
       </div>

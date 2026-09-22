@@ -12,6 +12,7 @@ const COPY = {
   descripcion:
     'Conoce la participación del Instituto Hutchison Ports en este encuentro dedicado al intercambio de experiencias, la innovación y el fortalecimiento de una cultura de excelencia.',
   videoLabel: 'Recorrido por el stand del Instituto',
+  videoSub: 'Congreso de Calidad Total 2026',
 }
 
 // 1080p60/1.4 GB → 720p30, WebM (VP9) + MP4 de respaldo.
@@ -61,8 +62,8 @@ export default function RecorridoStand() {
             poster={VIDEO.poster}
             sources={VIDEO.sources}
             label={COPY.videoLabel}
+            sublabel={COPY.videoSub}
             radius={10}
-            hideCaption
             className="mx-auto"
             style={{ maxWidth: 1000, border: '3px solid #FFFFFF', boxShadow: '0 30px 70px -20px rgba(0,46,109,0.4)' }}
           />
