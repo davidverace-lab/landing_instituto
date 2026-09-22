@@ -16,7 +16,6 @@ const COPY = {
   marca: 'Hutchison Ports.',
   pilares: ['Información', 'Actualidad', 'Conexión'],
   videoLabel: 'Entrevista al Ing. Lecona',
-  videoSub: 'Instituto HP al Aire',
 }
 
 // 1080p60/1.1 GB → 720p30, WebM (VP9) + MP4 de respaldo.
@@ -108,10 +107,8 @@ export default function InstitutoAlAire() {
               poster={VIDEO.poster}
               sources={VIDEO.sources}
               label={COPY.videoLabel}
-              sublabel={COPY.videoSub}
               ratio="16/9"
               radius={14}
-              tone="dark"
               style={{ border: '2px solid rgba(255,255,255,0.25)', boxShadow: '0 40px 80px -30px rgba(0,0,0,0.7)' }}
             />
           </SectionReveal>

@@ -6,7 +6,7 @@ import { Colors } from '../../tokens'
  * Reproductor de video con carátula (.webp) y fuentes WebM + MP4.
  *
  * Mientras no se reproduce, siempre muestra la portada con el botón de play
- * (círculo blanco) y su descripción: antes de empezar, en pausa y al terminar. Sólo suena un
+ * (círculo blanco): antes de empezar, en pausa y al terminar. Sólo suena un
  * video a la vez, y se pausa solo al salir de la pantalla.
  *
  * Sin `sources` funciona como carátula lista para incrustar: muestra la portada
@@ -17,13 +17,8 @@ export interface VideoBoxProps {
   /** [webm, mp4]. Si va vacío, el recuadro queda sólo como carátula. */
   sources?: { src: string; type: string }[]
   label: string
-  sublabel?: string
   ratio?: string
   radius?: number
-  /** Oculta la descripción cuando el marco de alrededor ya la dice. */
-  hideCaption?: boolean
-  /** Color de la descripción bajo el video: 'light' sobre fondo claro, 'dark' sobre fondo oscuro. */
-  tone?: 'light' | 'dark'
   /** Avisa cuando el video empieza o deja de reproducirse. */
   onPlayingChange?: (playing: boolean) => void
   className?: string
@@ -37,11 +32,8 @@ export default function VideoBox({
   poster,
   sources = [],
   label,
-  sublabel,
   ratio = '16 / 9',
   radius = 12,
-  hideCaption = false,
-  tone = 'light',
   onPlayingChange,
   className = '',
   style,
@@ -70,7 +62,7 @@ export default function VideoBox({
     return () => io.disconnect()
   }, [playable])
 
-  // El ancho va en el contenedor para que la descripción de abajo lo respete.
+  // El ancho va en el contenedor; el resto del estilo, en el recuadro.
   const { maxWidth, width, ...boxStyle } = style ?? {}
 
   return (
@@ -111,7 +103,7 @@ export default function VideoBox({
             decoding="async"
             draggable={false}
           />
-          {/* Velo para que el botón y el rótulo se lean sobre cualquier portada */}
+          {/* Velo para que el botón se lea sobre cualquier portada */}
           <div
             aria-hidden
             className="absolute inset-0 pointer-events-none"
@@ -133,19 +125,6 @@ export default function VideoBox({
       )}
     </motion.div>
 
-    {/* Descripción debajo, para no taparse con los logos que traen grabados los videos */}
-    {!hideCaption && (
-      <div className="text-center mt-4">
-        <p className="font-verlag uppercase" style={{ color: tone === 'dark' ? '#FFFFFF' : Colors.seaBlue100, fontSize: 'clamp(0.8rem, 1.3vw, 1rem)', letterSpacing: '0.16em', margin: 0 }}>
-          {label}
-        </p>
-        {sublabel && (
-          <p className="font-montserrat" style={{ color: Colors.skyBlue100, fontSize: 'clamp(0.7rem, 1.1vw, 0.85rem)', marginTop: 2 }}>
-            {sublabel}
-          </p>
-        )}
-      </div>
-    )}
     </div>
   )
 }

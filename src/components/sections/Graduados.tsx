@@ -12,14 +12,16 @@ const COPY = {
   tituloLinea1: 'RECONOCIMIENTO A LOS GRADUADOS',
   tituloLinea2: 'DEL TRONCO COMÚN 2026',
   videoLabel: 'Video de graduados',
-  videoSub: 'Todas las personas graduadas de las unidades de negocio',
 }
 
-// Video comprimido para web: 1080p/428 MB → 720p H.264/48 MB, con carátula .webp.
-// Se descartó la versión WebM: con este material (fotos fijas) VP9 salía más pesada.
+// Video comprimido para web: 1080p/428 MB → 720p a 560 kbps (dos pasadas), WebM (VP9) + MP4
+// de respaldo, ~88 MB cada uno para quedar bajo el límite de 100 MB de GitHub.
 const VIDEO = {
   poster: '/videos/graduados-poster.webp',
-  sources: [{ src: '/videos/graduados-tronco-comun-2026.mp4', type: 'video/mp4' }],
+  sources: [
+    { src: '/videos/graduados-tronco-comun-2026.webm', type: 'video/webm' },
+    { src: '/videos/graduados-tronco-comun-2026.mp4', type: 'video/mp4' },
+  ],
 }
 
 export default function Graduados() {
@@ -73,7 +75,6 @@ export default function Graduados() {
             poster={VIDEO.poster}
             sources={VIDEO.sources}
             label={COPY.videoLabel}
-            sublabel={COPY.videoSub}
             radius={10}
             className="mx-auto"
             style={{ maxWidth: 1000, border: '3px solid #FFFFFF', boxShadow: '0 30px 70px -20px rgba(0,46,109,0.4)' }}

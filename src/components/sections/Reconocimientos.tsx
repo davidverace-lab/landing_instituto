@@ -33,7 +33,6 @@ export default function Reconocimientos() {
               poster={VIDEO.poster}
               sources={VIDEO.sources}
               label="Entrega de reconocimientos"
-              sublabel="Ceremonia en Hutchison Ports TNG"
             />
           </SectionReveal>
 

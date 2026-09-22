@@ -159,7 +159,6 @@ export default function Entrevistas() {
                       poster={ENTREVISTAS[active].poster}
                       sources={ENTREVISTAS[active].sources}
                       label={ENTREVISTAS[active].label}
-                      hideCaption
                       ratio="9/16"
                       radius={16}
                       onPlayingChange={v => { playing.current = v }}
@@ -181,7 +180,7 @@ export default function Entrevistas() {
             </div>
 
             <p className="font-verlag uppercase text-white mt-6" style={{ fontSize: 'clamp(0.8rem, 1.3vw, 1rem)', letterSpacing: '0.18em' }}>
-              {ENTREVISTAS[active].label} · {COPY.etiqueta}
+              {COPY.etiqueta}
             </p>
             <div style={{ width: 120, height: 3, background: `linear-gradient(90deg, transparent, ${Colors.skyBlue100}, transparent)`, marginTop: 8 }} />
           </div>
