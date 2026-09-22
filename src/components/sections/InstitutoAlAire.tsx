@@ -54,7 +54,7 @@ export default function InstitutoAlAire() {
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.05fr_1fr]" style={{ minHeight: 'min(88dvh, 820px)' }}>
 
         {/* ── Texto, todo centrado ── */}
-        <div className="relative flex items-center justify-center px-6 md:px-12 lg:px-10 py-16 md:py-20 lg:py-24 order-2 lg:order-1">
+        <div className="relative flex items-center justify-center px-6 md:px-12 lg:px-10 pt-16 pb-8 md:pt-20 md:pb-10 lg:py-24">
           <SectionReveal className="w-full flex flex-col items-center text-center" style={{ maxWidth: 700 }}>
             <motion.span
               className="font-verlag uppercase inline-block"
@@ -95,7 +95,7 @@ export default function InstitutoAlAire() {
         </div>
 
         {/* ── Recuadro del video ── */}
-        <div className="relative flex items-center justify-center order-1 lg:order-2 px-6 md:px-12 lg:px-0 pt-16 lg:pt-0 pb-4 lg:pb-0">
+        <div className="relative flex items-center justify-center px-6 md:px-12 lg:px-0 pb-16 md:pb-20 lg:pb-0">
           {/* Chevron del arte, sólo en escritorio */}
           <div
             aria-hidden
