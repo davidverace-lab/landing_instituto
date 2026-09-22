@@ -5,11 +5,12 @@ import { ReactNode } from 'react'
 interface Props {
   children: ReactNode
   className?: string
+  style?: React.CSSProperties
   delay?: number
   direction?: 'up' | 'left' | 'right'
 }
 
-export default function SectionReveal({ children, className = '', delay = 0, direction = 'up' }: Props) {
+export default function SectionReveal({ children, className = '', style, delay = 0, direction = 'up' }: Props) {
   const { ref, inView } = useInView()
 
   const variants = {
@@ -35,6 +36,7 @@ export default function SectionReveal({ children, className = '', delay = 0, dir
     <motion.div
       ref={ref}
       className={className}
+      style={style}
       initial="hidden"
       animate={inView ? 'visible' : 'hidden'}
       variants={variants}

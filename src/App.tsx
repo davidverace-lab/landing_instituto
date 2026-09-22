@@ -1,11 +1,12 @@
 import Hero from './components/sections/Hero'
-import Challenge from './components/sections/Challenge'
-import Urgency from './components/sections/Urgency'
-import Ranking from './components/sections/Ranking'
+import Graduados from './components/sections/Graduados'
+import Reconocimientos from './components/sections/Reconocimientos'
+import Modulo0 from './components/sections/Modulo0'
 import Organigrama from './components/sections/Organigrama'
-import Testimonials from './components/sections/Testimonials'
-import HonorBoard from './components/sections/HonorBoard'
-import Ceremony from './components/sections/Ceremony'
+import { PortQuest, TerminalRally } from './components/sections/Juegos'
+import RecorridoStand from './components/sections/RecorridoStand'
+import Entrevistas from './components/sections/Entrevistas'
+import InstitutoAlAire from './components/sections/InstitutoAlAire'
 import FinalCTA from './components/sections/FinalCTA'
 
 export default function App() {
@@ -13,14 +14,17 @@ export default function App() {
   return (
     <main>
       <Hero />
-      <Ceremony />
-      <Challenge />
-      <Urgency />
-      <Ranking />
+      <div id="contenido" />
+      <Graduados />          {/* Cambio 1: reconocimiento a los graduados (antes: ceremonia de clausura) */}
+      <Reconocimientos />    {/* Cambio 7: videos de entrega de reconocimientos */}
+      <Modulo0 />            {/* Cambio 5: curso NOM-035 (antes: cuenta regresiva) */}
       <Organigrama />
-      <Testimonials />
-      <HonorBoard />
-      <FinalCTA />
+      <PortQuest />          {/* Cambio 3 */}
+      <TerminalRally />      {/* Cambio 4 */}
+      <RecorridoStand />     {/* Recorrido del stand en el Congreso de Calidad Total */}
+      <Entrevistas />        {/* Cambio 2: entrevistas del congreso (antes: voces de éxito) */}
+      <InstitutoAlAire />    {/* Cambio 6: próximamente */}
+      <FinalCTA />           {/* Cambio 8: slogan original */}
     </main>
   )
 }

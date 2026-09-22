@@ -8,3 +8,11 @@ dist
 
 # Source video files (use optimized .mp4 in repo instead)
 public/*.mov
+
+# Material de trabajo del cliente (pesado, no va al sitio)
+cambios/
+wetransfer_*/
+/*.pdf
+RESUMEN-SESION-*.md
+*.mov
+*.MOV

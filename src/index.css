@@ -134,6 +134,7 @@
   }
 
   .btn-gold {
+    border-radius: 0;
     font-family: 'Verlag Black', sans-serif;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -250,33 +251,84 @@
   }
 }
 
-/* Testimonials — contenedor del texto.
-   Altura fija basada en el testimonio más largo para evitar que el
-   contenedor "salte" al cambiar de slide. Slides en absolute para que la
-   transición no afecte la altura.
-   Tuneado para iPhone estándar (~390px) con la cita más larga de Jafet
-   Salas Díaz (~340 caracteres). */
-.testimonial-text-wrap {
-  min-height: 420px;
+/* Instituto al Aire — la sección "respira": fondo en zoom lento, nodos del
+   mapa que laten, brillo que recorre la franja diagonal y ondas del logo. */
+@keyframes alaire-kenburns {
+  0%   { transform: scale(1) translate(0, 0); }
+  50%  { transform: scale(1.08) translate(-1.5%, -1%); }
+  100% { transform: scale(1) translate(0, 0); }
 }
-.testimonial-text-inner {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
+@keyframes alaire-pulse {
+  0%   { transform: scale(0.6); opacity: 0.9; }
+  70%  { transform: scale(2.6); opacity: 0; }
+  100% { transform: scale(2.6); opacity: 0; }
 }
-@media (min-width: 380px) {
-  .testimonial-text-wrap {
-    min-height: 400px;
-  }
+@keyframes alaire-sweep {
+  0%   { transform: translateY(-120%); }
+  100% { transform: translateY(220%); }
 }
-@media (min-width: 640px) {
-  .testimonial-text-wrap {
-    min-height: 320px;
-  }
+@keyframes alaire-scan {
+  0%   { top: -10%; opacity: 0; }
+  10%  { opacity: 0.35; }
+  90%  { opacity: 0.35; }
+  100% { top: 110%; opacity: 0; }
+}
+.alaire-bg { animation: alaire-kenburns 28s ease-in-out infinite; will-change: transform; }
+.alaire-stripe { overflow: hidden; }
+.alaire-stripe::after { content: ''; position: absolute; left: 0; right: 0; height: 40%; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.75), transparent); animation: alaire-sweep 4.5s ease-in-out infinite; }
+.alaire-scan { position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(0,155,222,0.9), transparent); animation: alaire-scan 7s linear infinite; pointer-events: none; }
+@keyframes alaire-draw {
+  0%   { stroke-dashoffset: 700; opacity: 0; }
+  10%  { opacity: 0.9; }
+  60%  { stroke-dashoffset: 0; opacity: 0.9; }
+  85%  { opacity: 0; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes alaire-ring {
+  0%   { r: 3.5; opacity: 0.9; }
+  100% { r: 22; opacity: 0; }
+}
+.alaire-route { fill: none; stroke: #009BDE; stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 700; stroke-dashoffset: 700; filter: drop-shadow(0 0 4px rgba(0,155,222,0.9)); animation: alaire-draw 6s ease-in-out infinite; }
+.alaire-ring { fill: none; stroke: #009BDE; stroke-width: 1.5; animation: alaire-ring 2.6s ease-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .alaire-bg, .alaire-stripe::after, .alaire-scan, .alaire-route, .alaire-ring { animation: none; }
 }
 @media (min-width: 1024px) {
-  .testimonial-text-wrap {
-    min-height: clamp(220px, 30vh, 340px);
-  }
+  .alaire-chevron { clip-path: polygon(22% 0, 100% 0, 100% 100%, 22% 100%, 0 50%); }
+}
+
+
+
+/* Banda diagonal de marca: un rectángulo enorme girado 30.3° (ángulo de las
+   guías Hutchison Ports), así todas las secciones comparten exactamente la
+   misma inclinación. Se coloca con --band-x / --band-y (centro) y --band-t (grosor). */
+.brand-band {
+  position: absolute;
+  left: var(--band-x, 50%);
+  top: var(--band-y, 50%);
+  width: 320vw;
+  height: var(--band-t, 33vw);
+  transform: translate(-50%, -50%) rotate(-30.3deg);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+/* Reconocimientos — la forma azul se corta en vertical a media pantalla en escritorio. */
+/* Frase grande para la sección de graduados */
+.frase-lg { font-size: clamp(1rem, 1.9vw, 1.5rem) !important; }
+
+/* Vida de fondo: zoom lento en fotos de fondo y flotación suave en tarjetas. */
+@keyframes kenburns {
+  0%   { transform: scale(1.08) translate(0, 0); }
+  50%  { transform: scale(1.16) translate(-1.2%, -1%); }
+  100% { transform: scale(1.08) translate(0, 0); }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.kenburns { animation: kenburns 32s ease-in-out infinite; will-change: transform; }
+.float-slow { animation: float-slow 7s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .kenburns, .float-slow { animation: none; }
 }

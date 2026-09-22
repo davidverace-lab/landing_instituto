@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import SectionReveal from '../ui/SectionReveal'
 import { useInView } from '../../hooks/useInView'
 import { Users, ChartBar, Buildings } from '@phosphor-icons/react'
-import { Colors, Type, DescriptionCSS } from '../../tokens'
+import { Colors, Type, DescriptionCSS, Section } from '../../tokens'
 import type { SanityOrganigramaItem, SanityOrganigramaCard } from '../../types/sanity'
 
 const ACCENT = Colors.seaBlue100
@@ -80,7 +80,7 @@ function Connector({ direction, inView: visible }: { direction: 'v' | 'h-left' |
     </div>
   )
   return (
-    <div className={`hidden lg:flex mb-1 ${direction === 'h-left' ? 'justify-end' : 'justify-start'}`}>
+    <div className={`hidden xl:flex mb-1 ${direction === 'h-left' ? 'justify-end' : 'justify-start'}`}>
       <motion.div
         className="h-px bg-navy"
         initial={{ width: 0 }}
@@ -126,7 +126,7 @@ export default function Organigrama(_props: OrganigramaProps) {
       <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-8 lg:px-12">
         <SectionReveal>
           <div className="text-center mb-10 md:mb-14">
-            <h2 className="section-title text-white" style={{ textWrap: 'balance' as React.CSSProperties['textWrap'] }}>
+            <h2 className="section-title text-white" style={{ fontSize: Section.title, textWrap: 'balance' as React.CSSProperties['textWrap'] }}>
               <span className="block">CÓMO SE CONFORMA EL</span>
               <span className="block">INSTITUTO HUTCHISON PORTS</span>
             </h2>
@@ -153,7 +153,9 @@ export default function Organigrama(_props: OrganigramaProps) {
           <Connector direction="v" inView={imgInView} />
         </SectionReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(280px,380px)_1fr] gap-6 md:gap-4 lg:gap-8 items-center mb-2">
+        {/* Las tres columnas sólo a partir de xl (1280 px): en 1024–1279 las columnas
+            laterales quedaban de ~240 px y el texto salía a dos palabras por renglón. */}
+        <div className="grid grid-cols-1 xl:grid-cols-[1fr_minmax(240px,320px)_1fr] gap-6 md:gap-8 xl:gap-8 2xl:gap-10 items-center mb-2">
 
           <div className="flex flex-col justify-center">
             <SectionReveal direction="right" delay={0.22}>
@@ -178,7 +180,7 @@ export default function Organigrama(_props: OrganigramaProps) {
               <motion.img
                 src="/webp/Vector organigrama.webp"
                 alt="Organigrama Instituto Hutchison Ports"
-                className="relative w-72 md:w-80 lg:w-[380px] h-auto drop-shadow-2xl"
+                className="relative w-72 md:w-80 xl:w-[320px] 2xl:w-[380px] h-auto drop-shadow-2xl"
                 loading="lazy"
                 decoding="async"
                 initial={{ opacity: 0, scale: 0.82 }}
@@ -207,7 +209,7 @@ export default function Organigrama(_props: OrganigramaProps) {
         <SectionReveal delay={0.38}>
           <div className="flex justify-center">
             <div
-              className="max-w-xl w-full flex flex-col items-center gap-3 px-10 py-8 text-center"
+              className="max-w-xl w-full flex flex-col items-center gap-3 px-6 sm:px-10 py-8 text-center"
               style={{
                 background: 'linear-gradient(135deg, rgba(0,46,109,0.80) 0%, rgba(0,46,109,0.60) 100%)',
                 border: `2px solid ${ACCENT}`,

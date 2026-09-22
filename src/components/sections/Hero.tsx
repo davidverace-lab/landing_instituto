@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { CaretDown } from '@phosphor-icons/react'
 import { Type } from '../../tokens'
 
 interface HeroProps {
@@ -22,15 +23,20 @@ export default function Hero(_props: HeroProps) {
   const s = DEFAULTS.subtitle
   const b = DEFAULTS.buttonText
   const url = DEFAULTS.buttonUrl
+  const { scrollY } = useScroll()
+  const bgY = useTransform(scrollY, [0, 900], [0, 180])
+  const textY = useTransform(scrollY, [0, 900], [0, -60])
+  const fade = useTransform(scrollY, [0, 500], [1, 0])
 
   return (
     <section className="relative min-h-[100dvh] flex flex-col overflow-hidden bg-navy-dark">
       {/* Background image */}
-      <div className="absolute inset-0 z-0">
+      <motion.div className="absolute inset-0 z-0" style={{ y: bgY }}>
         <img
-          src="/webp/fotofondo.webp"
+          src="/webp/hero-icave-aerea.webp"
           alt=""
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-center kenburns"
+          style={{ scale: 1.08 }}
           decoding="async"
         />
         <div
@@ -39,7 +45,7 @@ export default function Hero(_props: HeroProps) {
             background: 'linear-gradient(to top, rgba(0,46,109,0.92) 0%, rgba(0,46,109,0.55) 45%, rgba(0,46,109,0.10) 100%)',
           }}
         />
-      </div>
+      </motion.div>
 
       {/* Logos */}
       <motion.div
@@ -63,7 +69,7 @@ export default function Hero(_props: HeroProps) {
       </motion.div>
 
       {/* Contenido centrado */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-5 md:px-10 pt-24 md:pt-28 pb-12">
+      <motion.div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-5 md:px-10 pt-24 md:pt-28 pb-12" style={{ y: textY, opacity: fade }}>
         <div className="w-full max-w-6xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 50 }}
@@ -105,7 +111,23 @@ export default function Hero(_props: HeroProps) {
             </a>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
+
+      {/* Indicador de scroll */}
+      <motion.a
+        href="#contenido"
+        aria-label="Bajar al contenido"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 text-white"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.6, duration: 0.8 }}
+        style={{ opacity: fade }}
+      >
+        <span className="font-montserrat uppercase" style={{ fontSize: '0.62rem', letterSpacing: '0.24em', opacity: 0.8 }}>Desliza</span>
+        <motion.span animate={{ y: [0, 8, 0] }} transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}>
+          <CaretDown size={22} weight="bold" />
+        </motion.span>
+      </motion.a>
     </section>
   )
 }

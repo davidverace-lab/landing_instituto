@@ -29,5 +29,27 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/portquest",
+      "destination": "/portquest/",
+      "permanent": false
+    },
+    {
+      "source": "/terminalrally",
+      "destination": "/terminalrally/",
+      "permanent": false
+    },
+    {
+      "source": "/juego",
+      "destination": "/terminalrally/",
+      "permanent": false
+    },
+    {
+      "source": "/juego/(.*)",
+      "destination": "/terminalrally/$1",
+      "permanent": false
+    }
   ]
 }
