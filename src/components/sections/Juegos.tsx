@@ -82,14 +82,6 @@ function GameplayCard({ href, clip, alt, tone }: { href: string; clip: string; a
         preload="metadata"
         aria-hidden
       />
-      <motion.span
-        animate={{ boxShadow: ['0 0 0 0 rgba(0,155,222,0.55)', '0 0 0 10px rgba(0,155,222,0)'] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-3 right-3 font-verlag uppercase text-white flex items-center gap-2 px-3 py-2"
-        style={{ background: 'rgba(0,46,109,0.85)', borderRadius: 0, fontSize: '0.72rem', letterSpacing: '0.14em', backdropFilter: 'blur(6px)' }}
-      >
-        Jugar <ArrowRight size={14} weight="bold" />
-      </motion.span>
     </motion.a>
   )
 }
