@@ -28,7 +28,7 @@ export default function Reconocimientos() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-16" style={{ paddingTop: 'clamp(56px, 7vw, 104px)', paddingBottom: 'clamp(56px, 7vw, 104px)' }}>
         <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-10 lg:gap-14 items-center">
 
-          <SectionReveal direction="right">
+          <SectionReveal direction="right" className="order-2 lg:order-1">
             <VideoBox
               poster={VIDEO.poster}
               sources={VIDEO.sources}
@@ -36,7 +36,7 @@ export default function Reconocimientos() {
             />
           </SectionReveal>
 
-          <SectionReveal delay={0.15}>
+          <SectionReveal delay={0.15} className="order-1 lg:order-2">
             <p className="font-montserrat uppercase text-navy" style={{ fontSize: '0.72rem', letterSpacing: '0.22em', fontWeight: 600, margin: 0 }}>
               {COPY.overline}
             </p>
