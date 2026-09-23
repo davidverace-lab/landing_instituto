@@ -36,7 +36,7 @@ export const Type = {
 /** Escala única de títulos y descripciones para todas las secciones de la landing. */
 export const Section = {
   title:  'clamp(1.7rem, 3.4vw, 2.9rem)',   // h2 de sección
-  desc:   'clamp(1rem, 1.25vw, 1.2rem)',    // párrafo de sección
+  desc:   'clamp(0.95rem, 2.4vw, 1.55rem)', // párrafo de sección (= DescriptionCSS.base, el del organigrama)
   descLH: 1.65,
 }
 
