@@ -26,6 +26,9 @@ const FOTOS = {
 // Canto inclinado del panel: arriba llega al 56 % del ancho, abajo al 42 %.
 const PANEL = 'polygon(0 0, 56% 0, 42% 100%, 0 100%)'
 
+// Alto del corte inclinado del panel en móvil/tablet.
+const CORTE_MOVIL = 'clamp(40px, 12vw, 90px)'
+
 function Texto() {
   const p = { ...DescriptionCSS.sm, fontSize: Section.desc, lineHeight: Section.descLH, textWrap: 'pretty' as React.CSSProperties['textWrap'] }
   return (
@@ -87,19 +90,21 @@ export default function Modulo0() {
         </div>
       </div>
 
-      {/* ── Móvil y tablet: apilado ── */}
+      {/* ── Móvil y tablet: apilado ──
+          El canto inclinado del panel se monta SOBRE la foto principal (margen negativo
+          del mismo alto que el corte), así no queda un triángulo claro entre ambos. */}
       <div className="relative z-10 lg:hidden">
-        <div className="px-6 md:px-12 pt-14 pb-16" style={{ background: Colors.seaBlue100, clipPath: 'polygon(0 0, 100% 0, 100% 90%, 0 100%)' }}>
+        <div className="relative z-10 px-6 md:px-12 pt-14" style={{ paddingBottom: `calc(${CORTE_MOVIL} + 2.5rem)`, background: Colors.seaBlue100, clipPath: `polygon(0 0, 100% 0, 100% calc(100% - ${CORTE_MOVIL}), 0 100%)` }}>
           <Texto />
         </div>
-        <ClipReveal from="right">
-          <img src={FOTOS.principal.src} alt={FOTOS.principal.alt} className="w-full object-cover block" style={{ aspectRatio: '16 / 10' }} loading="lazy" decoding="async" />
-        </ClipReveal>
-        <div>
-          <div className="grid grid-cols-2 gap-2">
+        <div className="flex flex-col" style={{ marginTop: `calc(-1 * ${CORTE_MOVIL})` }}>
+          <ClipReveal from="right">
+            <img src={FOTOS.principal.src} alt={FOTOS.principal.alt} className="w-full object-cover block" style={{ aspectRatio: '16 / 10' }} loading="lazy" decoding="async" />
+          </ClipReveal>
+          <div className="grid grid-cols-2">
             {FOTOS.chicas.map((f, i) => (
               <ClipReveal key={f.src} from="bottom" delay={0.2 + i * 0.1}>
-                <img src={f.src} alt={f.alt} className="w-full object-cover block" style={{ aspectRatio: '16 / 9' }} loading="lazy" decoding="async" />
+                <img src={f.src} alt={f.alt} className="w-full object-cover block" style={{ aspectRatio: '4 / 3' }} loading="lazy" decoding="async" />
               </ClipReveal>
             ))}
           </div>
