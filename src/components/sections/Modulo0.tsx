@@ -56,8 +56,10 @@ export default function Modulo0() {
         <div className="absolute inset-0" style={{ background: 'linear-gradient(90deg, rgba(233,238,245,0.5) 0%, rgba(233,238,245,0.85) 100%)' }} />
       </div>
 
-      {/* ── Escritorio: composición fija en proporción 16:9 ── */}
-      <div className="relative z-10 hidden lg:block" style={{ aspectRatio: '16 / 9', maxHeight: 900 }}>
+      {/* ── Escritorio: composición en proporción 16:9, con alto tope de 900 px ──
+          Alto explícito en vez de aspect-ratio + maxHeight: esa combinación también
+          limita el ANCHO a 1600 px y en pantallas grandes dejaba un hueco a la derecha. */}
+      <div className="relative z-10 hidden lg:block" style={{ height: 'min(56.25vw, 900px)' }}>
         {/* Foto principal, detrás del panel */}
         <ClipReveal from="right" className="absolute z-0" style={{ left: '40%', top: 0, right: 0, height: '66%' }}>
           <img src={FOTOS.principal.src} alt={FOTOS.principal.alt} className="w-full h-full object-cover block" loading="lazy" decoding="async" />
