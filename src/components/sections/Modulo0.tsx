@@ -78,10 +78,10 @@ export default function Modulo0() {
           <Texto />
         </div>
 
-        {/* Tira de cuatro fotos que llena el resto hasta el borde inferior.
+        {/* Tira de cuatro fotos, pegadas entre sí y a la principal, hasta el borde inferior.
             Va DETRÁS del panel (z-[5]): el canto inclinado la recorta y la primera foto
             no se ve como un elemento suelto montado sobre el azul. */}
-        <div className="absolute z-[5] grid grid-cols-4 gap-2" style={{ left: '40%', right: 0, top: '67%', bottom: 0 }}>
+        <div className="absolute z-[5] grid grid-cols-4" style={{ left: '40%', right: 0, top: '66%', bottom: 0 }}>
           {FOTOS.chicas.map((f, i) => (
             <ClipReveal key={f.src} from="bottom" delay={0.3 + i * 0.1} className="h-full">
               <img src={f.src} alt={f.alt} className="w-full h-full object-cover block" loading="lazy" decoding="async" />
