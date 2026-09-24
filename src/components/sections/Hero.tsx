@@ -33,7 +33,7 @@ export default function Hero(_props: HeroProps) {
       {/* Background image */}
       <motion.div className="absolute inset-0 z-0" style={{ y: bgY }}>
         <img
-          src="/webp/hero-icave-aerea.webp"
+          src="/webp/fotofondo.webp"
           alt=""
           className="w-full h-full object-cover object-center kenburns"
           style={{ scale: 1.08 }}

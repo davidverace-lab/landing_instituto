@@ -27,6 +27,46 @@ const VIDEO = {
   ],
 }
 
+/**
+ * Nodos del mapamundi, en píxeles de fondo-alaire.webp (2800×1581): cada uno cae sobre
+ * un punto brillante de la foto. El SVG usa el mismo viewBox con `slice`, igual que el
+ * object-cover de la imagen, así que siguen encima del punto a cualquier ancho.
+ */
+const NODOS = {
+  norteamerica: [1373, 456],
+  centroamerica: [1432, 663],
+  sudamerica: [1599, 609],
+  atlantico: [1805, 470],
+  europa: [1884, 358],
+  africa: [2046, 561],
+  asia: [2449, 400],
+  australia: [2613, 820],
+} as const
+type Nodo = keyof typeof NODOS
+
+/** Rutas que calcan las líneas de la foto; el número es cuánto se abomba el arco. */
+const RUTAS: [Nodo, Nodo, number][] = [
+  ['norteamerica', 'atlantico', 0.2],
+  ['norteamerica', 'europa', 0.06],
+  ['centroamerica', 'sudamerica', 0.03],
+  ['sudamerica', 'atlantico', 0.04],
+  ['sudamerica', 'africa', 0.06],
+  ['africa', 'asia', 0.1],
+]
+
+/** Curva cuadrática entre dos nodos, abombada hacia arriba. */
+function arco(a: Nodo, b: Nodo, bombeo: number) {
+  const [x1, y1] = NODOS[a]
+  const [x2, y2] = NODOS[b]
+  const d = Math.hypot(x2 - x1, y2 - y1)
+  let nx = (y2 - y1) / d
+  let ny = -(x2 - x1) / d
+  if (ny > 0) { nx = -nx; ny = -ny }
+  const cx = (x1 + x2) / 2 + nx * d * bombeo * 2
+  const cy = (y1 + y2) / 2 + ny * d * bombeo * 2
+  return `M${x1} ${y1} Q${cx} ${cy} ${x2} ${y2}`
+}
+
 /** Chevron "<" que marca el corte entre el texto y el recuadro. */
 const CHEVRON = 'polygon(18% 0, 100% 0, 100% 100%, 18% 100%, 0 50%)'
 
@@ -34,16 +74,30 @@ export default function InstitutoAlAire() {
   return (
     <section className="relative overflow-hidden" style={{ backgroundColor: '#03153A' }}>
       {/* Fondo: puerto de noche con el mapamundi digital, velado en azul para que se lea el texto */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <img
-          src="/webp/fondo-alaire.webp"
-          alt=""
-          aria-hidden
-          className="w-full h-full object-cover object-center select-none"
-          loading="lazy"
-          decoding="async"
-          draggable={false}
-        />
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Foto y nodos se mueven juntos para que los nodos no se despeguen del mapa */}
+        <div className="absolute inset-0 alaire-bg">
+          <img
+            src="/webp/fondo-alaire.webp"
+            alt=""
+            aria-hidden
+            className="w-full h-full object-cover object-center select-none"
+            loading="lazy"
+            decoding="async"
+            draggable={false}
+          />
+          <svg aria-hidden className="absolute inset-0 w-full h-full" viewBox="0 0 2800 1581" preserveAspectRatio="xMidYMid slice">
+            {RUTAS.map(([a, b, bombeo], i) => (
+              <path key={a + b} d={arco(a, b, bombeo)} pathLength={100} className="alaire-route" style={{ animationDelay: `${i * 0.9}s` }} />
+            ))}
+            {Object.entries(NODOS).map(([k, [x, y]], i) => (
+              <g key={k}>
+                <circle cx={x} cy={y} r={8} className="alaire-ring" style={{ animationDelay: `${i * 0.37}s` }} />
+                <circle cx={x} cy={y} r={7} className="alaire-core" style={{ animationDelay: `${i * 0.37}s` }} />
+              </g>
+            ))}
+          </svg>
+        </div>
         <div
           className="absolute inset-0"
           style={{ background: 'linear-gradient(90deg, rgba(3,21,58,0.94) 0%, rgba(3,21,58,0.82) 45%, rgba(3,21,58,0.45) 100%)' }}

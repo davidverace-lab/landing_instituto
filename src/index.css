@@ -278,20 +278,26 @@
 .alaire-stripe::after { content: ''; position: absolute; left: 0; right: 0; height: 40%; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.75), transparent); animation: alaire-sweep 4.5s ease-in-out infinite; }
 .alaire-scan { position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(0,155,222,0.9), transparent); animation: alaire-scan 7s linear infinite; pointer-events: none; }
 @keyframes alaire-draw {
-  0%   { stroke-dashoffset: 700; opacity: 0; }
+  0%   { stroke-dashoffset: 100; opacity: 0; }
   10%  { opacity: 0.9; }
   60%  { stroke-dashoffset: 0; opacity: 0.9; }
   85%  { opacity: 0; }
   100% { stroke-dashoffset: 0; opacity: 0; }
 }
 @keyframes alaire-ring {
-  0%   { r: 3.5; opacity: 0.9; }
-  100% { r: 22; opacity: 0; }
+  0%   { r: 8; opacity: 0.95; }
+  100% { r: 46; opacity: 0; }
 }
-.alaire-route { fill: none; stroke: #009BDE; stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 700; stroke-dashoffset: 700; filter: drop-shadow(0 0 4px rgba(0,155,222,0.9)); animation: alaire-draw 6s ease-in-out infinite; }
-.alaire-ring { fill: none; stroke: #009BDE; stroke-width: 1.5; animation: alaire-ring 2.6s ease-out infinite; }
+@keyframes alaire-core {
+  0%, 100% { opacity: 0.75; }
+  50%      { opacity: 1; }
+}
+/* Coordenadas en el viewBox de la foto (2800×1581): el trazo va en esas unidades. */
+.alaire-route { fill: none; stroke: #7FD3FF; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; filter: drop-shadow(0 0 6px rgba(0,155,222,0.95)); animation: alaire-draw 6s ease-in-out infinite; }
+.alaire-ring { fill: none; stroke: #7FD3FF; stroke-width: 3; animation: alaire-ring 2.6s ease-out infinite; }
+.alaire-core { fill: #FFFFFF; filter: drop-shadow(0 0 8px rgba(0,155,222,1)); animation: alaire-core 2.6s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) {
-  .alaire-bg, .alaire-stripe::after, .alaire-scan, .alaire-route, .alaire-ring { animation: none; }
+  .alaire-bg, .alaire-stripe::after, .alaire-scan, .alaire-route, .alaire-ring, .alaire-core { animation: none; }
 }
 @media (min-width: 1024px) {
   .alaire-chevron { clip-path: polygon(22% 0, 100% 0, 100% 100%, 22% 100%, 0 50%); }
